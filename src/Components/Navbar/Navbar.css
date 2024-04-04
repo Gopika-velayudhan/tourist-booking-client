@@ -1,0 +1,20 @@
+.head{
+display: flex;
+text-align: start;
+}
+/* Navbar.css */
+
+.navbar-nav .nav-link:hover {
+    color: darkgreen; 
+    text-decoration: underline; 
+    font-size: bold;
+  }
+  
+  .navbar-nav .nav-link:focus {
+    color:darkgreen; 
+    text-decoration: underline; 
+  }
+  .navbar-nav .nav-link.dropdown-toggle::after {
+    display: none !important;
+  }
+  

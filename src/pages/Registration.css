@@ -1,0 +1,12 @@
+.logo{
+  width: 45px;
+  height: 6vh;
+}
+.name{
+  margin-bottom: 2px;
+}
+.main {
+  display: flex;
+  padding-left: 50px;
+  padding-bottom: 10px;
+}
