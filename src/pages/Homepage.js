@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-import Home from '../Components/home/Banner'
+import Home from '../Components/home/Home'
 import "../Components/home/Homepage.css"
 
 

@@ -9,12 +9,21 @@ import Logo from '../Assests/Logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { AiOutlineHeart } from 'react-icons/ai';
+import {CgProfile} from 'react-icons/cg'
 import { useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 function Navbar1() {
   const [showDropdown, setShowDropdown] = useState(false);
+  const [login, setLogin] = useState(false);
   const navigate = useNavigate();
+
+  // Function to handle logout
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setLogin(false);
+    navigate('/');
+  };
 
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
@@ -47,7 +56,7 @@ function Navbar1() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#features" onClick={() => navigate('/')}>Home</Nav.Link>
+            <Nav.Link onClick={() => navigate('/')}>Home</Nav.Link>
             <Nav.Link href="#pricing" onClick={() => navigate('/about')}>About</Nav.Link>
             <NavDropdown
               title="Packages"
@@ -72,10 +81,16 @@ function Navbar1() {
             </Form>
           </Nav>
           <Nav>
-            <Nav.Link onClick={() => navigate('/Login')}>
-              <FontAwesomeIcon icon={faUser} />
-            </Nav.Link>
-            <Nav.Link  href="#memes">
+            {login ? (
+              <Nav.Link onClick={handleLogout}>
+                <FontAwesomeIcon icon={faUser} />
+              </Nav.Link>
+            ) : (
+              <Nav.Link onClick={() => navigate('/Login')}>
+                <CgProfile />
+              </Nav.Link>
+            )}
+            <Nav.Link href="#memes">
               <AiOutlineHeart style={{ fontSize: '24px' }} />
             </Nav.Link>
           </Nav>

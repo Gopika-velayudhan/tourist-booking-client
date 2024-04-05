@@ -27,7 +27,7 @@ function Otp() {
 
     try {
       const otpVerificationResponse = await axios.post(
-        "http://localhost:3002/api/user/sendotp",
+        "http://localhost:3002/api/user/verifyOtp",
         { Phonenumber: formData.Phonenumber, otp: otp }
       );
 
@@ -40,10 +40,10 @@ function Otp() {
 
         if (response.data.success) {
           setError(null);
-          toast.success("OTP Verified Successfully");
+          toast.success("registration successfully");
           navigate("/Login");
         } else {
-          setError(response.data.message);
+           setError(response.data.message);
         }
       } else {
         setError("invalid OTP.please try again");

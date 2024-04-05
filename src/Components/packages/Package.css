@@ -1,4 +1,4 @@
-/* Package.css */
+
 
 .custom-button {
   background-color: #e1ded4; 
@@ -17,10 +17,7 @@
 
 .custom-button:hover {
   background-color: #ff9800; 
-}
-
-.green-text {
-  color: green;
+  transform: scale(1.05); 
 }
 
 .card-img-container {
@@ -32,9 +29,23 @@
   transform: scale(1.1); 
 }
 
+.card {
+  height: 300px; 
+}
+
+.card-img-container {
+  height: 150px; 
+  overflow: hidden; 
+}
 
 .destination-text {
-  font-weight: bold;
-  font-size: 18px;
-  color: #333; 
+  font-size: 16px; 
+}
+
+.green-text {
+  color: green; 
+}
+
+.custom-button {
+  margin-top: 5px; 
 }
