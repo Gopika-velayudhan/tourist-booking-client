@@ -1,21 +1,42 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import holiday1 from '../Assests/holiday1.jpg';
-import './Package.css'
+import { Package_list } from './Package_List';
+import { useNavigate } from 'react-router-dom';
+import { Card, Button, CardGroup } from 'react-bootstrap';
+import './Package.css'; 
 
 function Packages() {
+  const navigate = useNavigate();
   return (
-    <Card className="custom-card" style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={holiday1} />
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
-      </Card.Body>
-    </Card>
+    <>
+      <div className='container'>
+        <div className='row'>
+          {Package_list.map((item) => (
+            <CardGroup className='col-6 col-md-3' key={item.id}>
+              <Card className='m-2 mt-4 md-3'>
+                <div className='card-img-container'>
+                  <Card.Img style={{ maxHeight: '12rem' }} src={item.Image} />
+                </div>
+                <Card.Body>
+                  
+                  <Card.Text className='destination-text'>{item.Destinaton}</Card.Text>
+                  <Card.Text>
+                    <span className='green-text'>{item.Duratuion}</span>
+                  </Card.Text>
+                  <Card.Text> Rs{item.Price}/Person</Card.Text>
+                  <Button
+                    variant='warning'
+                    className='custom-button'
+                    onClick={() => navigate(`/View Details/${item.id}`)}
+                  >
+                    View Details
+                  </Button>
+                </Card.Body>
+              </Card>
+            </CardGroup>
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
 

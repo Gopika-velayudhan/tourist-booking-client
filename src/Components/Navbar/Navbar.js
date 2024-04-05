@@ -47,8 +47,8 @@ function Navbar1() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#features">Home</Nav.Link>
-            <Nav.Link href="#pricing">About</Nav.Link>
+            <Nav.Link href="#features" onClick={() => navigate('/')}>Home</Nav.Link>
+            <Nav.Link href="#pricing" onClick={() => navigate('/about')}>About</Nav.Link>
             <NavDropdown
               title="Packages"
               id="responsive-nav"

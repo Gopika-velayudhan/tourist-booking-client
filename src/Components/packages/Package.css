@@ -1,8 +1,40 @@
-.custom-card {
-    transition: transform 0.3s ease;
-  }
-  
-  .custom-card:hover {
-    transform: scale(1.05);
-  }
-  
+/* Package.css */
+
+.custom-button {
+  background-color: #e1ded4; 
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease; 
+}
+
+.custom-button:hover {
+  background-color: #ff9800; 
+}
+
+.green-text {
+  color: green;
+}
+
+.card-img-container {
+  overflow: hidden; 
+  transition: transform 0.3s ease; 
+}
+
+.card-img-container:hover {
+  transform: scale(1.1); 
+}
+
+
+.destination-text {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333; 
+}
