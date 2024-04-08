@@ -1,14 +1,14 @@
 import React from "react";
 import about1 from '../Assests/about3.jpg';
 import about2 from '../Assests/aout2.jpg';
-import './About.css'; // Import your CSS file
+import './About.css'; 
 
 function About() {
   return (
     <div className="about-container">
       <div className="about-images">
-        <img src={about1} alt="about" />
-        <img src={about2} alt="about" />
+        <img src={about1} alt="about" className="about-image1" />
+        <img src={about2} alt="about" className="about-image2" />
       </div>
       <div className="about-text">
         <h1>About ExploreEpic</h1>

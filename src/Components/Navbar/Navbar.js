@@ -18,7 +18,7 @@ function Navbar1() {
   const [login, setLogin] = useState(false);
   const navigate = useNavigate();
 
-  // Function to handle logout
+  
   const handleLogout = () => {
     localStorage.removeItem('token');
     setLogin(false);
@@ -83,11 +83,12 @@ function Navbar1() {
           <Nav>
             {login ? (
               <Nav.Link onClick={handleLogout}>
-                <FontAwesomeIcon icon={faUser} />
+                 <CgProfile />
+               
               </Nav.Link>
             ) : (
               <Nav.Link onClick={() => navigate('/Login')}>
-                <CgProfile />
+                 <FontAwesomeIcon icon={faUser} />
               </Nav.Link>
             )}
             <Nav.Link href="#memes">

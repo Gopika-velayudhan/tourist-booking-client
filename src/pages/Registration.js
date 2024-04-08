@@ -9,30 +9,30 @@ import { toast } from 'react-toastify';
 function Registration() {
   const navigate = useNavigate();
 
-  
   const validationSchema = Yup.object().shape({
-    Username: Yup.string().required("username is required"),
-    Email: Yup.string().email('Invalid email format').required("email is required"),
-    Phonenumber: Yup.string().matches(/^\d{10}$/, 'Invalid phone number').required("phonenumber is required"),
-    Password: Yup.string().required("password is required"),
+    Username: Yup.string().required("Username is required"),
+    Email: Yup.string().email('Invalid email format').required("Email is required"),
+    Phonenumber: Yup.string().matches(/^\d{10}$/, 'Invalid phone number').required("Phone number is required"),
+    Password: Yup.string().required("Password is required"),
   });
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const otpResponse = await axios.post(
-        'http://localhost:3002/api/user/sendotp',
+        'http://localhost:3005/api/user/otpsend',
         { Phonenumber: values.Phonenumber }
+        
       );
-      if (otpResponse && otpResponse.data && otpResponse.data.success) {
+      console.log(otpResponse,"dfghj");
+      if (otpResponse &&  otpResponse.status == 200) {
+        
         toast.success('Registration successful. OTP sent.');
         navigate('/sendotp', { state: { formData: values } });
-      } else {
-        toast.error(otpResponse.data.message);
       }
       console.log(otpResponse);
     } catch (error) {
       console.error('Error:', error);
-      toast.error(error.response.data.message);
+      toast.error('Error sending OTP: ' + error.response.data.message);
     } finally {
       setSubmitting(false);
     }

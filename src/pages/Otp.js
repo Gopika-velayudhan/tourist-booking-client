@@ -22,35 +22,38 @@ function Otp() {
       }
     }
   };
+  console.log(formData);
   const handleVerify = async (e) => {
     e.preventDefault();
 
     try {
-      const otpVerificationResponse = await axios.post(
-        "http://localhost:3002/api/user/verifyOtp",
-        { Phonenumber: formData.Phonenumber, otp: otp }
-      );
+      // const otpVerificationResponse = await axios.post(
+      //   "http://localhost:3002/api/user/register",
+      //   { Phonenumber: formData.Phonenumber, otp: otp }
+      // );
 
-      if (otpVerificationResponse.data.success) {
+      
         const response = await axios.post(
-          "http://localhost:3002/api/user/register",
+          "http://localhost:3005/api/user/userRegister",
           formData,
           { headers: { "Content-Type": "application/json" } }
         );
 
-        if (response.data.success) {
+        if (response && response.status == 201) {
           setError(null);
           toast.success("registration successfully");
           navigate("/Login");
-        } else {
-           setError(response.data.message);
-        }
-      } else {
-        setError("invalid OTP.please try again");
-      }
+        } 
+        
+     
+      
     } catch (error) {
       console.error("error", error.message);
-      setError("An error occurred . please try again later");
+      if(error.response.status === 403){
+        setError("An error occurred . please try again later");
+
+      }
+      
     }
   };
 
