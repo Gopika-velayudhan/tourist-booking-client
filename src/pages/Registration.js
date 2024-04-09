@@ -19,11 +19,11 @@ function Registration() {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const otpResponse = await axios.post(
-        'http://localhost:3005/api/user/otpsend',
+        'http://localhost:3005/api/user/sendotp',
         { Phonenumber: values.Phonenumber }
         
       );
-      console.log(otpResponse,"dfghj");
+    
       if (otpResponse &&  otpResponse.status == 200) {
         
         toast.success('Registration successful. OTP sent.');
