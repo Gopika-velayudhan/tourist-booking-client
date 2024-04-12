@@ -1,12 +1,14 @@
 import React from "react";
 import about1 from '../Assests/about3.jpg';
 import about2 from '../Assests/aout2.jpg';
+import about3 from '../Assests/about image.webp'
 import './About.css'; 
 
 function About() {
   return (
     <div className="about-container">
       <div className="about-images">
+        <img src={about3} alt="about" className="about-image3"/>
         <img src={about1} alt="about" className="about-image1" />
         <img src={about2} alt="about" className="about-image2" />
       </div>

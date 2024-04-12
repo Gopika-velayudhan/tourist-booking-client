@@ -19,7 +19,7 @@ function Registration() {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const otpResponse = await axios.post(
-        'http://localhost:3005/api/user/sendotp',
+        'http://localhost:3005/api/user/otpsend',
         { Phonenumber: values.Phonenumber }
         
       );

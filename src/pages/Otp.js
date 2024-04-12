@@ -34,11 +34,10 @@ function Otp() {
 
       
         const response = await axios.post(
-          "http://localhost:3005/api/user/verifyotp",
-          {Phonenumber:formData, otp:otp },
+          "http://localhost:3005/api/user/userRegister",
+          {Username:formData.Username,Email:formData.Email,Phonenumber:formData.Phonenumber,Password:formData.Password, otp:otp },
           { headers: { "Content-Type": "application/json" } }
         );
-        
         console.log(response,"what is the error");
 
         if (response && response.status == 201) {

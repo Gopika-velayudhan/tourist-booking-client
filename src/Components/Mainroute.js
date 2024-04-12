@@ -5,8 +5,10 @@ import Login from "../pages/Login";
 import Navbar1 from "./Navbar/Navbar.js";
 import Homepage from "../pages/Homepage";
 import OTP from "../pages/Otp";
-import Packages from "../Components/packages/Packages";
 import About from "./home/About.js";
+import HoneyMoon from "../Components/packages/Honeymoon.js";
+import Adavnture from "./packages/Advanture.js";
+
 
 const Mainroute = () => {
   return (
@@ -17,8 +19,9 @@ const Mainroute = () => {
         <Route path="/register" element={<Registration />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/sendotp" element={<OTP />} />
-        <Route path="/packages" element={<Packages />} />
         <Route path="/about" element={<About/>}/>
+        <Route path="/honeymoon" element={<HoneyMoon/>}/>
+        <Route path="/advanture" element={<Adavnture/>}/>
 
        
       </Routes>

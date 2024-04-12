@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSearch,
   faCalendarAlt,
-  faDollarSign
+  faDollarSign,
+  
 } from "@fortawesome/free-solid-svg-icons";
 
 function Home() {
@@ -80,13 +81,18 @@ function Home() {
             />
           </div>
           <div className="input-container">
-            <FontAwesomeIcon icon={ faDollarSign} className="icon" />
+            <FontAwesomeIcon icon={faDollarSign} className="icon" />
             <input
               type="number"
               placeholder="Trip budget"
               className="search-input"
             />
           </div>
+          {/* Add the button within the search div */}
+          <button type="button" className="search-btn">
+            submit
+            
+          </button>
         </div>
       </div>
     </div>

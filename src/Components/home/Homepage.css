@@ -4,6 +4,7 @@
     width: 100vw;
     background-size: cover;
     background-position: center;
+    filter: brightness(90%);
   }
   
   
@@ -58,4 +59,16 @@
   transform: translateY(-50%);
   font-size: 20px;
   color: gray;
+}
+.search-btn {
+  background-color: #007bff; 
+  color: white; 
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  border: none;
+  cursor: pointer; 
+}
+
+.search-btn:hover {
+  background-color: #0056b3; 
 }
