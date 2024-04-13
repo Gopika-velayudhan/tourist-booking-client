@@ -16,15 +16,15 @@ import advature3 from '../Assests/advanturepackage4.webp';
 import advature4 from '../Assests/Advanturepackage5.jpg';
 import advature5 from '../Assests/advanturepackage7.avif';
 import advature6 from '../Assests/Advanture package8.webp';
-// import family1 from '../Assests/familypackage1.jpg'
-// import family2 from '../Assests/familypackage2.jpg'
-// import family3 from '../Assests/familypackage3..jpg'
-// import family4 from '../Assests/familypackage4.jpg'
-// import family5 from '../Assests/familypackge4.jpg'
-// import family6 from '../Assests/family package6.jpg'
-// import family7 from '../Assests/familypakage7.jpg'
-// import family8 from '../Assests/familypackage8.jpg'
-// import family9 from '../Assests/familypackage9.jpg'
+import family1 from '../Assests/familypackage1.jpg'
+import family2 from '../Assests/familypackage2.jpg'
+import family3 from '../Assests/familypackage3..jpg'
+import family4 from '../Assests/familypackage4.jpg'
+import family5 from '../Assests/familypackge4.jpg'
+import family6 from '../Assests/family package6.jpg'
+import family7 from '../Assests/familypakage7.jpg'
+import family8 from '../Assests/familypackage8.jpg'
+import family9 from '../Assests/familypackage9.jpg'
 
 
 
@@ -214,28 +214,19 @@ export const package_list = [
     Description:
       "Kasauli is one of the best-kept secrets of Himachal Pradesh which while provides honeymooners a stunning display of natural splendour like any of Himachali hill station, does not share their tourist-crowded environment",
   },
+  
   {
-    Destination: " heritage Pilgrimay & wildlife of Gujart",
-    Duration: "10 nights / 11 days",
-    Catagory: "Advanture",
-    Price: 15000,
-    Available_Date: "20-12-2024",
-    Image: honey12,
-    Description:
-      "Kasauli is one of the best-kept secrets of Himachal Pradesh which while provides honeymooners a stunning display of natural splendour like any of Himachali hill station, does not share their tourist-crowded environment",
-  },
-  {
-    Destination: " ",
+    Destination: "Nainital,Uttarakhand",
     Duration: "10 nights / 11 days",
     Catagory: "Family",
     Price: 15000,
     Available_Date: "20-12-2024",
-    Image:family1,
+    Image: family1,
     Description:
       "Kasauli is one of the best-kept secrets of Himachal Pradesh which while provides honeymooners a stunning display of natural splendour like any of Himachali hill station, does not share their tourist-crowded environment",
   },
   {
-    Destination: "",
+    Destination: "Shimla and Manali, Himachal Pradhesh ",
     Duration: "10 nights / 11 days",
     Catagory: "Family",
     Price: 15000,
@@ -245,27 +236,27 @@ export const package_list = [
       "Kasauli is one of the best-kept secrets of Himachal Pradesh which while provides honeymooners a stunning display of natural splendour like any of Himachali hill station, does not share their tourist-crowded environment",
   },
   {
-    Destination: "",
+    Destination: "Leh and Ledakh,Jammu-kashmir",
     Duration: "10 nights / 11 days",
     Catagory: "Family",
     Price: 15000,
     Available_Date: "20-12-2024",
-    Image: family3,
+    Image:family3,
     Description:
       "Kasauli is one of the best-kept secrets of Himachal Pradesh which while provides honeymooners a stunning display of natural splendour like any of Himachali hill station, does not share their tourist-crowded environment",
   },
   {
-    Destination: "",
+    Destination: "Ooty and Kodaikanal, TamilNadu",
     Duration: "10 nights / 11 days",
     Catagory: "Family",
     Price: 15000,
     Available_Date: "20-12-2024",
-    Image: family4,
+    Image:family4,
     Description:
       "Kasauli is one of the best-kept secrets of Himachal Pradesh which while provides honeymooners a stunning display of natural splendour like any of Himachali hill station, does not share their tourist-crowded environment",
   },
   {
-    Destination: "",
+    Destination: "Darjeeling and kalipong, west Bengal",
     Duration: "10 nights / 11 days",
     Catagory: "Family",
     Price: 15000,
@@ -275,7 +266,7 @@ export const package_list = [
       "Kasauli is one of the best-kept secrets of Himachal Pradesh which while provides honeymooners a stunning display of natural splendour like any of Himachali hill station, does not share their tourist-crowded environment",
   },
   {
-    Destination: "",
+    Destination: "Gungtok and shillong, North east",
     Duration: "10 nights / 11 days",
     Catagory: "Family",
     Price: 15000,
@@ -285,17 +276,17 @@ export const package_list = [
       "Kasauli is one of the best-kept secrets of Himachal Pradesh which while provides honeymooners a stunning display of natural splendour like any of Himachali hill station, does not share their tourist-crowded environment",
   },
   {
-    Destination: "",
+    Destination: "Munnar and thekkadi,Kerala",
     Duration: "10 nights / 11 days",
     Catagory: "Family",
     Price: 15000,
     Available_Date: "20-12-2024",
-    Image: family7,
+    Image:family7,
     Description:
       "Kasauli is one of the best-kept secrets of Himachal Pradesh which while provides honeymooners a stunning display of natural splendour like any of Himachali hill station, does not share their tourist-crowded environment",
   },
   {
-    Destination: "",
+    Destination: "Srinagar and Gulmarg,kashmir",
     Duration: "10 nights / 11 days",
     Catagory: "Family",
     Price: 15000,
@@ -305,16 +296,13 @@ export const package_list = [
       "Kasauli is one of the best-kept secrets of Himachal Pradesh which while provides honeymooners a stunning display of natural splendour like any of Himachali hill station, does not share their tourist-crowded environment",
   },
   {
-    Destination: "",
+    Destination: "mahabuleshwar and Panchgani,Maharashtra",
     Duration: "10 nights / 11 days",
     Catagory: "Family",
     Price: 15000,
     Available_Date: "20-12-2024",
-    Image: family9,
+    Image:family9,
     Description:
       "Kasauli is one of the best-kept secrets of Himachal Pradesh which while provides honeymooners a stunning display of natural splendour like any of Himachali hill station, does not share their tourist-crowded environment",
   },
-
- 
- 
-];
+]

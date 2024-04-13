@@ -13,8 +13,8 @@ function About() {
         <img src={about2} alt="about" className="about-image2" />
       </div>
       <div className="about-text">
-        <h1>About ExploreEpic</h1>
-        <h2>Who We Are</h2>
+        <h1 className="about-heading">About ExploreEpic</h1>
+        <h2 className="about-subheading">Who We Are</h2>
         <p>
           Welcome to the wonderland of all time, explore the beauty of India
           through ExploreEpic and write your daily with more and more happy

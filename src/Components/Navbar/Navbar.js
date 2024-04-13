@@ -65,9 +65,9 @@ function Navbar1() {
               onMouseEnter={() => setShowDropdown(true)}
               onMouseLeave={() => setShowDropdown(false)}
             >
-              <NavDropdown.Item>Honeymoon packages</NavDropdown.Item>
-              <NavDropdown.Item>LuxuryPackages</NavDropdown.Item>
-              <NavDropdown.Item>Normal Packages</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>navigate('/honeymoon')}>Honeymoon packages</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>navigate('/advanture')}>Adavnture Packages</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>navigate('/family')}>Normal Packages</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="#pricing">Contacts</Nav.Link>
             <Form className="d-flex" style={{ marginLeft: '50px', width: '500px' }}>

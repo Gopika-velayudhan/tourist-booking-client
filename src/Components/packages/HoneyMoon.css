@@ -8,3 +8,28 @@
 .card-image:hover {
     transform: scale(1.1); 
 }
+
+.card-image-container {
+    position: relative;
+  }
+  
+  .wishlist-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: black; 
+    cursor: pointer;
+  }
+  .btn {
+    transition: background-color 0.3s ease; 
+    color: white; 
+    background-color: blue; 
+  }
+  
+  .btn:hover {
+    background-color: orangered; 
+  }
+
+  
+  
