@@ -94,65 +94,52 @@ import "./Registration.css"
 const Registration = () => {
   const navigate = useNavigate();
 
-  // const [agree, setAgree] = useState(false);
   const [formData, setFormData] = useState({
     Username: "",
     Email: "",
     Phonenumber: "",
     Password: ""
   });
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  //Chechbox validation
-  // const handleCheckbox = () => {
-  //   setAgree(!agree);
-  // };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //Checkbox validation
-    // if (!agree) {
-    //   toast.error("Please agree the terms and conditions");
-    //   return;
-    // }
+    try {
+      const otpResponse = await axios.post('http://localhost:3005/api/user/sendotp', { Phonenumber: formData.Phonenumber });
 
-    //Send request with Phone no to verify OTP
-    axios.post('http://localhost:3005/api/user/sentotp', {Phonenumber: formData.Phonenumber})
-      .then(result => {
-        console.log(result);
+      if (otpResponse && otpResponse.status === 200) {
+        console.log(otpResponse);
         toast.success("Registration Success. Redirecting to OTP verification...");
-        navigate('/verifyotp', { state: { formData, Phonenumber:formData.Phonenumber } });
-      })
-      .catch(error => {
-        console.log(error);
-        toast.error(error.response.data.message);
-      });
+        navigate('/verifyotp', { state: { formData, Phonenumber: formData.Phonenumber } });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error(error.response.data.message);
+    }
   };
 
-  return(
-  
+  return (
     <>
-    
-     <div className="container d-flex justify-content-center align-items-center register " style={{ minHeight: '100vh' }}>
-        <div className=' rounded shadow p-3 mb-5 bg-white fom' style={{ width: '25rem'}}>
-          <form>
+      <div className="container d-flex justify-content-center align-items-center register " style={{ minHeight: '100vh' }}>
+        <div className='rounded shadow p-3 mb-5 bg-white fom' style={{ width: '25rem' }}>
+          <form onSubmit={handleSubmit}>
             <h1 className='mt-3' style={{ fontFamily: 'inherit' }}>
               Registration Form
             </h1>
-            <input  className='form-control mt-3' type='text' name='Username' value={formData.Username} placeholder='Username' required  onChange={handleChange}/>
+            <input className='form-control mt-3' type='text' name='Username' value={formData.Username} placeholder='Username' required onChange={handleChange} />
             <br />
-            <input className='form-control mt-4' type='email'name='Email' value={formData.Email} placeholder='Email' required onChange={handleChange}/>
+            <input className='form-control mt-4' type='email' name='Email' value={formData.Email} placeholder='Email' required onChange={handleChange} />
             <br />
-            <input  className='form-control mt-4' type='tel' name='Phonenumber' value={formData.Phonenumber} placeholder='Mobile number' required onChange={handleChange}/>
+            <input className='form-control mt-4' type='tel' name='Phonenumber' value={formData.Phonenumber} placeholder='Mobile number' required onChange={handleChange} />
             <br />
-            <input  className='form-control mt-4' type='password' name='Password' value={formData.Password} placeholder='Password' required onChange={handleChange}/>
+            <input className='form-control mt-4' type='password' name='Password' value={formData.Password} placeholder='Password' required onChange={handleChange} />
             <br />
-          
-    
-            <button className='btn btn-primary rounded mt-4 w-100' onClick={handleSubmit}>
+
+            <button className='btn btn-primary rounded mt-4 w-100'>
               Sign up
             </button>
             <p className='mt-4'>
@@ -161,13 +148,8 @@ const Registration = () => {
           </form>
         </div>
       </div>
-    
-    
-    
-    
-    
     </>
   );
 };
 
-export default Registration;
+export default Registration;

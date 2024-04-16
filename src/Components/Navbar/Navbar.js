@@ -19,11 +19,11 @@ function Navbar1() {
   const navigate = useNavigate();
 
   
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setLogin(false);
-    navigate('/');
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem('token');
+  //   setLogin(false);
+  //   navigate('/');
+  // };
 
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
@@ -82,7 +82,7 @@ function Navbar1() {
           </Nav>
           <Nav>
             {login ? (
-              <Nav.Link onClick={handleLogout}>
+              <Nav.Link>
                  <CgProfile />
                
               </Nav.Link>
