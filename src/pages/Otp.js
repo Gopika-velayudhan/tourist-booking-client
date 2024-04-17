@@ -130,7 +130,7 @@ const OtpVerification = () => {
 
       if (otpVerificationResponse.data.success) {
         setError(null);
-        // If OTP verified, proceed with registration
+        
         try {
           const response = await axios.post(
             "http://localhost:3005/api/user/userRegister",
@@ -139,7 +139,7 @@ const OtpVerification = () => {
           );
 
           if (response.data.success) {
-            // If registration successful, navigate to login
+            
             navigate("/login");
           } else {
             setError(response.data.message);
