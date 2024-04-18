@@ -10,3 +10,9 @@
   padding-left: 50px;
   padding-bottom: 10px;
 }
+.welcome-heading {
+  color: #007bff;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
