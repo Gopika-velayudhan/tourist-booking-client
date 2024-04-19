@@ -10,6 +10,7 @@ import About from "./home/About.js";
 import HoneyMoon from "../Components/packages/Honeymoon.js";
 import Adavnture from "./packages/Advanture.js";
 import Family from "../Components/packages/Family.js";
+import UserProfile from "../pages/userProfile.js";
 
 
 const Mainroute = () => {
@@ -25,6 +26,7 @@ const Mainroute = () => {
         <Route path="/honeymoon" element={<HoneyMoon/>}/>
         <Route path="/advanture" element={<Adavnture/>}/>
         <Route path="/family" element={<Family/>}/>
+        <Route path="/userprofile" element={<UserProfile/>}/>
 
        
       </Routes>

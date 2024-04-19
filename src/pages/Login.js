@@ -16,9 +16,10 @@ const Login = () => {
     setUserData({ ...userData, [e.target.id]: e.target.value });
   };
 
-  // store token in cookie
+  
   const handleLoginSuccess = (token) => {
     localStorage.setItem("token",token)
+    localStorage.setItem("userData", JSON.stringify(userData))
     navigate("/");
     toast.success("login successsfull");
   };
