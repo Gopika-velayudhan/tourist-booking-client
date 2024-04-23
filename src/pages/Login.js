@@ -19,7 +19,6 @@ const Login = () => {
   
   const handleLoginSuccess = (token) => {
     localStorage.setItem("token",token)
-    localStorage.setItem("userData", JSON.stringify(userData))
     navigate("/");
     toast.success("login successsfull");
   };

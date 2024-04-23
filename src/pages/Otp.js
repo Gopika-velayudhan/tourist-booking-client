@@ -129,7 +129,7 @@ const OtpVerification = () => {
       );
 
       if (otpVerificationResponse.data.success) {
-        setError(null);
+        setError("");
         
         try {
           const response = await axios.post(
