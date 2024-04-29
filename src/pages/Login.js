@@ -19,6 +19,8 @@ const Login = () => {
   
   const handleLoginSuccess = (token) => {
     localStorage.setItem("token",token)
+
+  
     navigate("/");
     toast.success("login successsfull");
   };

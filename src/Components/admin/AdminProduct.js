@@ -1,86 +1,99 @@
-import React, { useState } from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaListAlt, FaClock } from "react-icons/fa";
+import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 const AdminProduct = () => {
   const [formData, setFormData] = useState({
-    Destination: '',
-    Duration:'',
-    Category: '',
-    Price: '',
-    Available_Date: '',
-    Image: '',
-    Description: '',
+    Destination: "",
+    Duration: "",
+    Category: "",
+    Price: "",
+    Available_Date: "",
+    image: null,
+    Description: "",
   });
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [id]: value,
-    }));
+    if (id === "image") {
+      setFormData((prevData) => ({
+        ...prevData,
+        image: e.target.files[0],
+      }));
+    } else if (id === "Available_Date") {
+      setFormData((prevData) => ({
+        ...prevData,
+        Available_Date: value,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [id]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const adminToken = localStorage.getItem('adminToken');
-      console.log(adminToken);
-  
+      const adminToken = localStorage.getItem("adminToken");
       if (!adminToken) {
-        toast.error('Admin token not found.');
+        toast.error("Admin token not found.");
         return;
       }
-  
+
       const response = await axios.post(
-        'http://localhost:3005/api/admin/Package',
+        "http://localhost:3005/api/admin/packages",
         formData,
         {
           headers: {
             Authorization: `Bearer ${adminToken}`,
-            'Content-Type': 'application/json',
+            "Content-Type": "multipart/form-data",
           },
         }
       );
-  
-      if (response.status === 200) {
+
+      if (response.status === 201) {
         toast.success(response.data.message);
-      
+
         setFormData({
-          Destination: '',
-          Duration: 0,
-          Category: '',
-          Price: 0,
-          Available_Date: '',
-          image: '',
-          Description: '',
+          Destination: "",
+          Duration: "",
+          Category: "",
+          Price: "",
+          Available_Date: "",
+          image: null,
+          Description: "",
         });
       } else {
-        toast.error(response.data.message || 'Error submitting form.');
+        toast.error(response.data.message || "Error submitting form.");
       }
     } catch (error) {
-      console.error('Error:', error);
-  
+      console.error("Error:", error);
+
       if (error.response && error.response.status === 401) {
-        toast.error('Unauthorized. Check your authentication credentials.');
+        toast.error("Unauthorized. Check your authentication credentials.");
       } else {
-        toast.error('An error occurred.');
+        toast.error("An error occurred.");
       }
     }
   };
-  
-  
+
   return (
-    <div className="container mt-5">
+    <div
+      className="container-md mt-5"
+      style={{ maxWidth: "600px", margin: "auto" }}
+    >
       <div className="card">
         <div className="card-header bg-primary text-white">
           <h2 className="mb-0">Add a Product</h2>
         </div>
-        <div className="card-body">
+        <div className="card-body" style={{ padding: "20px" }}>
           <form onSubmit={handleSubmit}>
-        
-        
             <div className="mb-3">
               <label htmlFor="Destination" className="form-label">
                 Destination:
@@ -94,47 +107,87 @@ const AdminProduct = () => {
                 required
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="Duration" className="form-label">
-                Duration:
-              </label>
-              <input type="number" id="Duration"  className="form-control" value={formData.Duration} onChange={handleChange} required />
+            <div className="row mb-3">
+              <div className="col-md-4">
+                <label htmlFor="Duration" className="form-label">
+                  <FaClock /> Duration:
+                </label>
+                <input
+                  type="number"
+                  id="Duration"
+                  className="form-control"
+                  value={formData.Duration}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              
+              <div className="col-md-4">
+                <label htmlFor="Category" className="form-label">
+                  <FaListAlt /> Category:
+                </label>
+                <input
+                  type="text"
+                  id="Category"
+                  className="form-control"
+                  value={formData.Category}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="col-md-4">
+                <label htmlFor="Price" className="form-label">
+                  <FontAwesomeIcon icon={faDollarSign} /> Price:
+                </label>
+                <input
+                  type="number"
+                  id="Price"
+                  className="form-control"
+                  value={formData.Price}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
             </div>
-
-            <div className="mb-3">
-              <label htmlFor="Category" className="form-label">
-                Category:
-              </label>
-              <input type="text" id="Category"  className="form-control" value={formData.Category} onChange={handleChange} required />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="Price" className="form-label">
-                Price:
-              </label>
-              <input type="number" id="Price" className="form-control" value={formData.Price} onChange={handleChange} required />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="Available_Date" className="form-label">
-                Available_Date:
-              </label>
-              <input type="date" id="Available_Date"  className="form-control" value={formData.Available_Date} onChange={handleChange} required />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="Image url" className="form-label">
-                image url:
-              </label>
-              <input type="text" id="image" className="form-control" value={formData.image} onChange={handleChange}required />
+            <div className="row mb-3">
+              <div className="col-md-6">
+                <label htmlFor="Available_Date" className="form-label">
+                  Available Date:
+                </label>
+                <input
+                  type="date"
+                  id="Available_Date"
+                  className="form-control"
+                  value={formData.Available_Date}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="col-md-6">
+                <label htmlFor="image" className="form-label">
+                  Image:
+                </label>
+                <input
+                  type="file"
+                  id="image"
+                  className="form-control"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
             </div>
             <div className="mb-3">
               <label htmlFor="Description" className="form-label">
                 Description:
               </label>
-              <input type="text" id="Description" className="form-control" value={formData.Description} onChange={handleChange} required />
+              <textarea
+                id="Description"
+                className="form-control"
+                value={formData.Description}
+                onChange={handleChange}
+                required
+              />
             </div>
-
 
             <button type="submit" className="btn btn-primary">
               Add Product
@@ -147,6 +200,3 @@ const AdminProduct = () => {
 };
 
 export default AdminProduct;
-
-
-

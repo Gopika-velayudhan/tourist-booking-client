@@ -88,7 +88,7 @@ function Home() {
               className="search-input"
             />
           </div>
-          {/* Add the button within the search div */}
+        
           <button type="button" className="search-btn">
             submit
             

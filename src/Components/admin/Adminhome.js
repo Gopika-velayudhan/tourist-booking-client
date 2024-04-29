@@ -20,7 +20,7 @@ const AdminHome = () => {
           <Card.Header>Users</Card.Header>
           <Card.Body>
             <Card.Title>USERS</Card.Title>
-            <Card.Text>{/* <h1> {userData.length} </h1> */}</Card.Text>
+            <Card.Text></Card.Text>
           </Card.Body>
         </Card>
 
@@ -31,7 +31,7 @@ const AdminHome = () => {
           <Card.Header>Booking</Card.Header>
           <Card.Body>
             <Card.Title>Booking</Card.Title>
-            <Card.Text>{/* <h1> {vieworder.length} </h1> */}</Card.Text>
+            <Card.Text></Card.Text>
           </Card.Body>
         </Card>
 
@@ -42,7 +42,7 @@ const AdminHome = () => {
           <Card.Header>Add Package</Card.Header>
           <Card.Body>
             <Card.Title>Add package</Card.Title>
-            <Card.Text>{/* <h1> {vieworder.length} </h1> */}</Card.Text>
+            <Card.Text></Card.Text>
           </Card.Body>
         </Card>
 
@@ -53,7 +53,7 @@ const AdminHome = () => {
           <Card.Header>Completed</Card.Header>
           <Card.Body>
             <Card.Title>Completed</Card.Title>
-            <Card.Text>{/* <h1> {vieworder.length} </h1> */}</Card.Text>
+            <Card.Text></Card.Text>
           </Card.Body>
         </Card>
       </div>
