@@ -31,14 +31,13 @@ const AdminUsers = () => {
       ) : (
         <div>
           <h1 className="text-center mb-4">User Details</h1>
-          <div className="table-responsive">
-            <MDBTable responsive="sm" hover bordered>
+          <div className="table-responsive d-flex justify-content-center ">
+            <MDBTable responsive="sm" hover bordered style={{width: "100%"}}> 
               <MDBTableHead color="primary">
                 <tr>
                   <th>Username</th>
                   <th>E-mail</th>
                   <th>Phonenumber</th>
-                
                 </tr>
               </MDBTableHead>
               <MDBTableBody>
@@ -47,7 +46,9 @@ const AdminUsers = () => {
                     <td>
                       <div className="d-flex align-items-center">
                         <FaUserLarge className="mr-2" />
-                        <span className="font-weight-bold">{item.Username}</span>
+                        <span className="font-weight-bold">
+                          {item.Username}
+                        </span>
                       </div>
                     </td>
                     <td>{item.email}</td>

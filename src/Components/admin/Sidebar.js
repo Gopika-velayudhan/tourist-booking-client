@@ -9,7 +9,12 @@ import {
 } from "cdbreact";
 import { NavLink } from "react-router-dom";
 
-const SideBar = () => {
+
+ const SideBar = () => {
+//   const location = useLocation();
+//   const isAdminPage = location.pathname.startsWith("/admin");
+
+//   if (isAdminPage && !location.pathname.includes("/adminlogin")) {
   
 
   return (
@@ -35,10 +40,10 @@ const SideBar = () => {
             <NavLink exact to="/vieworder" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="store">Booking Packages</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/adminproduct" activeClassName="activeClicked">
+            <NavLink exact to="/adminview" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="list">Update Package</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/addproduct" activeClassName="activeClicked">
+            <NavLink exact to="/adminproduct" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="plus">Add Package</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/adminhome" activeClassName="activeClicked">
@@ -56,4 +61,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default SideBar

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FaListAlt, FaClock } from "react-icons/fa";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
+import SideBar from "./Sidebar";
 import axios from "axios";
 
 const AdminProduct = () => {
@@ -85,13 +85,15 @@ const AdminProduct = () => {
 
   return (
     <div
-      className="container-md mt-5"
+      className="container-md mt-5 d-flex"
       style={{ maxWidth: "600px", margin: "auto" }}
     >
+      {/* <div><SideBar/></div> */}
       <div className="card">
         <div className="card-header bg-primary text-white">
           <h2 className="mb-0">Add a Product</h2>
         </div>
+        
         <div className="card-body" style={{ padding: "20px" }}>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -110,7 +112,7 @@ const AdminProduct = () => {
             <div className="row mb-3">
               <div className="col-md-4">
                 <label htmlFor="Duration" className="form-label">
-                  <FaClock /> Duration:
+                  <i className="fas fa-clock"/> Duration:
                 </label>
                 <input
                   type="number"
@@ -124,7 +126,7 @@ const AdminProduct = () => {
               
               <div className="col-md-4">
                 <label htmlFor="Category" className="form-label">
-                  <FaListAlt /> Category:
+                <i className="fas fa-list"/> Category:
                 </label>
                 <input
                   type="text"
