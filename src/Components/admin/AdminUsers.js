@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import { FaUserLarge } from "react-icons/fa6";
+
+
+
+
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -32,7 +35,7 @@ const AdminUsers = () => {
         <div>
           <h1 className="text-center mb-4">User Details</h1>
           <div className="table-responsive d-flex justify-content-center ">
-            <MDBTable responsive="sm" hover bordered style={{width: "100%"}}> 
+            <MDBTable responsive="sm" hover bordered style={{ width: "100%" }}>
               <MDBTableHead color="primary">
                 <tr>
                   <th>Username</th>

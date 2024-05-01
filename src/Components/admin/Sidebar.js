@@ -24,7 +24,7 @@ import { NavLink } from "react-router-dom";
       <CDBSidebar textColor="#fff" backgroundColor="#2C3539">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <NavLink
-            to="/adminpage"
+            to="/adminhome"
             className="text-decoration-none"
             style={{ color: "inherit" }}
           >
@@ -46,9 +46,7 @@ import { NavLink } from "react-router-dom";
             <NavLink exact to="/adminproduct" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="plus">Add Package</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/adminhome" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Admin Home</CDBSidebarMenuItem>
-            </NavLink>
+            
             <NavLink exact to="/" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
             </NavLink>

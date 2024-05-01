@@ -44,7 +44,8 @@ const Mainroute = () => {
           <Route path="/adminproduct" element={<AdminProduct />} />
           <Route path="/sidebar" element={<SideBar />} />
           <Route path="/adminview" element={<Adminviewproduct />} />
-          <Route path="/adminedit" element={<Adminedit/>}/>
+          <Route path="/adminedit/:id" element={<Adminedit/>}/>
+          <Route path="/userprofile" element={<UserProfile/>}/>
         </Routes>
       </div>
     </>
