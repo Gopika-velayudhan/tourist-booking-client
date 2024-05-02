@@ -17,6 +17,7 @@ import AdminProduct from "./admin/AdminProduct.js";
 import SideBar from "./admin/Sidebar.js";
 import Adminviewproduct from "./admin/Adminviewproduct.js";
 import Adminedit from "./admin/Adminedit.js";
+import Adminsingle from "./admin/Adminsingle.js";
 
 const Mainroute = () => {
   const location = useLocation();
@@ -46,6 +47,7 @@ const Mainroute = () => {
           <Route path="/adminview" element={<Adminviewproduct />} />
           <Route path="/adminedit/:id" element={<Adminedit/>}/>
           <Route path="/userprofile" element={<UserProfile/>}/>
+          <Route path="/adminsingle/:id" element={<Adminsingle/>}/>
         </Routes>
       </div>
     </>

@@ -32,19 +32,24 @@ function Adminviewproduct() {
     try {
       const token = localStorage.getItem("adminToken");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
-      const response = await axios.delete(
-        `http://localhost:3005/api/admin/packages/${_id}`,
-        { headers }
-      );
 
-      if (response.status === 200) {
-        const updatedPackages = packages.filter((item) => item._id !== _id);
-        setPackages(updatedPackages);
-        console.log(response.data.message);
-        toast.success("Successfully deleted package");
-      } else {
-        console.log("Failed to delete package");
-        toast.error("Oops! Something went wrong.");
+      const confirmed = window.confirm("Are you sure delete the package");
+
+      if (confirmed) {
+        const response = await axios.delete(
+          `http://localhost:3005/api/admin/packages/${_id}`,
+          { headers }
+        );
+
+        if (response.status === 200) {
+          const updatedPackages = packages.filter((item) => item._id !== _id);
+          setPackages(updatedPackages);
+          console.log(response.data.message);
+          toast.success("Successfully deleted package");
+        } else {
+          console.log("Failed to delete package");
+          toast.error("Oops! Something went wrong.");
+        }
       }
     } catch (error) {
       console.error("Error deleting package:", error);
@@ -63,13 +68,23 @@ function Adminviewproduct() {
             <div
               key={item._id}
               className="bg-white shadow-md rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105"
+              onClick={() => navigate(`/adminsingle/${item._id}`)}
             >
               <div className="p-4">
-                <h3 className="text-lg font-semibold mb-2">{item.Destination}</h3>
-                <p className="text-sm text-gray-500 mb-4">{item.Duration} Days</p>
-                <img src={item.image} alt={item.Destination} className="w-full h-auto mb-4" />
-                <p className="text-sm text-gray-500 font-semibold mb-4">{item.Price}</p>
-                
+                <h3 className="text-lg font-semibold mb-2">
+                  {item.Destination}
+                </h3>
+                <p className="text-sm text-gray-500 mb-4">
+                  {item.Duration} Days
+                </p>
+                <img
+                  src={item.image}
+                  alt={item.Destination}
+                  className="w-full h-auto mb-4"
+                />
+                <p className="text-sm text-gray-500 font-semibold mb-4">
+                  {item.Price}
+                </p>
               </div>
               <div className="flex justify-between items-center p-4">
                 <FaEdit
