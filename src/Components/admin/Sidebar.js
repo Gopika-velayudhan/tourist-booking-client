@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -7,15 +8,23 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from "cdbreact";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AiOutlineLogout } from "react-icons/ai";
+import {toast} from 'react-toastify'
+
 
 
  const SideBar = () => {
-//   const location = useLocation();
-//   const isAdminPage = location.pathname.startsWith("/admin");
+  const [login,setLogin] = useState(false)
+  const navigate = useNavigate()
 
-//   if (isAdminPage && !location.pathname.includes("/adminlogin")) {
-  
+   const handleLogout = () => {
+    localStorage.removeItem('adminToken');
+    setLogin(false);
+
+    navigate('/');
+    toast.success("Logout")
+  };
 
   return (
     <div
@@ -49,6 +58,9 @@ import { NavLink } from "react-router-dom";
             
             <NavLink exact to="/" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/" activeClassName="activeClicked" onClick={handleLogout}>
+              <CDBSidebarMenuItem icon="logout" >LogOut </CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>

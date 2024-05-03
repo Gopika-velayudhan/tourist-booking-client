@@ -77,11 +77,14 @@ function Adminviewproduct() {
                 <p className="text-sm text-gray-500 mb-4">
                   {item.Duration} Days
                 </p>
-                <img
-                  src={item.image}
-                  alt={item.Destination}
-                  className="w-full h-auto mb-4"
-                />
+                
+                  <img
+                  
+                    src={item.images[1]}
+                  
+                    className="w-full h-auto mb-4"
+                  />
+              
                 <p className="text-sm text-gray-500 font-semibold mb-4">
                   {item.Price}
                 </p>

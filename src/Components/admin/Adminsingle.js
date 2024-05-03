@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 const Adminsingle = () => {
   const { id } = useParams();
-  const [packag, setPackage] = useState(null);
+  const [packag, setPackage] = useState([]);
 
   useEffect(() => {
     const fetchPackage = async () => {
@@ -17,6 +17,7 @@ const Adminsingle = () => {
           { headers }
         );
         setPackage(response.data.data);
+
       } catch (err) {
         console.error("Error fetching single package", err);
       }
@@ -26,7 +27,7 @@ const Adminsingle = () => {
       fetchPackage();
     }
   }, [id]);
-
+  
   return (
     <div className="flex">
       <div className="h-screen">
@@ -40,9 +41,11 @@ const Adminsingle = () => {
           >
             <h3 className="text-lg font-semibold mb-2">{packag.Destination}</h3>
             <p className="text-sm text-gray-500 mb-4">{packag.Duration} Days</p>
+            
             <img
-              src={packag.image}
-              alt={packag.Destination}
+             
+              src={packag.images[0]}
+              alt={`Image 1 of ${packag.Destination}`}
               className="w-full h-auto mb-4"
             />
             <p className="text-sm text-gray-500 font-semibold mb-4">

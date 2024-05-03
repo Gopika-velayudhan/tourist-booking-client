@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
-import SideBar from "./Sidebar";
 import axios from "axios";
 
 const AdminProduct = () => {
@@ -13,16 +12,21 @@ const AdminProduct = () => {
     Category: "",
     Price: "",
     Available_Date: "",
-    image: null,
+    images: [],
     Description: "",
   });
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    if (id === "image") {
+    if (id === "images") {
+      const files = e.target.files;
+      const imagesArray = [];
+      for (let i = 0; i < files.length; i++) {
+        imagesArray.push(files[i]);
+      }
       setFormData((prevData) => ({
         ...prevData,
-        image: e.target.files[0],
+        images: imagesArray,
       }));
     } else if (id === "Available_Date") {
       setFormData((prevData) => ({
@@ -46,9 +50,20 @@ const AdminProduct = () => {
         return;
       }
 
+      const formDataToSend = new FormData();
+      formDataToSend.append("Destination", formData.Destination);
+      formDataToSend.append("Duration", formData.Duration);
+      formDataToSend.append("Category", formData.Category);
+      formDataToSend.append("Price", formData.Price);
+      formDataToSend.append("Available_Date", formData.Available_Date);
+      for (let i = 0; i < formData.images.length; i++) {
+        formDataToSend.append("images", formData.images[i]);
+      }
+      formDataToSend.append("Description", formData.Description);
+
       const response = await axios.post(
         "http://localhost:3005/api/admin/packages",
-        formData,
+        formDataToSend,
         {
           headers: {
             Authorization: `Bearer ${adminToken}`,
@@ -66,9 +81,10 @@ const AdminProduct = () => {
           Category: "",
           Price: "",
           Available_Date: "",
-          image: null,
+          images: [],
           Description: "",
         });
+        console.log(formData, "full data");
       } else {
         toast.error(response.data.message || "Error submitting form.");
       }
@@ -88,12 +104,14 @@ const AdminProduct = () => {
       className="container-md mt-5 d-flex"
       style={{ maxWidth: "600px", margin: "auto" }}
     >
-      {/* <div><SideBar/></div> */}
+      {/* <div className="h-screen ">
+       <SideBar/>
+       </div>  */}
       <div className="card">
         <div className="card-header bg-primary text-white">
           <h2 className="mb-0">Add a Product</h2>
         </div>
-        
+
         <div className="card-body" style={{ padding: "20px" }}>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -112,7 +130,7 @@ const AdminProduct = () => {
             <div className="row mb-3">
               <div className="col-md-4">
                 <label htmlFor="Duration" className="form-label">
-                  <i className="fas fa-clock"/> Duration:
+                  <i className="fas fa-clock" /> Duration:
                 </label>
                 <input
                   type="number"
@@ -123,10 +141,10 @@ const AdminProduct = () => {
                   required
                 />
               </div>
-              
+
               <div className="col-md-4">
                 <label htmlFor="Category" className="form-label">
-                <i className="fas fa-list"/> Category:
+                  <i className="fas fa-list" /> Category:
                 </label>
                 <input
                   type="text"
@@ -171,10 +189,11 @@ const AdminProduct = () => {
                 </label>
                 <input
                   type="file"
-                  id="image"
+                  id="images"
                   className="form-control"
                   onChange={handleChange}
                   required
+                  multiple
                 />
               </div>
             </div>
