@@ -3,7 +3,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
+import axios from 'axios'
+
 
 const AdminProduct = () => {
   const [formData, setFormData] = useState({
@@ -66,7 +67,7 @@ const AdminProduct = () => {
         formDataToSend,
         {
           headers: {
-            Authorization: `Bearer ${adminToken}`,
+             Authorization: `Bearer ${adminToken}`,
             "Content-Type": "multipart/form-data",
           },
         }

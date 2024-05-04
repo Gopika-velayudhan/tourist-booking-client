@@ -4,6 +4,7 @@ import { Col, Row, Button, Container } from 'react-bootstrap';
 import axios from 'axios';
 import { toast } from "react-toastify";
 
+
 function AdminLogin() {
   const [login, setLogin] = useState({ email: '', password: '' });
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ function AdminLogin() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setLogin({ ...login, [name]: value }); 
+  
   };
 
   const handleSubmit = async (e) => {

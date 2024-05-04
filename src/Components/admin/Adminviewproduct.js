@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 
+
 function Adminviewproduct() {
   const [packages, setPackages] = useState([]);
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function Adminviewproduct() {
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
         const response = await axios.get(
           "http://localhost:3005/api/admin/packages",
-          { headers }
+          {headers}
         );
         setPackages(response.data.data);
       } catch (error) {
@@ -38,7 +39,8 @@ function Adminviewproduct() {
       if (confirmed) {
         const response = await axios.delete(
           `http://localhost:3005/api/admin/packages/${_id}`,
-          { headers }
+          {headers}
+          
         );
 
         if (response.status === 200) {
@@ -68,7 +70,7 @@ function Adminviewproduct() {
             <div
               key={item._id}
               className="bg-white shadow-md rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105"
-              onClick={() => navigate(`/adminsingle/${item._id}`)}
+             
             >
               <div className="p-4">
                 <h3 className="text-lg font-semibold mb-2">
@@ -100,6 +102,7 @@ function Adminviewproduct() {
                   className="text-red-500 cursor-pointer"
                   onClick={() => handleDelete(item._id)}
                 />
+                <button type="submit"  onClick={() => navigate(`/adminsingle/${item._id}`)}>visit now</button>
               </div>
             </div>
           ))}

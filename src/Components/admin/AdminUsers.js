@@ -4,6 +4,7 @@ import { FaUserLarge } from "react-icons/fa6";
 import SideBar from "../admin/Sidebar";
 import { TbLockOpen, TbLockOff } from "react-icons/tb";
 
+
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
 
@@ -14,7 +15,8 @@ const AdminUsers = () => {
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
         const response = await axios.get(
           "http://localhost:3005/api/admin/users",
-          { headers }
+          {headers}
+          
         );
         setUsers(response.data.data);
       } catch (error) {
@@ -32,7 +34,7 @@ const AdminUsers = () => {
         ? `http://localhost:3005/api/admin/users1/${id}`
         : `http://localhost:3005/api/admin/users/${id}`;
   
-      const response = await axios.put(url, {}, { headers });
+      const response = await axios.put(url, {headers},{});
       
        
       setUsers((prevUsers) =>
