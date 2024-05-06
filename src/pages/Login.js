@@ -1,55 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
 const Login = () => {
   const [userData, setUserData] = useState({});
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.id]: e.target.value });
   };
 
-  
   const handleLoginSuccess = (token) => {
-    localStorage.setItem("token",token)
-
-  
+    localStorage.setItem("token", token);
     navigate("/");
-    toast.success("login successsfull");
+    toast.success("Login successful");
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      const response = await axios.post(
-        "http://localhost:3005/api/user/login",
-        userData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+  try {
+    const response = await axios.post(
+      "http://localhost:3005/api/user/login",
+      userData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-      const { token } = response.data;
+    const { token } = response.data;
 
-      handleLoginSuccess(token);
-      
-    } catch (error) {
-      
-      console.log(error)
-      toast.error("An error occured in log in")
-      
+    handleLoginSuccess(token);
+  } catch (error) {
+    console.error("Error:", error);
+    if (error.response && error.response.status === 404) {
+      toast.error("User  not found");
+    } else if (error.response && error.response.status === 401) {
+      toast.error("Incorrect password");
+    } else if (error.response && error.response.status === 403) {
+      toast.error("User is blocked");
+    } else {
+      toast.error("An error occurred during login");
     }
-  };
+  }
+};
 
   return (
     <>
@@ -68,7 +67,7 @@ const Login = () => {
                   type="email"
                   className="form-control"
                   placeholder="Email"
-                  id="Email"
+                  id="email"
                   onChange={handleChange}
                 />
               </Col>
@@ -80,7 +79,7 @@ const Login = () => {
                   type="password"
                   className="form-control"
                   placeholder="Password"
-                  id="Password"
+                  id="password"
                   onChange={handleChange}
                 />
               </Col>
@@ -103,8 +102,7 @@ const Login = () => {
             <Row>
               <Col>
                 <h6 className="mt-3">
-                  Don't have an account?{" "}
-                  <Link to="/register">Registration</Link>
+                  Don't have an account? <Link to="/register">Register</Link>
                 </h6>
               </Col>
             </Row>

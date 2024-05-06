@@ -30,11 +30,12 @@ const AdminUsers = () => {
     try {
       const token = localStorage.getItem("adminToken");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      console.log(headers);
       const url = isBlocked
         ? `http://localhost:3005/api/admin/users1/${id}`
         : `http://localhost:3005/api/admin/users/${id}`;
   
-      const response = await axios.put(url, {headers},{});
+      const response = await axios.put(url,{}, {headers});
       
        
       setUsers((prevUsers) =>

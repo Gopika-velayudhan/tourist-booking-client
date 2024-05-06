@@ -1,20 +1,17 @@
-
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import "./Registration.css"
+import './Registration.css';
 
 const Registration = () => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false); 
-
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    Username: "",
-    Email: "",
-    Phonenumber: "",
-    Password: ""
+    Username: '',
+    email: '',
+    Phonenumber: '',
+    password: '',
   });
 
   const handleChange = (e) => {
@@ -23,23 +20,24 @@ const Registration = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    setIsLoading(true); 
+    setIsLoading(true);
 
     try {
-      const otpResponse = await axios.post('http://localhost:3005/api/user/sendotp', { Phonenumber: formData.Phonenumber });
+      const response = await axios.post('http://localhost:3005/api/user/userregister', formData, {
+        headers: { 'Content-Type': 'application/json' },
+      });
 
-      if (otpResponse && otpResponse.status === 200) {
-        console.log(otpResponse);
-        toast.success("Registration Success. Redirecting to OTP verification...");
-        navigate('/verifyotp', { state: { formData, Phonenumber: formData.Phonenumber } });
+      if (response && response.status === 201) {
+        console.log(response);
+        toast.success('Registration Success');
+        navigate('/login');
       }
     } catch (error) {
       console.error('Error:', error);
       toast.error(error.response.data.message);
     }
 
-    setIsLoading(false); 
+    setIsLoading(false);
   };
 
   return (
@@ -52,11 +50,11 @@ const Registration = () => {
             </h1>
             <input className='form-control mt-3' type='text' name='Username' value={formData.Username} placeholder='Username' required onChange={handleChange} />
             <br />
-            <input className='form-control mt-4' type='email' name='Email' value={formData.Email} placeholder='Email' required onChange={handleChange} />
+            <input className='form-control mt-4' type='email' name='email' value={formData.email} placeholder='Email' required onChange={handleChange} />
             <br />
             <input className='form-control mt-4' type='tel' name='Phonenumber' value={formData.Phonenumber} placeholder='Mobile number' required onChange={handleChange} />
             <br />
-            <input className='form-control mt-4' type='password' name='Password' value={formData.Password} placeholder='Password' required onChange={handleChange} />
+            <input className='form-control mt-4' type='password' name='password' value={formData.password} placeholder='Password' required onChange={handleChange} />
             <br />
 
             <button className='btn btn-primary rounded mt-4 w-100' disabled={isLoading}>

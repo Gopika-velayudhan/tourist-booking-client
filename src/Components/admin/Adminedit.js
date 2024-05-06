@@ -82,7 +82,7 @@ function Adminedit() {
             Available Date:
           </label>
           <input
-            type="text"
+            type="date"
             id="availableDate"
             name="Available_Date"
             value={formData.Available_Date}

@@ -19,11 +19,7 @@ function Navbar1() {
   const navigate = useNavigate();
 
   
-  // const handleLogout = () => {
-  //   localStorage.removeItem('token');
-  //   setLogin(false);
-  //   navigate('/');
-  // };
+  
 
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
@@ -67,7 +63,7 @@ function Navbar1() {
             >
               <NavDropdown.Item onClick={()=>navigate('/honeymoon')}>Honeymoon packages</NavDropdown.Item>
               <NavDropdown.Item onClick={()=>navigate('/advanture')}>Adavnture Packages</NavDropdown.Item>
-              <NavDropdown.Item onClick={()=>navigate('/family')}>Normal Packages</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>navigate('/family')}>Family packages</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="#pricing">Contacts</Nav.Link>
             <Form className="d-flex" style={{ marginLeft: '50px', width: '500px' }}>
