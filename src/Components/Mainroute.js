@@ -18,19 +18,21 @@ import SideBar from "./admin/Sidebar.js";
 import Adminviewproduct from "./admin/Adminviewproduct.js";
 import Adminedit from "./admin/Adminedit.js";
 import Adminsingle from "./admin/Adminsingle.js";
-import Wishlist from "../pages/Wishlist.js";
+import Singlepackage from "./packages/Singlepackage.js";
+import Wishlist from "./packages/Wishlist.js";
 
 const Mainroute = () => {
   const location = useLocation();
-
 
   const isAdminPath = location.pathname.startsWith("/admin");
 
   return (
     <>
       <div>
-        {isAdminPath ? null : <Navbar1 />} 
+        {isAdminPath ? null : <Navbar1 />}
         <Routes>
+          
+          {/* user route */}
           <Route path="/" element={<Homepage />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/login" element={<Login />} />
@@ -40,16 +42,24 @@ const Mainroute = () => {
           <Route path="/advanture" element={<Adavnture />} />
           <Route path="/family" element={<Family />} />
           <Route path="/userprofile" element={<UserProfile />} />
+          <Route path="/singlepack/:id" element={<Singlepackage />} />
+          <Route path="/wishlist" element={<Wishlist/>}/>
+          
+
+
+          {/* admin route */}
           <Route path="/adminlogin" element={<AdminLogin />} />
           <Route path="/adminusers" element={<Adminusers />} />
           <Route path="/adminhome" element={<AdminHome />} />
           <Route path="/adminproduct" element={<AdminProduct />} />
           <Route path="/sidebar" element={<SideBar />} />
           <Route path="/adminview" element={<Adminviewproduct />} />
-          <Route path="/adminedit/:id" element={<Adminedit/>}/>
-          <Route path="/userprofile" element={<UserProfile/>}/>
-          <Route path="/adminsingle/:id" element={<Adminsingle/>}/>
-          <Route path="/wishlist" element={<Wishlist/>}/>
+          <Route path="/adminedit/:id" element={<Adminedit />} />
+          <Route path="/adminsingle/:id" element={<Adminsingle />} />
+
+          
+        
+         
         </Routes>
       </div>
     </>

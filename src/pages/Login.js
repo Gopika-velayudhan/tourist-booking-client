@@ -13,11 +13,14 @@ const Login = () => {
     setUserData({ ...userData, [e.target.id]: e.target.value });
   };
 
-  const handleLoginSuccess = (token) => {
+  const handleLoginSuccess = (token, userId) => {
     localStorage.setItem("token", token);
+    localStorage.setItem("userId", userId);
+    
     navigate("/");
     toast.success("Login successful");
   };
+ 
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -32,10 +35,13 @@ const handleSubmit = async (e) => {
         },
       }
     );
-
-    const { token } = response.data;
-
-    handleLoginSuccess(token);
+    const { token,user} = response.data;
+   
+        
+   
+    
+    
+    handleLoginSuccess(token,user._id);
   } catch (error) {
     console.error("Error:", error);
     if (error.response && error.response.status === 404) {

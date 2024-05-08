@@ -87,7 +87,7 @@ function Navbar1() {
                  <FontAwesomeIcon icon={faUser} />
               </Nav.Link>
             )}
-            <Nav.Link href="#memes">
+            <Nav.Link onClick={()=>navigate('/wishlist')}>
               <AiOutlineHeart style={{ fontSize: '24px' }} />
             </Nav.Link>
           </Nav>

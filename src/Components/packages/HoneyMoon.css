@@ -1,35 +1,77 @@
-.card-image {
-    width: 100%;
-    height: 10rem;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden; 
 }
 
-.card-image:hover {
-    transform: scale(1.1); 
+.card:hover {
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-.card-image-container {
-    position: relative;
-  }
-  
-  .wishlist-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    color: black; 
-    cursor: pointer;
-  }
-  .btn {
-    transition: background-color 0.3s ease; 
-    color: white; 
-    background-color: blue; 
-  }
-  
-  .btn:hover {
-    background-color: orangered; 
-  }
+.card .card-image {
+  width: 100%;
+  height: 18rem; 
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
 
-  
-  
+.card .wishlist-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #ff5252; 
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.card:hover .wishlist-icon {
+  color: #f44336;
+}
+
+.card-details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.destination-button {
+  display: flex;
+  align-items: center;
+}
+
+
+.left-details {
+  flex: 1;
+  overflow: hidden; 
+}
+
+.right-details {
+  display: flex;
+  align-items: center;
+}
+
+.right-details button {
+  margin-left: auto;
+}
+
+.card .btn {
+  transition: background-color 0.3s ease;
+  color: #fff; 
+  background-color: #2196f3; 
+  border: none;
+}
+
+.card .btn:hover {
+  background-color: #1976d2; 
+}
