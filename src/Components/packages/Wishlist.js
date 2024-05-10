@@ -14,6 +14,7 @@ function Wishlist() {
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
         
         const response = await axios.get(`http://localhost:3005/api/user/wishlists/${userid}`, { headers });
+        response.data.data.Available_Date = new Date(response.data.data.Available_Date);
         setWishlist(response.data.data);
         
       } catch (err) {

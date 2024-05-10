@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import "../home/Homepage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSearch,
   faCalendarAlt,
   faDollarSign,
-  
 } from "@fortawesome/free-solid-svg-icons";
 
 function Home() {
+  
+
+  // const handleSearch = async () => {
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     console.log(token);
+  //     const headers = token ? { Authorization: `Bearer ${token}` } : {};
+  //     const response = await axios.post("http://localhost:3005/api/user/search", {
+  //       query: searchQuery,
+  //       days,
+  //       budget,
+  //     }, { headers });
+  //     console.log(response.data); 
+  //   } catch (error) {
+  //     console.error("Error searching packages:", error);
+  //     // Handle error
+  //   }
+  // };
+
   return (
     <div>
       <div
@@ -21,48 +40,7 @@ function Home() {
           minHeight: "100vh",
         }}
       >
-        <h2
-          style={{
-            fontSize: "bold",
-            color: "black",
-            marginTop: "30px",
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
-          }}
-          className="para"
-        >
-          Welcome To Explore
-          <span
-            style={{
-              fontWeight: "bold",
-              color: "goldenrod",
-              textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
-            }}
-          >
-            Epic
-          </span>
-        </h2>
-        <h1
-          style={{
-            fontFamily: "cursive",
-            fontWeight: "bold",
-            textAlign: "center",
-            marginTop: "20px",
-            color: "white",
-          }}
-        >
-          Turn Your{" "}
-          <span
-            style={{
-              fontWeight: "bold",
-              color: "goldenrod",
-              textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
-            }}
-          >
-            Dream Holiday
-          </span>{" "}
-          into Reality
-        </h1>
-
+        {/* Your existing JSX code */}
         <div className="search">
           <div className="input-container">
             <FontAwesomeIcon icon={faSearch} className="icon" />
@@ -70,6 +48,8 @@ function Home() {
               type="text"
               placeholder="Search for trips"
               className="search-input"
+              
+              
             />
           </div>
           <div className="input-container">
@@ -78,6 +58,8 @@ function Home() {
               type="number"
               placeholder="Days in trips"
               className="search-input"
+          
+            
             />
           </div>
           <div className="input-container">
@@ -86,12 +68,12 @@ function Home() {
               type="number"
               placeholder="Trip budget"
               className="search-input"
+              
+              
             />
           </div>
-        
-          <button type="button" className="search-btn">
-            submit
-            
+          <button type="button" className="search-btn" >
+            Submit
           </button>
         </div>
       </div>

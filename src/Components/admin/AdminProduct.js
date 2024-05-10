@@ -3,8 +3,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
-import axios from 'axios'
-
+import axios from "axios";
 
 const AdminProduct = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +18,7 @@ const AdminProduct = () => {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
+
     if (id === "images") {
       const files = e.target.files;
       const imagesArray = [];
@@ -67,7 +67,7 @@ const AdminProduct = () => {
         formDataToSend,
         {
           headers: {
-             Authorization: `Bearer ${adminToken}`,
+            Authorization: `Bearer ${adminToken}`,
             "Content-Type": "multipart/form-data",
           },
         }
@@ -147,15 +147,20 @@ const AdminProduct = () => {
                 <label htmlFor="Category" className="form-label">
                   <i className="fas fa-list" /> Category:
                 </label>
-                <input
-                  type="text"
+                <select
                   id="Category"
                   className="form-control"
                   value={formData.Category}
                   onChange={handleChange}
                   required
-                />
+                >
+                  <option value="" >Select Category</option>
+                  <option value="Category 1">Honeymoon</option>
+                  <option value="Category 2">Family</option>
+                  <option value="Category 3">Advanture</option>
+                </select>
               </div>
+
               <div className="col-md-4">
                 <label htmlFor="Price" className="form-label">
                   <FontAwesomeIcon icon={faDollarSign} /> Price:

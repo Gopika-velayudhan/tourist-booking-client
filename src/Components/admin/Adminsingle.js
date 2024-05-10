@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import SideBar from "./Sidebar";
 import { useParams } from "react-router-dom";
 
-
 const Adminsingle = () => {
   const { id } = useParams();
   const [packag, setPackage] = useState(null);
@@ -15,9 +14,10 @@ const Adminsingle = () => {
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
         const response = await axios.get(
           `http://localhost:3005/api/admin/packages/${id}`,
-          {headers}
-          
+          { headers }
         );
+        
+        response.data.data.Available_Date = new Date(response.data.data.Available_Date);
         setPackage(response.data.data);
       } catch (err) {
         console.error("Error fetching single package", err);
@@ -28,14 +28,14 @@ const Adminsingle = () => {
       fetchPackage();
     }
   }, [id]);
-  
+
   return (
     <div className="flex">
       <div className="h-screen">
         <SideBar />
       </div>
       <div className="flex flex-wrap justify-center gap-4 p-8">
-        {packag && ( 
+        {packag && (
           <div
             key={packag._id}
             className="bg-white rounded-lg shadow-md p-6 max-w-xl w-full"
@@ -52,29 +52,27 @@ const Adminsingle = () => {
                   />
                 ))}
               </div>
-              <div className="flex flex-col justify-between">
-                <div className="mb-4">
-                  <h4 className="text-lg font-semibold mb-2">Description:</h4>
-                  <p className="text-sm">{packag.Description}</p>
-                </div>
-                <div className="flex flex-col mb-4">
-                  <h4 className="text-lg font-semibold mb-2">Highlights:</h4>
-                  <ul className="list-disc list-inside">
-                    <li>Beautiful scenery</li>
-                    <li>Adventure activities</li>
-                    <li>Cultural experiences</li>
-                  </ul>
-                </div>
-                <div className="flex flex-col mb-4">
-                  <h4 className="text-lg font-semibold mb-2">Inclusions:</h4>
-                  <ul className="list-disc list-inside">
-                    <li>Accommodation</li>
-                    <li>Transportation</li>
-                    <li>Guided tours</li>
-                  </ul>
-                </div>
+            </div>
+            <div className="">
+              <div className="mt-4">
+                <h4 className="text-lg font-bold">Description:</h4>
+                <p className="text-sm">{packag.Description}</p>
               </div>
-             
+            </div>
+            <div className="">
+              <div className="mt-4">
+                <h4 className="text-lg font-bold">Category:</h4>
+                <p className="text-semibold">{packag.Category}</p>
+              </div>
+            </div>
+            <div className="">
+              <div className="mt-4">
+                <h4 className="text-lg font-bold">Available_Date:</h4>
+              
+                <p className="text-semibold">
+                  {packag.Available_Date.toLocaleDateString()}
+                </p>
+              </div>
             </div>
           </div>
         )}

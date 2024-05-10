@@ -85,6 +85,7 @@ function Adminviewproduct() {
                     src={item.images[1]}
                   
                     className="w-full h-auto mb-4"
+                    onClick={() => navigate(`/adminsingle/${item._id}`)}
                   />
               
                 <p className="text-sm text-gray-500 font-semibold mb-4">
@@ -102,7 +103,7 @@ function Adminviewproduct() {
                   className="text-red-500 cursor-pointer"
                   onClick={() => handleDelete(item._id)}
                 />
-                <button type="submit"  onClick={() => navigate(`/adminsingle/${item._id}`)}>visit now</button>
+              
               </div>
             </div>
           ))}

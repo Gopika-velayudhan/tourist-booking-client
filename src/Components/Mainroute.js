@@ -9,7 +9,7 @@ import About from "./home/About.js";
 import HoneyMoon from "../Components/packages/Honeymoon.js";
 import Adavnture from "./packages/Advanture.js";
 import Family from "../Components/packages/Family.js";
-import UserProfile from "../pages/userProfile.js";
+import Search from "./search/Search.js";
 import AdminHome from "../Components/admin/Adminhome.js";
 import AdminLogin from "./admin/AdminLogin.js";
 import Adminusers from "./admin/AdminUsers.js";
@@ -41,7 +41,7 @@ const Mainroute = () => {
           <Route path="/honeymoon" element={<HoneyMoon />} />
           <Route path="/advanture" element={<Adavnture />} />
           <Route path="/family" element={<Family />} />
-          <Route path="/userprofile" element={<UserProfile />} />
+          <Route path="/search" element={<Search/>}/>
           <Route path="/singlepack/:id" element={<Singlepackage />} />
           <Route path="/wishlist" element={<Wishlist/>}/>
           

@@ -17,6 +17,7 @@ function Singlepackage() {
           `http://localhost:3005/api/user/packages/${id}`,
           { headers }
         );
+        response.data.data.Available_Date = new Date(response.data.data.Available_Date);
         setPackages(response.data.data);
       } catch (err) {
         console.error("error fetching in package", err);
@@ -68,6 +69,7 @@ function Singlepackage() {
                 <p style={{ color: "black" }}>{packages.Description}</p>
                 <h3 style={{ color: "black" }}>₹{packages.Price}-/</h3>
                 <h3 style={{ color: "black" }}>{packages.Category}</h3>
+                <h3 style={{ color: "black" }}>{packages.Available_Date.toLocaleDateString()}</h3>
               </div>
               <Button className="bg-primary" style={{ margin: "8px" }}>Book now</Button>
             </Card.Body>
