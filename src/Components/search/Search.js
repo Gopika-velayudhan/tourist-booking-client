@@ -26,8 +26,8 @@ function Search() {
         const data = response.data.data;
         console.log(response.data);
         
-        // Filter the package that matches the searched destination
-        const foundPackage = data.find((pack) => pack.Destination === locationQuery);
+        
+        const foundPackage = data.find((pack) => pack.Destination === locationQuery );
         setPackageToShow(foundPackage);
         setLoading(false);
       } catch (error) {

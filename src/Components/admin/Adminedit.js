@@ -2,36 +2,50 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import SideBar from "./Sidebar";
-
+import { toast } from "react-toastify";
 
 function Adminedit() {
   const { id } = useParams();
   const [formData, setFormData] = useState({
     Destination: "",
     Duration: "",
-    Price: "",
+    Category: "",
     Available_Date: "",
+    Price: "",
+    images: []
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if (e.target.name === "images") {
+      
+      const files = Array.from(e.target.files);
+      const fileUrls = files.map((file) => URL.createObjectURL(file)); 
+      setFormData({ ...formData, [e.target.name]: fileUrls });
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
   };
+
+
+  
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("adminToken");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      console.log(id)
       const response = await axios.put(
         `http://localhost:3005/api/admin/packages/${id}`,
         formData,
-        {headers}
-        
+        { headers }
       );
+      toast.success("updated successfully");
       console.log(response.data);
     } catch (error) {
-      console.error("Error updating package:", error);
+      console.error("Error updating property:", error);
     }
   };
 
@@ -65,6 +79,17 @@ function Adminedit() {
             onChange={handleChange}
             className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:border-blue-500"
           />
+          <label htmlFor="duration" className="block mb-2">
+            Category:
+          </label>
+          <input
+            type="text"
+            id="category"
+            name="Category"
+            value={formData.Category}
+            onChange={handleChange}
+            className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:border-blue-500"
+          />
 
           <label htmlFor="price" className="block mb-2">
             Price:
@@ -89,6 +114,17 @@ function Adminedit() {
             onChange={handleChange}
             className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:border-blue-500"
           />
+          {/* <label htmlFor="availableDate" className="block mb-2">
+            images:
+          </label>
+          <input
+            type="file"
+            id="images"
+            name="images"
+            onChange={handleChange}
+            className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:border-blue-500"
+            multiple
+          /> */}
 
           <button
             type="submit"
