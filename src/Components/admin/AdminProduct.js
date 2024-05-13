@@ -155,9 +155,9 @@ const AdminProduct = () => {
                   required
                 >
                   <option value="" >Select Category</option>
-                  <option value="Category 1">Honeymoon</option>
-                  <option value="Category 2">Family</option>
-                  <option value="Category 3">Advanture</option>
+                  <option value="Honeymoon">Honeymoon</option>
+                  <option value="Family">Family</option>
+                  <option value="Advanture">Advanture</option>
                 </select>
               </div>
 

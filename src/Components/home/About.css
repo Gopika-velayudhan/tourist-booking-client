@@ -1,38 +1,36 @@
 .about-container {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   padding: 20px;
-  background-color: #f8f9fa; 
+  background-color: #f8f9fa;
 }
 
 .about-images {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-  gap: 20px;
+  grid-template-columns: auto 1fr; 
 }
 
+.about-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.about-image3 {
+  grid-column: span 2; 
+}
 
 .about-text {
   flex: 1;
   padding-left: 20px;
-  
 }
-
-
-
-
 
 .about-text p {
   margin-bottom: 10px;
-  line-height: 1.5; 
+  line-height: 1.5;
   font-family: Arial, Helvetica, sans-serif;
-}
-
-.about-image {
-  max-width: 100%; 
-  height: 200px; 
-  object-fit: cover; 
-  margin-bottom: 10px; 
 }
 
 .about-heading {
@@ -46,8 +44,6 @@
 .about-subheading {
   font-size: 30px;
   font-weight: bold;
-  color:black; 
+  color: black;
   margin-bottom: 15px;
 }
-
-

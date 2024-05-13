@@ -16,8 +16,10 @@ const Adminsingle = () => {
           `http://localhost:3005/api/admin/packages/${id}`,
           { headers }
         );
-        
-        response.data.data.Available_Date = new Date(response.data.data.Available_Date);
+
+        response.data.data.Available_Date = new Date(
+          response.data.data.Available_Date
+        );
         setPackage(response.data.data);
       } catch (err) {
         console.error("Error fetching single package", err);
@@ -40,7 +42,9 @@ const Adminsingle = () => {
             key={packag._id}
             className="bg-white rounded-lg shadow-md p-6 max-w-xl w-full"
           >
-            <h3 className="text-3xl font-bold mb-4 text-black">{packag.Destination}</h3>
+            <h3 className="text-3xl font-bold mb-4 text-black">
+              {packag.Destination}
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="flex gap-4">
                 {packag.images.map((image, index) => (
@@ -68,7 +72,7 @@ const Adminsingle = () => {
             <div className="">
               <div className="mt-4">
                 <h4 className="text-lg font-bold">Available_Date:</h4>
-              
+
                 <p className="text-semibold">
                   {packag.Available_Date.toLocaleDateString()}
                 </p>

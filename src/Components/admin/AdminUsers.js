@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import instance from "../../axiosinterceptor/Axiosinterceptor";
 import { FaUserLarge } from "react-icons/fa6";
 import SideBar from "../admin/Sidebar";
 import { TbLockOpen, TbLockOff } from "react-icons/tb";
-
+import {toast} from 'react-toastify'
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -11,13 +11,7 @@ const AdminUsers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const token = localStorage.getItem("adminToken");
-        const headers = token ? { Authorization: `Bearer ${token}` } : {};
-        const response = await axios.get(
-          "http://localhost:3005/api/admin/users",
-          {headers}
-          
-        );
+        const response = await instance.get("/api/admin/users");
         setUsers(response.data.data);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -28,27 +22,20 @@ const AdminUsers = () => {
 
   const handleLock = async (id, isBlocked) => {
     try {
-      const token = localStorage.getItem("adminToken");
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
-      console.log(headers);
-      const url = isBlocked
-        ? `http://localhost:3005/api/admin/users1/${id}`
-        : `http://localhost:3005/api/admin/users/${id}`;
-  
-      const response = await axios.put(url,{}, {headers});
-      
-       
+      const action = isBlocked ? "unblock" : "block";
+      const url = `/api/admin/users/${id}?action=${action}`;
+      const response = await instance.patch(url, {});
       setUsers((prevUsers) =>
         prevUsers.map((item) =>
           item._id === id ? { ...item, isBlocked: !item.isBlocked } : item
         )
       );
-      
-      console.log(response.data.message);
+      toast.success(response.data.message);
     } catch (error) {
       console.error("Error locking/unlocking user:", error);
     }
   };
+
 
   return (
     <div className="flex">
@@ -88,9 +75,13 @@ const AdminUsers = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <FaUserLarge className="text-blue-500 w-6 h-6" />
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{item.Username}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {item.Username}
+                  </td>
                   <td className="px-6 py-4 whitespace-nowrap">{item.email}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{item.Phonenumber}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {item.Phonenumber}
+                  </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {item.isBlocked ? (
                       <TbLockOff
