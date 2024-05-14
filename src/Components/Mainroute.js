@@ -20,6 +20,7 @@ import Adminedit from "./admin/Adminedit.js";
 import Adminsingle from "./admin/Adminsingle.js";
 import Singlepackage from "./packages/Singlepackage.js";
 import Wishlist from "./packages/Wishlist.js";
+import Payment from "../pages/Payment.js";
 
 const Mainroute = () => {
   const location = useLocation();
@@ -44,6 +45,7 @@ const Mainroute = () => {
           <Route path="/search" element={<Search/>}/>
           <Route path="/singlepack/:id" element={<Singlepackage />} />
           <Route path="/wishlist" element={<Wishlist/>}/>
+          <Route path="/payment" element={<Payment/>}/>
           
 
 

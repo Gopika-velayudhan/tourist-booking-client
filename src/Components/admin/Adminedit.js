@@ -12,18 +12,13 @@ function Adminedit() {
     Category: "",
     Available_Date: "",
     Price: "",
-    images: []
+  
   });
 
   const handleChange = (e) => {
-    if (e.target.name === "images") {
-      
-      const files = Array.from(e.target.files);
-      const fileUrls = files.map((file) => URL.createObjectURL(file)); 
-      setFormData({ ...formData, [e.target.name]: fileUrls });
-    } else {
+   
       setFormData({ ...formData, [e.target.name]: e.target.value });
-    }
+    
   };
 
 

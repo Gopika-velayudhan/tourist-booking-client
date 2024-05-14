@@ -11,6 +11,7 @@ function Search() {
   const [error, setError] = useState(null);
   const location = useLocation();
   const navigate = useNavigate()
+  
 
   useEffect(() => {
     const fetchPackages = async () => {
@@ -39,6 +40,7 @@ function Search() {
 
     fetchPackages();
   }, [location]);
+  
 
   return (
     <div className="px-4 py-8">
