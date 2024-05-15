@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import axios from "axios";
-import "../home/Homepage.css";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faCalendarAlt, faDollarSign } from "@fortawesome/free-solid-svg-icons";
-import { toast } from 'react-toastify';
-import { useNavigate } from "react-router-dom";
+import "../home/Homepage.css";
 
 function Home() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState({
     Destination: "",
-    Duration:0 ,
+    Duration: 0,
     Price: 0,
   });
 
@@ -22,7 +20,11 @@ function Home() {
     }));
   };
 
-  
+  const handleSearch = () => {
+    const { Destination, Duration, Price } = searchQuery;
+    const query = new URLSearchParams({ location: Destination, duration: Duration, price: Price }).toString();
+    navigate(`/search?${query}`);
+  };
 
   return (
     <div>
@@ -70,7 +72,7 @@ function Home() {
               onChange={handleInputChange}
             />
           </div>
-          <button type="button" className="search-btn" onClick={()=>navigate('/search')}>
+          <button type="button" className="search-btn" onClick={handleSearch}>
             Submit
           </button>
         </div>

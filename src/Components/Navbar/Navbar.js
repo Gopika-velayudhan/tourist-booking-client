@@ -11,8 +11,10 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { AiOutlineHeart } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
-import "./Navbar.css";
 import { MdAdminPanelSettings } from "react-icons/md";
+import { FaCartPlus } from 'react-icons/fa';
+import "./Navbar.css";
+
 
 function Navbar1() {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -116,6 +118,9 @@ function Navbar1() {
             )}
             <Nav.Link onClick={() => navigate("/wishlist")}>
               <AiOutlineHeart style={{ fontSize: "24px" }} />
+            </Nav.Link>
+            <Nav.Link onClick={() => navigate()}>
+              <FaCartPlus style={{ fontSize: "24px" }} />
             </Nav.Link>
             <Nav.Link onClick={() => navigate("/adminlogin")}>
               <MdAdminPanelSettings style={{ fontSize: "24px" }} />

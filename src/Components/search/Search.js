@@ -5,13 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Search() {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState({ location: '', duration: '', price: '' });
   const [packageToShow, setPackageToShow] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const location = useLocation();
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPackages = async () => {
@@ -20,15 +19,19 @@ function Search() {
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
         const searchParams = new URLSearchParams(location.search);
         const locationQuery = searchParams.get('location');
+        const durationQuery = searchParams.get('duration');
+        const priceQuery = searchParams.get('price');
 
-        setSearch(locationQuery);
+        setSearch({ location: locationQuery, duration: durationQuery, price: priceQuery });
 
-        const response = await axios.get(`http://localhost:3005/api/user/searches?location=${locationQuery}`, { headers });
+        const response = await axios.get(`http://localhost:3005/api/user/searches?location=${locationQuery}&duration=${durationQuery}&price=${priceQuery}`, { headers });
         const data = response.data.data;
-        console.log(response.data);
         
-        
-        const foundPackage = data.find((pack) => pack.Destination === locationQuery );
+        const foundPackage = data.find((pack) => 
+          pack.Destination.toLowerCase() === locationQuery.toLowerCase() &&
+          pack.Duration === Number(durationQuery) &&
+          pack.Price === Number(priceQuery)
+        );
         setPackageToShow(foundPackage);
         setLoading(false);
       } catch (error) {
@@ -40,7 +43,6 @@ function Search() {
 
     fetchPackages();
   }, [location]);
-  
 
   return (
     <div className="px-4 py-8">
@@ -71,7 +73,7 @@ function Search() {
           </Card>
         </div>
       ) : (
-        <div className="text-center">No package found for "{search}".</div>
+        <div className="text-center">No package found for "{search.location}" with duration "{search.duration}" and price "{search.price}".</div>
       )}
     </div>
   );

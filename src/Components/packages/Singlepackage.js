@@ -98,6 +98,7 @@ function Singlepackage() {
               </div>
               <div className="form mt-4 border p-2 rounded-lg" style={{ maxWidth: '300px', margin: '0 auto' }}>
                 <form>
+                  Available_Date:
                   <input
                     type="date"
                     name="availableDate"
@@ -106,6 +107,7 @@ function Singlepackage() {
                     onChange={handleInputChange}
                     className="block w-full p-2 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                   />
+                  Duration:
                   <input
                     type="number"
                     name="days"
@@ -114,6 +116,7 @@ function Singlepackage() {
                     onChange={handleInputChange}
                     className="block w-full p-2 mb-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                   />
+                  Total Price:
                   <input
                     type="number"
                     name="price"
