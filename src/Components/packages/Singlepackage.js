@@ -39,11 +39,16 @@ function Singlepackage() {
       try {
         const token = localStorage.getItem("token");
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
+        if (!token) {
+          toast.error("Please login");
+          navigate("/login");
+          return;
+        }
         const response = await axios.get(
           `http://localhost:3005/api/user/packages/${id}`,
           { headers }
         );
-        response.data.data.Available_Date = new Date(response.data.data.Available_Date);
+        
         setPackages(response.data.data);
       } catch (err) {
         console.error("Error fetching package", err);
@@ -105,7 +110,7 @@ function Singlepackage() {
               <p className="text-black">{packages.Description}</p>
               <h3 className="text-black text-xl">₹{packages.Price}-/Day</h3>
               <h3 className="text-black text-xl">{packages.Category}</h3>
-              <h3 className="text-black text-xl">{packages.Available_Date.toLocaleDateString()}</h3>
+            
             </div>
             <div className="form mt-4 border p-2 rounded-lg" style={{ maxWidth: '300px', margin: '0 auto' }}>
               <form>

@@ -36,35 +36,26 @@ const HoneyMoon = () => {
     fetchPackages();
   }, []);
 
-  useEffect(() => {
-    const fetchWishlist = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const userid = localStorage.getItem("userId");
-        const headers = token ? { Authorization: `Bearer ${token}` } : {};
-        const response = await axios.get(`http://localhost:3005/api/user/wishlists/${userid}`, { headers });
-        setWishlist(response.data.data.map(pkg => pkg.packageid));
-      } catch (error) {
-        console.error("Error fetching wishlist:", error);
-      }
-    };
-
-    fetchWishlist();
-  }, []);
-
   const addToWishlist = async (pkgId) => {
+    const token = localStorage.getItem("token");
+    const userid = localStorage.getItem("userId");
+
+    if (!token) {
+      toast.error("Please log in to add packages to your wishlist.");
+      navigate("/login");
+      return;
+    }
+
     try {
-      const token = localStorage.getItem("token");
-      const userid = localStorage.getItem("userId");
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      const headers = { Authorization: `Bearer ${token}` };
       const response = await axios.post(
         `http://localhost:3005/api/user/wishlists/${userid}`,
         { packageid: pkgId },
         { headers }
       );
       if (response.status === 200) {
-        setWishlist([...wishlist, pkgId]);
         toast.success("Package successfully added to wishlist");
+        setWishlist((prevWishlist) => [...prevWishlist, pkgId]);
       }
     } catch (error) {
       console.error("Error adding to wishlist:", error);
@@ -72,10 +63,17 @@ const HoneyMoon = () => {
   };
 
   const deleteFromWishlist = async (pkgId) => {
+    const token = localStorage.getItem("token");
+    const userid = localStorage.getItem("userId");
+
+    if (!token) {
+      toast.error("Please log in to remove packages from your wishlist.");
+      navigate("/login");
+      return;
+    }
+
     try {
-      const token = localStorage.getItem("token");
-      const userid = localStorage.getItem("userId");
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      const headers = { Authorization: `Bearer ${token}` };
       const response = await axios.delete(
         `http://localhost:3005/api/user/wishlists/${userid}`,
         {
@@ -84,8 +82,8 @@ const HoneyMoon = () => {
         }
       );
       if (response.status === 200) {
-        setWishlist(wishlist.filter(id => id !== pkgId));
         toast.success("Package successfully removed from wishlist");
+        setWishlist((prevWishlist) => prevWishlist.filter(id => id !== pkgId));
       }
     } catch (error) {
       console.error("Error deleting from wishlist:", error);

@@ -1,9 +1,5 @@
-import React, { useState } from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { Form } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Nav, Navbar, NavDropdown, Form } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import Logo from "../Assests/Logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,25 +8,36 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import { MdAdminPanelSettings } from "react-icons/md";
+import { toast } from "react-toastify"; 
 import "./Navbar.css";
-
 
 function Navbar1() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [login, setLogin] = useState(false);
-  const [inputvalue, setInputvalue] = useState("");
+  const [inputValue, setInputValue] = useState("");
 
   const navigate = useNavigate();
 
-  const handlechange = (e) => {
-    const { value } = e.target;
-    setInputvalue(value);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setLogin(!!token);
+  }, []);
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
   };
 
   const handleSearch = () => {
-    if (inputvalue.trim() !== "") {
-      navigate(`/search?location=${inputvalue}`);
+    if (inputValue.trim() !== "") {
+      navigate(`/search?location=${inputValue}`);
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setLogin(false);
+    navigate('/');
+    toast.success("Logged out successfully");
   };
 
   return (
@@ -68,9 +75,7 @@ function Navbar1() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
-            <Nav.Link href="#pricing" onClick={() => navigate("/about")}>
-              About
-            </Nav.Link>
+            <Nav.Link onClick={() => navigate("/about")}>About</Nav.Link>
             <NavDropdown
               title="Packages"
               id="responsive-nav"
@@ -88,37 +93,38 @@ function Navbar1() {
                 Family packages
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="#pricing">Contacts</Nav.Link>
+            <Nav.Link onClick={() => navigate("/contacts")}>Contacts</Nav.Link>
             <Form
               className="d-flex"
               style={{ marginLeft: "50px", width: "500px" }}
-              onClick={handleSearch}
+              onSubmit={(e) => { e.preventDefault(); handleSearch(); }}
             >
               <Form.Control
                 type="search"
                 placeholder="Search here...."
                 className="me-2"
                 aria-label="Search"
-                value={inputvalue}
-                onChange={handlechange}
+                value={inputValue}
+                onChange={handleChange}
               />
               <FaSearch style={{ marginTop: "10px" }} />
             </Form>
           </Nav>
           <Nav>
             {login ? (
-              <Nav.Link>
-                <CgProfile />
-              </Nav.Link>
+              <>
+                <Nav.Link onClick={handleLogout}>
+                  <CgProfile style={{ fontSize: "24px" }} />
+                </Nav.Link>
+              </>
             ) : (
-              <Nav.Link onClick={() => navigate("/Login")}>
-                <FontAwesomeIcon icon={faUser} />
+              <Nav.Link onClick={() => navigate("/login")}>
+                <FontAwesomeIcon icon={faUser} style={{ fontSize: "20px" }} />
               </Nav.Link>
             )}
             <Nav.Link onClick={() => navigate("/wishlist")}>
               <AiOutlineHeart style={{ fontSize: "24px" }} />
             </Nav.Link>
-           
             <Nav.Link onClick={() => navigate("/adminlogin")}>
               <MdAdminPanelSettings style={{ fontSize: "24px" }} />
             </Nav.Link>
