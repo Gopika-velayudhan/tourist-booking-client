@@ -1,0 +1,64 @@
+.container1 {
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  max-width: 800px;
+  margin: auto;
+}
+
+.header1, .guest-details1, .total-price1 {
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.header1 h2 {
+  margin-bottom: 20px;
+}
+
+.confirmation-table1 {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.confirmation-table1 td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.confirmation-table1 td:nth-child(odd) {
+  background-color: #f7f7f7;
+  font-weight: bold;
+}
+
+.total-price1 {
+  text-align: center;
+}
+
+.total-price1 p {
+  margin: 5px 0;
+}
+
+.total-price1 h3 {
+  margin-bottom: 20px;
+}
+
+.confirmation-table1 th,
+.confirmation-table1 td {
+  text-align: left;
+}
+
+.total-price1 Button {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.total-price1 Button:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}

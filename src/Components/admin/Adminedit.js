@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import SideBar from "./Sidebar";
 import { toast } from "react-toastify";
-
+import instance from "../../axiosinterceptor/Axiosinterceptor";
 function Adminedit() {
   const { id } = useParams();
   const [formData, setFormData] = useState({
@@ -29,13 +29,13 @@ function Adminedit() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("adminToken");
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
-      console.log(id)
-      const response = await axios.put(
-        `http://localhost:3005/api/admin/packages/${id}`,
+      // const token = localStorage.getItem("adminToken");
+      // const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      // console.log(id)
+      const response = await instance.put(
+        `/api/admin/packages/${id}`,
         formData,
-        { headers }
+       
       );
       toast.success("updated successfully");
       console.log(response.data);

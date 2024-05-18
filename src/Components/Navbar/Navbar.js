@@ -12,7 +12,6 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import { MdAdminPanelSettings } from "react-icons/md";
-import { FaCartPlus } from 'react-icons/fa';
 import "./Navbar.css";
 
 
@@ -119,9 +118,7 @@ function Navbar1() {
             <Nav.Link onClick={() => navigate("/wishlist")}>
               <AiOutlineHeart style={{ fontSize: "24px" }} />
             </Nav.Link>
-            <Nav.Link onClick={() => navigate()}>
-              <FaCartPlus style={{ fontSize: "24px" }} />
-            </Nav.Link>
+           
             <Nav.Link onClick={() => navigate("/adminlogin")}>
               <MdAdminPanelSettings style={{ fontSize: "24px" }} />
             </Nav.Link>

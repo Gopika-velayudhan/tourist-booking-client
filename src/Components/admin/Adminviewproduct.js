@@ -4,7 +4,8 @@ import { MdDelete } from "react-icons/md";
 import SideBar from "./Sidebar";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import axios from "axios";
+import instance from "../../axiosinterceptor/Axiosinterceptor";
+
 
 
 function Adminviewproduct() {
@@ -14,11 +15,11 @@ function Adminviewproduct() {
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const token = localStorage.getItem("adminToken");
-        const headers = token ? { Authorization: `Bearer ${token}` } : {};
-        const response = await axios.get(
-          "http://localhost:3005/api/admin/packages",
-          {headers}
+        // const token = localStorage.getItem("adminToken");
+        // const headers = token ? { Authorization: `Bearer ${token}` } : {};
+        const response = await instance.get(
+          '/api/admin/packages'
+      
         );
         setPackages(response.data.data);
       } catch (error) {
@@ -31,15 +32,13 @@ function Adminviewproduct() {
 
   const handleDelete = async (_id) => {
     try {
-      const token = localStorage.getItem("adminToken");
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
-
+     
       const confirmed = window.confirm("Are you sure delete the package");
 
       if (confirmed) {
-        const response = await axios.delete(
-          `http://localhost:3005/api/admin/packages/${_id}`,
-          {headers}
+        const response = await instance.delete(
+          `/api/admin/packages/${_id}`
+          
           
         );
 

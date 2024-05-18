@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import SideBar from "./Sidebar";
 import { useParams } from "react-router-dom";
+import instance from "../../axiosinterceptor/Axiosinterceptor";
 
 const Adminsingle = () => {
   const { id } = useParams();
@@ -10,11 +11,11 @@ const Adminsingle = () => {
   useEffect(() => {
     const fetchPackage = async () => {
       try {
-        const token = localStorage.getItem("adminToken");
-        const headers = token ? { Authorization: `Bearer ${token}` } : {};
-        const response = await axios.get(
-          `http://localhost:3005/api/admin/packages/${id}`,
-          { headers }
+        // const token = localStorage.getItem("adminToken");
+        // const headers = token ? { Authorization: `Bearer ${token}` } : {};
+        const response = await instance.get(
+          `/api/admin/packages/${id}`,
+          
         );
 
         response.data.data.Available_Date = new Date(
