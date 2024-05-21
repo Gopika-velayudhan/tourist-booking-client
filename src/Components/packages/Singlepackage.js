@@ -61,11 +61,7 @@ function Singlepackage() {
     try {
       const token = localStorage.getItem("token");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
-      if (!token) {
-        toast.error("Please login");
-        navigate("/login");
-        return;
-      }
+      
 
       const response = await axios.get(
         `http://localhost:3005/api/review/packages/${id}/reviews`,
@@ -101,11 +97,7 @@ function Singlepackage() {
       const token = localStorage.getItem("token");
       const userid = localStorage.getItem("userId");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
-      if (!token) {
-        toast.error("Please login");
-        navigate("/login");
-        return;
-      }
+      
       const response = await axios.post(
         `http://localhost:3005/api/review/reviews`,
         { user: userid, package: id, rating, reviewText },
@@ -204,7 +196,7 @@ function Singlepackage() {
         </Row>
       )}
 
-      <Row className="mt-4">
+      <Row className="mt-4 ml-5">
         <Col lg={{ span: 6, offset: 3 }}>
           <div className="review-card">
             <div className="card-body">

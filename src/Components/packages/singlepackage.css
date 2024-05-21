@@ -22,21 +22,21 @@
   border-radius: 10px;
 }
 
-/* Set maximum width for the review form */
+
 .review-form {
   max-width: 400px;
-  margin: 0 auto;
+  margin-right: 20px;
 }
 
-/* Set maximum width for the review card */
+
 .review-card {
   width: 100%;
   max-width: 600px;
-  margin: 0 auto;
+  margin-right:20px;
   box-shadow: none;
 }
 
-/* Additional styles for review items */
+
 .review-item {
   border-bottom: 1px solid #e0e0e0;
   padding-bottom: 10px;

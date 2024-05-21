@@ -52,7 +52,7 @@ const Confirmation = () => {
 
       console.log(response);
       const options = {
-        key: "rzp_test_L04o8QlNZR1jdR",
+        key: "rzp_test_eyXHobfs6uqaFU",
         amount: response.data.amount,
         currency: response.data.currency,
         receipt: response.data.receipt,

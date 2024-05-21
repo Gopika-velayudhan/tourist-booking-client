@@ -36,12 +36,33 @@ const HoneyMoon = () => {
     fetchPackages();
   }, []);
 
+  useEffect(() => {
+    const fetchWishlist = async () => {
+      const token = localStorage.getItem("token");
+      const userid = localStorage.getItem("userId");
+
+      if (token && userid) {
+        try {
+          const headers = { Authorization: `Bearer ${token}` };
+          const response = await axios.get(`http://localhost:3005/api/user/wishlists/${userid}`, {
+            headers,
+          });
+          setWishlist(response.data.wishlist || []);
+        } catch (error) {
+          console.error("Error fetching wishlist:", error);
+        }
+      }
+    };
+
+    fetchWishlist();
+  }, []);
+
   const addToWishlist = async (pkgId) => {
     const token = localStorage.getItem("token");
     const userid = localStorage.getItem("userId");
 
     if (!token) {
-      toast.error("Please log in to add packages to your wishlist.");
+      toast.error("please login");
       navigate("/login");
       return;
     }
@@ -129,12 +150,12 @@ const HoneyMoon = () => {
             </Button>
             {isLiked(pkg._id) ? (
               <AiFillHeart
-                className="text-xl text-red-500 absolute top-0 right-0 m-2"
+                className="text-xl text-red-500 absolute top-0 right-0 m-2 cursor-pointer"
                 onClick={() => toggleLike(pkg._id)}
               />
             ) : (
               <AiOutlineHeart
-                className="text-xl absolute top-0 right-0 m-2"
+                className="text-xl absolute top-0 right-0 m-2 cursor-pointer"
                 onClick={() => toggleLike(pkg._id)}
               />
             )}

@@ -8,9 +8,9 @@ function About() {
   return (
     <div className="about-container">
       <div className="about-images">
-        <img src={about3} alt="about" className="about-image about-image3"/>
-        <img src={about1} alt="about" className="about-image about-image1" />
-        <img src={about2} alt="about" className="about-image about-image2" />
+        <img src={about3} alt="about" className="img1"/>
+        <img src={about1} alt="about" className="img2" />
+        <img src={about2} alt="about" className="img3" />
       </div>
       <div className="about-text">
         <h1 className="about-heading">About ExploreEpic</h1>
