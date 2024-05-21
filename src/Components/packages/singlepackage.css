@@ -1,25 +1,70 @@
-.photoarray {
-  
-}
-
-.grid-container {
+/* singlepackage.css */
+.photoarray .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; 
-  grid-template-rows: repeat(1, 1fr); 
-  gap: 10px; 
+  gap: 1rem;
 }
 
-.photoitem {
+.photoarray .grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.main-image {
   width: 100%;
-  height: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
-.large-image {
-  grid-column: 1 / span 1;
-  grid-row: 1 / span 2; 
+.secondary-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
-.small-image {
-  width: calc(50% - 5px); 
+/* Set maximum width for the review form */
+.review-form {
+  max-width: 400px;
+  margin: 0 auto;
 }
 
+/* Set maximum width for the review card */
+.review-card {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: none;
+}
+
+/* Additional styles for review items */
+.review-item {
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.review-form .form-control {
+  resize: none;
+}
+
+.review-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.review-form .rating {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 992px) {
+  .photoarray .grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .main-image {
+    height: 200px;
+  }
+
+  .secondary-image {
+    height: 100px;
+  }
+}
