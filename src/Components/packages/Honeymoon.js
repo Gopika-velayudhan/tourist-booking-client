@@ -36,30 +36,10 @@ const HoneyMoon = () => {
     fetchPackages();
   }, []);
 
-  useEffect(() => {
-    const fetchWishlist = async () => {
-      const token = localStorage.getItem("token");
-      const userid = localStorage.getItem("userId");
-
-      if (token && userid) {
-        try {
-          const headers = { Authorization: `Bearer ${token}` };
-          const response = await axios.get(`http://localhost:3005/api/user/wishlists/${userid}`, {
-            headers,
-          });
-          setWishlist(response.data.wishlist || []);
-        } catch (error) {
-          console.error("Error fetching wishlist:", error);
-        }
-      }
-    };
-
-    fetchWishlist();
-  }, []);
-
+ 
   const addToWishlist = async (pkgId) => {
     const token = localStorage.getItem("token");
-    const userid = localStorage.getItem("userId");
+    const userid = localStorage.getItem("_id");
 
     if (!token) {
       toast.error("please login");
@@ -85,10 +65,10 @@ const HoneyMoon = () => {
 
   const deleteFromWishlist = async (pkgId) => {
     const token = localStorage.getItem("token");
-    const userid = localStorage.getItem("userId");
+    const userid = localStorage.getItem("_id");
 
     if (!token) {
-      toast.error("Please log in to remove packages from your wishlist.");
+      toast.error("Please login");
       navigate("/login");
       return;
     }

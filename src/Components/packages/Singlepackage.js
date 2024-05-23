@@ -5,7 +5,7 @@ import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Rating from "react-rating-stars-component";
-import "./singlepackage.css"; 
+import "./singlepackage.css";
 
 function Singlepackage() {
   const [packages, setPackages] = useState(null);
@@ -61,7 +61,6 @@ function Singlepackage() {
     try {
       const token = localStorage.getItem("token");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
-      
 
       const response = await axios.get(
         `http://localhost:3005/api/review/packages/${id}/reviews`,
@@ -88,16 +87,16 @@ function Singlepackage() {
 
   const handleConfirm = () => {
     navigate(
-      `/confirmation/${id}?destination=${packages.Destination}&duration=${formState.Duration}&available_date=${formState.Available_Date}&total_price=${formState.Price}`
+      `/confirmation/${id}?destination=${packages.Destination}&duration=${formState.Duration}&available_date=${formState.Available_Date}&total_price=${formState.Price}&package_id=${id}`
     );
   };
 
   const handleReviewSubmit = async () => {
     try {
       const token = localStorage.getItem("token");
-      const userid = localStorage.getItem("userId");
+      const userid = localStorage.getItem("_id");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
-      
+
       const response = await axios.post(
         `http://localhost:3005/api/review/reviews`,
         { user: userid, package: id, rating, reviewText },
@@ -196,49 +195,47 @@ function Singlepackage() {
         </Row>
       )}
 
-      <Row className="mt-4 ml-5">
-        <Col lg={{ span: 6, offset: 3 }}>
-          <div className="review-card">
-            <div className="card-body">
-              <h5 className="text-center">Reviews and Ratings</h5>
-              {reviews.map((review, index) => (
-                <div key={index} className="mb-3 review-item">
-                  <h5>{review.user.Username}</h5> 
-                  <Rating
-                    value={review.rating}
-                    edit={false}
-                    size={20}
-                    activeColor="#ffd700"
-                  />
-                  <p>{review.reviewText}</p>
-                </div>
-              ))}
-              <Form className="review-form">
-                <Form.Group className="mb-3">
-                  <Form.Label>Write a review</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    value={reviewText}
-                    onChange={(e) => setReviewText(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>Rating</Form.Label>
-                  <Rating
-                    count={5}
-                    size={24}
-                    value={rating}
-                    onChange={(newRating) => setRating(newRating)}
-                    activeColor="#ffd700"
-                  />
-                </Form.Group>
-                <Button variant="primary" onClick={handleReviewSubmit}>
-                  Submit Review
-                </Button>
-              </Form>
-            </div>
-          </div>
+      <Row className="mt-4">
+        <Col lg={3}>
+          <h5 className="text-center">Reviews and Ratings</h5>
+          {reviews.map((review, index) => (
+            <Card key={index} className="mb-3">
+              <Card.Body >
+                <Card.Title>{review.user.Username}</Card.Title> 
+                <Card.Text>{review.reviewText}</Card.Text>
+                <Rating
+                  value={review.rating}
+                  edit={false}
+                  size={20}
+                  activeColor="#ffd700"
+                />
+              </Card.Body>
+            </Card>
+          ))}
+          <Form className="review-form mt-4">
+            <Form.Group className="mb-3">
+              <Form.Label>Write a review</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={reviewText}
+                onChange={(e) => setReviewText(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Rating</Form.Label>
+              <Rating
+                count={5}
+                size={24}
+                value={rating}
+                onChange={(newRating) => setRating(newRating)}
+                activeColor="#ffd700"
+              />
+            </Form.Group>
+            <Button variant="primary" onClick={handleReviewSubmit}>
+              Submit Review
+            </Button>
+          </Form>
         </Col>
       </Row>
     </Container>
@@ -246,3 +243,4 @@ function Singlepackage() {
 }
 
 export default Singlepackage;
+

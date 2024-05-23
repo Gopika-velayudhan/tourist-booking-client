@@ -23,6 +23,7 @@ import Wishlist from "./packages/Wishlist.js";
 
 
 import Confirmation from "./payment/Confirmation.jsx";
+import Booking from "./payment/Booking.jsx";
 
 const Mainroute = () => {
   const location = useLocation();
@@ -47,8 +48,10 @@ const Mainroute = () => {
           <Route path="/search" element={<Search/>}/>
           <Route path="/singlepack/:id" element={<Singlepackage />} />
           <Route path="/wishlist" element={<Wishlist/>}/>
-      
           <Route path="confirmation/:id" element={<Confirmation/>}/>
+          <Route path="/booking/:id" element={<Booking/>}/>
+          
+      
           
          
           

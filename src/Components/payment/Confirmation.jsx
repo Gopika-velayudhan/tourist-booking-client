@@ -13,6 +13,8 @@ const Confirmation = () => {
   const duration = searchParams.get("duration");
   const availableDate = searchParams.get("available_date");
   const totalPrice = searchParams.get("total_price");
+  const packageId = searchParams.get("package_id");
+  console.log(packageId, "packageid");
 
   useEffect(() => {
     const handleGet = async () => {
@@ -35,6 +37,7 @@ const Confirmation = () => {
 
   const handlePayment = async () => {
     const userToken = localStorage.getItem("token");
+    const userid = localStorage.getItem("_id");
 
     if (!userToken) {
       console.log("token not found...");
@@ -44,21 +47,33 @@ const Confirmation = () => {
     const bearerToken = `Bearer ${userToken}`;
 
     try {
-      const response = await axios.post(
-        "http://localhost:3005/api/user/payment",
-        { amount: totalPrice * 100, currency: "INR", receipt: "receipt" },
+      const bookingResponse = await axios.post(
+        "http://localhost:3005/api/user/bookings",
+        { userId: userid, packageId, amount: totalPrice, currency: "INR" },
         { headers: { Authorization: bearerToken } }
       );
 
-      console.log(response);
+      const { payment_id } = bookingResponse.data;
+
+      const paymentResponse = await axios.post(
+        "http://localhost:3005/api/user/payment",
+        {
+          amount: totalPrice * 100,
+          currency: "INR",
+          receipt: `receipt_${Date.now()}`,
+          payment_id,
+        },
+        { headers: { Authorization: bearerToken } }
+      );
+
       const options = {
         key: "rzp_test_eyXHobfs6uqaFU",
-        amount: response.data.amount,
-        currency: response.data.currency,
-        receipt: response.data.receipt,
+        amount: paymentResponse.data.amount,
+        currency: paymentResponse.data.currency,
+        receipt: paymentResponse.data.receipt,
         name: "Explore_epic",
         description: "Test Transaction",
-        order_id: response.data.id,
+        order_id: paymentResponse.data.id,
         handler: (res) => {
           alert(`Payment successful: ${res.razorpay_payment_id}`);
           navigate("/");

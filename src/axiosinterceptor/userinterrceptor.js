@@ -4,14 +4,14 @@ import { toast } from "react-toastify";
 const adminToken = localStorage.getItem("adminToken");
 
 const instance = axios.create({
-  baseURL: "http://localhost:3005/api/admin",
+  baseURL: "http://localhost:3005/api/user",
 });
 
 instance.interceptors.request.use(
   (config) => {
     console.log(config);
     if (adminToken) {
-      config.headers.Authorization = `Bearer ${adminToken}`;
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },

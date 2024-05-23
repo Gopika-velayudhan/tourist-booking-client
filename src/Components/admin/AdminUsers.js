@@ -11,7 +11,7 @@ const AdminUsers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await instance.get("/api/admin/users");
+        const response = await instance.get("/users");
         setUsers(response.data.data);
       } catch (error) {
         console.error("Error fetching users:", error);

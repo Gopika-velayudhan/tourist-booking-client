@@ -33,7 +33,7 @@ function Adminedit() {
       // const headers = token ? { Authorization: `Bearer ${token}` } : {};
       // console.log(id)
       const response = await instance.put(
-        `/api/admin/packages/${id}`,
+        `/packages/${id}`,
         formData,
        
       );

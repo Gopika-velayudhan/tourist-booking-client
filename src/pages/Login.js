@@ -13,9 +13,13 @@ const Login = () => {
     setUserData({ ...userData, [e.target.id]: e.target.value });
   };
 
-  const handleLoginSuccess = (token, userId) => {
+  const handleLoginSuccess = (token, userDeatils) => {
+    const {_id,Username,email,Phonenumber} = userDeatils
     localStorage.setItem("token", token);
-    localStorage.setItem("userId", userId);
+    localStorage.setItem("_id", _id);
+    localStorage.setItem("Username", Username);
+    localStorage.setItem("email", email);
+    localStorage.setItem("Phonenumber", Phonenumber);
     
     navigate("/");
     toast.success("Login successful");
@@ -41,7 +45,7 @@ const handleSubmit = async (e) => {
    
     
     
-    handleLoginSuccess(token,user._id);
+    handleLoginSuccess(token,user);
   } catch (error) {
     console.error("Error:", error);
     if (error.response && error.response.status === 404) {

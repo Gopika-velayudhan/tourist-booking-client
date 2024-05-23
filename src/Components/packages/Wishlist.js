@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function Wishlist() {
   const [wishlist, setWishlist] = useState([]);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchWishlist = async () => {
@@ -50,6 +53,7 @@ function Wishlist() {
               />
               <p className="mt-2">Duration: {item.Duration}</p>
               <p>Available Date: {item.Available_Date}</p>
+              <Button onClick={() => navigate(`/singlepack/${item._id}`)}>View Your Dream</Button>
             </div>
           </div>
         ))}

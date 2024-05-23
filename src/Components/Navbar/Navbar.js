@@ -2,24 +2,22 @@ import React, { useState, useEffect } from "react";
 import { Container, Nav, Navbar, NavDropdown, Form } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import Logo from "../Assests/Logo.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { AiOutlineHeart } from "react-icons/ai";
-import { CgProfile } from "react-icons/cg";
+
 import { useNavigate } from "react-router-dom";
 import { MdAdminPanelSettings } from "react-icons/md";
-import { toast } from "react-toastify"; 
+import { toast } from "react-toastify";
 import "./Navbar.css";
 
 function Navbar1() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [login, setLogin] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const name = localStorage.getItem("Username");
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     setLogin(!!token);
   }, []);
 
@@ -34,9 +32,10 @@ function Navbar1() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
+    localStorage.removeItem("Username");
     setLogin(false);
-    navigate('/');
+    navigate("/");
     toast.success("Logged out successfully");
   };
 
@@ -97,7 +96,10 @@ function Navbar1() {
             <Form
               className="d-flex"
               style={{ marginLeft: "50px", width: "500px" }}
-              onSubmit={(e) => { e.preventDefault(); handleSearch(); }}
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSearch();
+              }}
             >
               <Form.Control
                 type="search"
@@ -110,21 +112,22 @@ function Navbar1() {
               <FaSearch style={{ marginTop: "10px" }} />
             </Form>
           </Nav>
-          <Nav>
-            {login ? (
-              <>
-                <Nav.Link onClick={handleLogout}>
-                  <CgProfile style={{ fontSize: "24px" }} />
-                </Nav.Link>
-              </>
-            ) : (
-              <Nav.Link onClick={() => navigate("/login")}>
-                <FontAwesomeIcon icon={faUser} style={{ fontSize: "20px" }} />
-              </Nav.Link>
+
+          <NavDropdown
+            title={name ? <>{name}</> : <>Login</>}
+            id="responsive-nav"
+          >
+            {!name && (
+              <NavDropdown.Item onClick={() => navigate("/login")}>
+                Sign In
+              </NavDropdown.Item>
             )}
-            <Nav.Link onClick={() => navigate("/wishlist")}>
-              <AiOutlineHeart style={{ fontSize: "24px" }} />
-            </Nav.Link>
+            {name && (
+              <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+            )}
+            <NavDropdown.Item onClick={()=>navigate('/register')}>Sign up</NavDropdown.Item>
+          </NavDropdown>
+          <Nav>
             <Nav.Link onClick={() => navigate("/adminlogin")}>
               <MdAdminPanelSettings style={{ fontSize: "24px" }} />
             </Nav.Link>

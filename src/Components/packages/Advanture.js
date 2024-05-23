@@ -2,9 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"; 
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import "./HoneyMoon.css";
 import "tailwindcss/tailwind.css";
+import { toast } from "react-toastify";
 
 const HoneyMoon = () => {
   const navigate = useNavigate();
@@ -12,7 +13,6 @@ const HoneyMoon = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [wishlist, setWishlist] = useState([]);
-  const [likedPackages, setLikedPackages] = useState([]);
 
   useEffect(() => {
     const fetchPackages = async () => {
@@ -36,31 +36,45 @@ const HoneyMoon = () => {
     fetchPackages();
   }, []);
 
+ 
   const addToWishlist = async (pkgId) => {
+    const token = localStorage.getItem("token");
+    const userid = localStorage.getItem("_id");
+
+    if (!token) {
+      toast.error("please login");
+      navigate("/login");
+      return;
+    }
+
     try {
-      const token = localStorage.getItem("token");
-      const userid = localStorage.getItem("userId");
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      const headers = { Authorization: `Bearer ${token}` };
       const response = await axios.post(
         `http://localhost:3005/api/user/wishlists/${userid}`,
-        {
-          packageid: pkgId,
-        },
+        { packageid: pkgId },
         { headers }
       );
-      console.log("Added to wishlist:", response.data);
-      setWishlist([...wishlist, pkgId]);
-      toggleLike(pkgId);
+      if (response.status === 200) {
+        toast.success("Package successfully added to wishlist");
+        setWishlist((prevWishlist) => [...prevWishlist, pkgId]);
+      }
     } catch (error) {
       console.error("Error adding to wishlist:", error);
     }
   };
 
   const deleteFromWishlist = async (pkgId) => {
+    const token = localStorage.getItem("token");
+    const userid = localStorage.getItem("_id");
+
+    if (!token) {
+      toast.error("Please login");
+      navigate("/login");
+      return;
+    }
+
     try {
-      const token = localStorage.getItem("token");
-      const userid = localStorage.getItem("userId");
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      const headers = { Authorization: `Bearer ${token}` };
       const response = await axios.delete(
         `http://localhost:3005/api/user/wishlists/${userid}`,
         {
@@ -68,24 +82,24 @@ const HoneyMoon = () => {
           data: { packageid: pkgId },
         }
       );
-      console.log("Deleted from wishlist:", response.data);
-      setWishlist(wishlist.filter((id) => id !== pkgId));
-      toggleLike(pkgId);
+      if (response.status === 200) {
+        toast.success("Package successfully removed from wishlist");
+        setWishlist((prevWishlist) => prevWishlist.filter(id => id !== pkgId));
+      }
     } catch (error) {
       console.error("Error deleting from wishlist:", error);
     }
   };
 
   const toggleLike = (pkgId) => {
-    if (likedPackages.includes(pkgId)) {
-      setLikedPackages(likedPackages.filter((id) => id !== pkgId));
+    if (isLiked(pkgId)) {
+      deleteFromWishlist(pkgId);
     } else {
-      setLikedPackages([...likedPackages, pkgId]);
+      addToWishlist(pkgId);
     }
   };
 
-  const isInWishlist = (pkgId) => wishlist.includes(pkgId);
-  const isLiked = (pkgId) => likedPackages.includes(pkgId);
+  const isLiked = (pkgId) => wishlist.includes(pkgId);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -114,22 +128,15 @@ const HoneyMoon = () => {
             <Button variant="primary" onClick={() => navigate(`/singlepack/${pkg._id}`)}>
               View Dreams
             </Button>
-
             {isLiked(pkg._id) ? (
               <AiFillHeart
-                className="text-xl text-red-500 absolute top-0 right- 0 m-2"
-                onClick={() => {
-                  deleteFromWishlist(pkg._id);
-                  toggleLike(pkg._id);
-                }}
+                className="text-xl text-red-500 absolute top-0 right-0 m-2 cursor-pointer"
+                onClick={() => toggleLike(pkg._id)}
               />
             ) : (
               <AiOutlineHeart
-                className="text-xl absolute top-0 right-0 m-2"
-                onClick={() => {
-                  addToWishlist(pkg._id);
-                  toggleLike(pkg._id);
-                }}
+                className="text-xl absolute top-0 right-0 m-2 cursor-pointer"
+                onClick={() => toggleLike(pkg._id)}
               />
             )}
           </Card.Body>

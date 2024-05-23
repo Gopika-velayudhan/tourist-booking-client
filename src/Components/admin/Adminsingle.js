@@ -14,7 +14,7 @@ const Adminsingle = () => {
         // const token = localStorage.getItem("adminToken");
         // const headers = token ? { Authorization: `Bearer ${token}` } : {};
         const response = await instance.get(
-          `/api/admin/packages/${id}`,
+          `/packages/${id}`,
           
         );
 
