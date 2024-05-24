@@ -13,10 +13,10 @@ const Adminsingle = () => {
       try {
         // const token = localStorage.getItem("adminToken");
         // const headers = token ? { Authorization: `Bearer ${token}` } : {};
-        const response = await instance.get(
-          `/packages/${id}`,
+        const response = await instance.get(`/packages/${id}`)
           
-        );
+          
+        
 
         response.data.data.Available_Date = new Date(
           response.data.data.Available_Date

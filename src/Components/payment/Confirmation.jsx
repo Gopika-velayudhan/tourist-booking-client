@@ -12,7 +12,7 @@ const Confirmation = () => {
   const destination = searchParams.get("destination");
   const duration = searchParams.get("duration");
   const availableDate = searchParams.get("available_date");
-  const totalPrice = searchParams.get("total_price");
+  const totalPrice = searchParams.get("total_price")
   const packageId = searchParams.get("package_id");
   console.log(packageId, "packageid");
 
@@ -21,7 +21,7 @@ const Confirmation = () => {
       try {
         const token = localStorage.getItem("token");
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
-        const userid = localStorage.getItem("userId");
+        const userid = localStorage.getItem("_id");
 
         const response = await axios.get(
           `http://localhost:3005/api/user/users/${userid}`,
@@ -90,8 +90,13 @@ const Confirmation = () => {
           color: "#3399cc",
         },
       };
-      const rzpay = new window.Razorpay(options);
-      rzpay.open();
+
+      if (window.Razorpay) {
+        const rzpay = new window.Razorpay(options);
+        rzpay.open();
+      } else {
+        console.error("Razorpay SDK not loaded");
+      }
     } catch (error) {
       console.error("Payment error:", error);
     }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Nav, Navbar, NavDropdown, Form } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import Logo from "../Assests/Logo.png";
-
+import { IoMdHeartEmpty } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { toast } from "react-toastify";
@@ -130,6 +130,9 @@ function Navbar1() {
           <Nav>
             <Nav.Link onClick={() => navigate("/adminlogin")}>
               <MdAdminPanelSettings style={{ fontSize: "24px" }} />
+            </Nav.Link>
+            <Nav.Link onClick={()=>navigate("/wishlist")}>
+              <IoMdHeartEmpty style={{fontSize:"24px"}}/>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

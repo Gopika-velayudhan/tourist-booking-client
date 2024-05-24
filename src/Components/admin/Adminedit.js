@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+
 import SideBar from "./Sidebar";
 import { toast } from "react-toastify";
 import instance from "../../axiosinterceptor/Axiosinterceptor";
@@ -12,19 +12,11 @@ function Adminedit() {
     Category: "",
     Available_Date: "",
     Price: "",
-  
   });
 
   const handleChange = (e) => {
-   
-      setFormData({ ...formData, [e.target.name]: e.target.value });
-    
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-
-  
-
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,11 +24,7 @@ function Adminedit() {
       // const token = localStorage.getItem("adminToken");
       // const headers = token ? { Authorization: `Bearer ${token}` } : {};
       // console.log(id)
-      const response = await instance.put(
-        `/packages/${id}`,
-        formData,
-       
-      );
+      const response = await instance.put(`/packages/${id}`, formData);
       toast.success("updated successfully");
       console.log(response.data);
     } catch (error) {
@@ -77,14 +65,18 @@ function Adminedit() {
           <label htmlFor="duration" className="block mb-2">
             Category:
           </label>
-          <input
-            type="text"
-            id="category"
-            name="Category"
+          <select
+            id="Category"
+            className="form-control"
             value={formData.Category}
             onChange={handleChange}
-            className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:border-blue-500"
-          />
+            required
+          >
+            <option value="">Select Category</option>
+            <option value="Honeymoon">Honeymoon</option>
+            <option value="Family">Family</option>
+            <option value="Advanture">Advanture</option>
+          </select>
 
           <label htmlFor="price" className="block mb-2">
             Price:

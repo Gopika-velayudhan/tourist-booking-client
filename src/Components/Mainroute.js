@@ -20,10 +20,12 @@ import Adminedit from "./admin/Adminedit.js";
 import Adminsingle from "./admin/Adminsingle.js";
 import Singlepackage from "./packages/Singlepackage.js";
 import Wishlist from "./packages/Wishlist.js";
-
-
 import Confirmation from "./payment/Confirmation.jsx";
 import Booking from "./payment/Booking.jsx";
+import Userprofie from "../pages/Userprofie.js";
+
+
+
 
 const Mainroute = () => {
   const location = useLocation();
@@ -50,6 +52,7 @@ const Mainroute = () => {
           <Route path="/wishlist" element={<Wishlist/>}/>
           <Route path="confirmation/:id" element={<Confirmation/>}/>
           <Route path="/booking/:id" element={<Booking/>}/>
+          <Route path="/userprofile" element={<Userprofie/>}/>
           
       
           

@@ -6,13 +6,13 @@ import { useNavigate } from "react-router-dom";
 
 function Wishlist() {
   const [wishlist, setWishlist] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchWishlist = async () => {
       try {
         const token = localStorage.getItem("token");
-        const userid = localStorage.getItem("userId");
+        const userid = localStorage.getItem("_id");
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
         const response = await axios.get(
@@ -20,9 +20,9 @@ function Wishlist() {
           { headers }
         );
 
-        response.data.data.Available_Date = new Date(
-          response.data.data.Available_Date
-        );
+        response.data.data.forEach(item => {
+          item.Available_Date = new Date(item.Available_Date);
+        });
         setWishlist(response.data.data);
       } catch (err) {
         console.error("Error fetching wishlist:", err);
@@ -32,6 +32,31 @@ function Wishlist() {
 
     fetchWishlist();
   }, []);
+
+  const handledelete = async (pkgId) => {
+    try {
+      const token = localStorage.getItem("token");
+      const userid = localStorage.getItem('_id');
+      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
+      const response = await axios.delete(
+        `http://localhost:3005/api/user/wishlists/${userid}`,
+        {
+          headers,
+          data: { packageid: pkgId },
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("Successfully removed the wishlist item");
+        
+        setWishlist(wishlist.filter(item => item._id !== pkgId));
+      }
+    } catch (err) {
+      console.error("Error deleting wishlist item:", err);
+      toast.error("Error deleting wishlist item");
+    }
+  }
 
   return (
     <div className="px-4 py-8">
@@ -52,8 +77,9 @@ function Wishlist() {
                 className="w-full h-48 object-cover border border-gray-200 shadow-sm"
               />
               <p className="mt-2">Duration: {item.Duration}</p>
-              <p>Available Date: {item.Available_Date}</p>
+              <p>Available Date: {item.Available_Date.toDateString()}</p>
               <Button onClick={() => navigate(`/singlepack/${item._id}`)}>View Your Dream</Button>
+              <Button onClick={() => handledelete(item._id)} style={{ backgroundColor: 'red', color: 'white' }}>Remove Wishlist</Button>
             </div>
           </div>
         ))}

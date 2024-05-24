@@ -3,8 +3,9 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
+import instance from "../../axiosinterceptor/Axiosinterceptor";
 
-import axios from "axios";
+
 
 const AdminProduct = () => {
   const [formData, setFormData] = useState({
@@ -46,12 +47,7 @@ const AdminProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const adminToken = localStorage.getItem("adminToken");
-      if (!adminToken) {
-        toast.error("Admin token not found.");
-        return;
-      }
-
+      
       const formDataToSend = new FormData();
       formDataToSend.append("Destination", formData.Destination);
       formDataToSend.append("Duration", formData.Duration);
@@ -63,13 +59,13 @@ const AdminProduct = () => {
       }
       formDataToSend.append("Description", formData.Description);
 
-      const response = await axios.post(
-        "http://localhost:3005/api/admin/packages",
+      const response = await instance.post(
+        "/packages",
         formDataToSend,
         {
           headers: {
-            Authorization: `Bearer ${adminToken}`,
-            "Content-Type": "multipart/form-data",
+            
+            "Content-Type": "multipart/form-data"
           },
         }
       );

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import Rating from "react-rating-stars-component";
 import "./singlepackage.css";
 
@@ -196,21 +195,27 @@ function Singlepackage() {
       )}
 
       <Row className="mt-4">
-        <Col lg={3}>
+        <Col lg={8}>
           <h5 className="text-center">Reviews and Ratings</h5>
           {reviews.map((review, index) => (
-            <Card key={index} className="mb-3">
-              <Card.Body >
-                <Card.Title>{review.user.Username}</Card.Title> 
-                <Card.Text>{review.reviewText}</Card.Text>
+            <div key={index} className="mb-3 d-flex align-items-center">
+              <img
+                src={review.user.Profileimg}
+                alt={review.user.Username}
+                className="rounded-circle"
+                style={{ width: "50px", height: "50px", marginRight: "10px" }}
+              />
+              <div>
+                <h6>{review.user.Username}</h6>
+                <p>{review.reviewText}</p>
                 <Rating
                   value={review.rating}
                   edit={false}
                   size={20}
                   activeColor="#ffd700"
                 />
-              </Card.Body>
-            </Card>
+              </div>
+            </div>
           ))}
           <Form className="review-form mt-4">
             <Form.Group className="mb-3">
@@ -243,4 +248,3 @@ function Singlepackage() {
 }
 
 export default Singlepackage;
-

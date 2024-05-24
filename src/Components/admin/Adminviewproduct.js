@@ -36,11 +36,11 @@ function Adminviewproduct() {
       const confirmed = window.confirm("Are you sure delete the package");
 
       if (confirmed) {
-        const response = await instance.delete(
-          `/api/admin/packages/${_id}`
+        const response = await instance.delete(`/packages/${_id}`)
           
           
-        );
+          
+        
 
         if (response.status === 200) {
           const updatedPackages = packages.filter((item) => item._id !== _id);
