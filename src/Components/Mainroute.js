@@ -24,12 +24,8 @@ import Confirmation from "./payment/Confirmation.jsx";
 import Booking from "./payment/Booking.jsx";
 import Userprofie from "../pages/Userprofie.js";
 
-
-
-
 const Mainroute = () => {
   const location = useLocation();
-
   const isAdminPath = location.pathname.startsWith("/admin");
 
   return (
@@ -37,8 +33,7 @@ const Mainroute = () => {
       <div>
         {isAdminPath ? null : <Navbar1 />}
         <Routes>
-          
-          {/* user route */}
+          {/* User routes */}
           <Route path="/" element={<Homepage />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/login" element={<Login />} />
@@ -47,20 +42,14 @@ const Mainroute = () => {
           <Route path="/honeymoon" element={<HoneyMoon />} />
           <Route path="/advanture" element={<Adavnture />} />
           <Route path="/family" element={<Family />} />
-          <Route path="/search" element={<Search/>}/>
+          <Route path="/search" element={<Search />} />
           <Route path="/singlepack/:id" element={<Singlepackage />} />
-          <Route path="/wishlist" element={<Wishlist/>}/>
-          <Route path="confirmation/:id" element={<Confirmation/>}/>
-          <Route path="/booking/:id" element={<Booking/>}/>
-          <Route path="/userprofile" element={<Userprofie/>}/>
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/confirmation/:id" element={<Confirmation />} />
+          <Route path="/booking/:id" element={<Booking />} />
+          <Route path="/userprofile" element={<Userprofie />} />
           
-      
-          
-         
-          
-
-
-          {/* admin route */}
+          {/* Admin routes */}
           <Route path="/adminlogin" element={<AdminLogin />} />
           <Route path="/adminusers" element={<Adminusers />} />
           <Route path="/adminhome" element={<AdminHome />} />
@@ -69,10 +58,6 @@ const Mainroute = () => {
           <Route path="/adminview" element={<Adminviewproduct />} />
           <Route path="/adminedit/:id" element={<Adminedit />} />
           <Route path="/adminsingle/:id" element={<Adminsingle />} />
-
-          
-        
-         
         </Routes>
       </div>
     </>

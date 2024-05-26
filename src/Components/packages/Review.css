@@ -1,0 +1,69 @@
+.review-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .review-section p {
+    margin-bottom: 20px;
+  }
+  
+  .reviews {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+  }
+  
+  .review-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    flex-shrink: 0;
+  }
+  
+  .review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .review-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-right: 10px;
+  }
+  
+  .review-details h3 {
+    margin: 0;
+  }
+  
+  .review-details p {
+    margin: 0;
+    color: #777;
+  }
+  
+  .review-body {
+    font-size: 14px;
+  }
+  
+  .review-rating {
+    margin-top: 10px;
+    color: gold;
+  }
+  
+  .review-form .form-control {
+    resize: none;
+  }
+  
+  .review-form .form-group {
+    margin-bottom: 1rem;
+  }
+  

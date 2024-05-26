@@ -5,6 +5,7 @@ import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Rating from "react-rating-stars-component";
 import "./singlepackage.css";
+import './Review.css'
 
 function Singlepackage() {
   const [packages, setPackages] = useState(null);
@@ -194,26 +195,31 @@ function Singlepackage() {
         </Row>
       )}
 
-      <Row className="mt-4">
-        <Col lg={8}>
-          <h5 className="text-center">Reviews and Ratings</h5>
+
+      <div className="review-section">
+       
+        <p>Read on to find out why our customers love us!</p>
+        <div className="reviews">
           {reviews.map((review, index) => (
-            <div key={index} className="mb-3 d-flex align-items-center">
-              <img
-                src={review.user.Profileimg}
-                alt={review.user.Username}
-                className="rounded-circle"
-                style={{ width: "50px", height: "50px", marginRight: "10px" }}
-              />
-              <div>
-                <h6>{review.user.Username}</h6>
+            <div key={index} className="review-card">
+              <div className="review-header">
+                <div className="review-avatar">
+                  {review.user.Profileimg ? (
+                    <img src={review.user.Profileimg} alt="Profile" />
+                  ) : (
+                    <div>{review.user.Username[0]}</div>
+                  )}
+                </div>
+                <div className="review-details">
+                  <h3>{review.user.Username}</h3>
+                  <p>{review.user.email}</p>
+                </div>
+              </div>
+              <div className="review-body">
                 <p>{review.reviewText}</p>
-                <Rating
-                  value={review.rating}
-                  edit={false}
-                  size={20}
-                  activeColor="#ffd700"
-                />
+                <div className="review-rating">
+                  {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
+                </div>
               </div>
             </div>
           ))}
@@ -241,8 +247,8 @@ function Singlepackage() {
               Submit Review
             </Button>
           </Form>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </Container>
   );
 }
