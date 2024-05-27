@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Rating from "react-rating-stars-component";
+import instance from "../../axiosinterceptor/userinterrceptor";
 import "./singlepackage.css";
 import './Review.css'
 
@@ -41,15 +42,15 @@ function Singlepackage() {
   const fetchPackage = async () => {
     try {
       const token = localStorage.getItem("token");
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      // const headers = token ? { Authorization: `Bearer ${token}` } : {};
       if (!token) {
         toast.error("Please login");
         navigate("/login");
         return;
       }
-      const response = await axios.get(
-        `http://localhost:3005/api/user/packages/${id}`,
-        { headers }
+      const response = await instance.get(
+        `/packages/${id}`,
+        
       );
       setPackages(response.data.data);
     } catch (err) {
@@ -114,6 +115,11 @@ function Singlepackage() {
     }
   };
 
+  const getCurrentDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  };
+
   return (
     <Container className="mt-4">
       {packages && (
@@ -163,6 +169,7 @@ function Singlepackage() {
                     <Form.Control
                       type="date"
                       name="Available_Date"
+                      min={getCurrentDate()}
                       value={formState.Available_Date}
                       onChange={handleInputChange}
                     />
@@ -212,7 +219,7 @@ function Singlepackage() {
                 </div>
                 <div className="review-details">
                   <h3>{review.user.Username}</h3>
-                  <p>{review.user.email}</p>
+                
                 </div>
               </div>
               <div className="review-body">
@@ -223,7 +230,7 @@ function Singlepackage() {
               </div>
             </div>
           ))}
-          <Form className="review-form mt-4">
+          {/* <Form className="review-form mt-4">
             <Form.Group className="mb-3">
               <Form.Label>Write a review</Form.Label>
               <Form.Control
@@ -246,7 +253,7 @@ function Singlepackage() {
             <Button variant="primary" onClick={handleReviewSubmit}>
               Submit Review
             </Button>
-          </Form>
+          </Form> */}
         </div>
       </div>
     </Container>

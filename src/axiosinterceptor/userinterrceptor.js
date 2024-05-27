@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const adminToken = localStorage.getItem("token");
+const token = localStorage.getItem("token");
 
 const instance = axios.create({
   baseURL: "http://localhost:3005/api/user",
@@ -10,7 +10,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     console.log(config);
-    if (adminToken) {
+    if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;

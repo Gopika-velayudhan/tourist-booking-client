@@ -5,8 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import instance from "../../axiosinterceptor/Axiosinterceptor";
 
-
-
 const AdminProduct = () => {
   const [formData, setFormData] = useState({
     Destination: "",
@@ -47,7 +45,6 @@ const AdminProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      
       const formDataToSend = new FormData();
       formDataToSend.append("Destination", formData.Destination);
       formDataToSend.append("Duration", formData.Duration);
@@ -59,16 +56,11 @@ const AdminProduct = () => {
       }
       formDataToSend.append("Description", formData.Description);
 
-      const response = await instance.post(
-        "/packages",
-        formDataToSend,
-        {
-          headers: {
-            
-            "Content-Type": "multipart/form-data"
-          },
-        }
-      );
+      const response = await instance.post("/packages", formDataToSend, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       if (response.status === 201) {
         toast.success(response.data.message);
@@ -97,14 +89,16 @@ const AdminProduct = () => {
     }
   };
 
+  const getCurrentDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  };
+
   return (
     <div
       className="container-md mt-5 d-flex"
       style={{ maxWidth: "600px", margin: "auto" }}
     >
-      {/* <div className="h-screen ">
-       <SideBar/>
-       </div>  */}
       <div className="card">
         <div className="card-header bg-primary text-white">
           <h2 className="mb-0">Add a Product</h2>
@@ -154,7 +148,7 @@ const AdminProduct = () => {
                   <option value="" >Select Category</option>
                   <option value="Honeymoon">Honeymoon</option>
                   <option value="Family">Family</option>
-                  <option value="Advanture">Advanture</option>
+                  <option value="Adventure">Adventure</option>
                 </select>
               </div>
 
@@ -181,13 +175,14 @@ const AdminProduct = () => {
                   type="date"
                   id="Available_Date"
                   className="form-control"
+                  min={getCurrentDate()}
                   value={formData.Available_Date}
                   onChange={handleChange}
                   required
                 />
               </div>
               <div className="col-md-6">
-                <label htmlFor="image" className="form-label">
+                <label htmlFor="images" className="form-label">
                   Image:
                 </label>
                 <input

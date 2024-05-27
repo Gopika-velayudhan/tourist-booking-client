@@ -1,13 +1,7 @@
-
 import React from "react";
 import "./Homepage.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import {
-//   faSearch,
-//   faCalendarAlt,
-//   faDollarSign,
-// } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import img1 from "../Assests/honeymoon_home.webp";
 import img2 from "../Assests/family_home.webp";
@@ -16,6 +10,7 @@ import img4 from "../Assests/friends_group.webp";
 import img5 from "../Assests/nature_home.webp";
 import img6 from "../Assests/wildlife_home.webp";
 import { FaWhatsappSquare } from "react-icons/fa";
+
 function Home() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState({
@@ -23,6 +18,7 @@ function Home() {
     Duration: "",
     Price: "",
   });
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setSearchQuery((prevState) => ({
@@ -45,9 +41,7 @@ function Home() {
     <main className="main-content">
       <section className="hero">
         <h1>Turn Your Dream Holiday Into Reality</h1>
-
         <div className="search-box">
-          {/* <FontAwesomeIcon icon={faSearch} className="icon" /> */}
           <input
             type="text"
             name="Destination"
@@ -72,41 +66,28 @@ function Home() {
             value={searchQuery.Price}
             onChange={handleInputChange}
           />
-          <button onClick={handleSearch}>Explore</button>
+          <button onClick={handleSearch} className="search-btn">Explore</button>
         </div>
       </section>
       <section className="themes">
         <h2 className="themes_h1">Explore destinations by theme</h2>
         <div className="themes-container">
-          <div className="theme-item">
-            <img src={img1} />
-          </div>
-          <div className="theme-item">
-            <img src={img2} />
-          </div>
-          <div className="theme-item">
-            <img src={img3} />
-          </div>
-          <div className="theme-item">
-            <img src={img4} />
-          </div>
-          <div className="theme-item">
-            <img src={img5} />
-          </div>
-          <div className="theme-item">
-            <img src={img6} />
-          </div>
+          {[img1, img2, img3, img4, img5, img6].map((img, index) => (
+            <div className="theme-item" key={index}>
+              <img src={img} alt={`theme-${index}`} />
+            </div>
+          ))}
         </div>
-        <div className=" flex items-center justify-end p-5">
+        <div className="whatsapp-container">
           <a
             href="https://api.whatsapp.com/send?phone=7736730305"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-green-600 hover:text-green-800"
+            className="whatsapp-link"
           >
-            <FaWhatsappSquare className="text-6xl" />
+            <FaWhatsappSquare className="whatsapp-icon" />
           </a>
-          <h4 className="text-white text-xl ml-2">Chat with us</h4>
+          <h4 className="whatsapp-text">Chat with us</h4>
         </div>
       </section>
     </main>

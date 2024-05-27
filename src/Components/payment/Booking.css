@@ -1,0 +1,55 @@
+
+.booking-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color:whitesmoke;
+    
+  }
+  
+  .booking-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .booking-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .booking-details p {
+    margin: 0;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .billing-model {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #e9f7e9;
+  }
+  
+  .billing-model h2 {
+    margin-top: 0;
+  }
+  
+  .billing-model p {
+    margin: 5px 0;
+  }
+  
+  .confirmation-text {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #dff0d8;
+    text-align: center;
+  }
+  

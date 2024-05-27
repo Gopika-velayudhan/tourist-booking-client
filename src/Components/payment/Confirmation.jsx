@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import axios from "axios";
+
+import instance from "../../axiosinterceptor/userinterrceptor";
 import "./Confirmation.css";
 
 const Confirmation = () => {
@@ -9,23 +10,23 @@ const Confirmation = () => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
 
-  const destination = searchParams.get("destination");
+  const destination = searchParams.get("destination");0.
   const duration = searchParams.get("duration");
   const availableDate = searchParams.get("available_date");
-  const totalPrice = searchParams.get("total_price")
+  const totalPrice = searchParams.get("total_price");
   const packageId = searchParams.get("package_id");
-  console.log(packageId, "packageid");
+  
 
   useEffect(() => {
     const handleGet = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+        // const token = localStorage.getItem("token");
+        // const headers = token ? { Authorization: `Bearer ${token}` } : {};
         const userid = localStorage.getItem("_id");
 
-        const response = await axios.get(
-          `http://localhost:3005/api/user/users/${userid}`,
-          { headers }
+        const response = await instance.get(
+          `/users/${userid}`,
+          
         );
         setUser(response.data.data);
       } catch (err) {
@@ -47,16 +48,16 @@ const Confirmation = () => {
     const bearerToken = `Bearer ${userToken}`;
 
     try {
-      const bookingResponse = await axios.post(
-        "http://localhost:3005/api/user/bookings",
+      const bookingResponse = await instance.post(
+        "/bookings",
         { userId: userid, packageId, amount: totalPrice, currency: "INR" },
-        { headers: { Authorization: bearerToken } }
+        
       );
 
-      const { payment_id } = bookingResponse.data;
+      const { payment_id, _id: bookingId } = bookingResponse.data.data;
 
-      const paymentResponse = await axios.post(
-        "http://localhost:3005/api/user/payment",
+      const paymentResponse = await instance.post(
+        "/payment",
         {
           amount: totalPrice * 100,
           currency: "INR",
@@ -76,7 +77,7 @@ const Confirmation = () => {
         order_id: paymentResponse.data.id,
         handler: (res) => {
           alert(`Payment successful: ${res.razorpay_payment_id}`);
-          navigate("/");
+          navigate(`/booking/${bookingId}`);
         },
         prefill: {
           name: user.Username,

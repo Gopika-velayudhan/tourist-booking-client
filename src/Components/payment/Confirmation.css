@@ -62,3 +62,37 @@
   background-color: #0056b3;
   border-color: #004085;
 }
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .container1 {
+    padding: 20px;
+  }
+
+  .confirmation-table1 td {
+    padding: 8px;
+  }
+
+  .total-price1 p {
+    margin: 3px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .header1 h2, .total-price1 h3 {
+    font-size: 1.5rem;
+  }
+
+  .confirmation-table1 td {
+    padding: 6px;
+    font-size: 0.9rem;
+  }
+
+  .total-price1 p {
+    font-size: 0.9rem;
+  }
+
+  .total-price1 Button {
+    width: 100%;
+  }
+}

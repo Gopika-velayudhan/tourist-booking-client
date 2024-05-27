@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import styles from './Userprofile.module.css';
+import instance from '../axiosinterceptor/userinterrceptor';
 import { toast } from 'react-toastify';
 
 function UserProfile() {
@@ -16,12 +17,12 @@ function UserProfile() {
   useEffect(() => {
     const handleGet = async () => {
       try {
-        const token = localStorage.getItem('token');
+        // const token = localStorage.getItem('token');
         const userId = localStorage.getItem('_id');
-        const headers = token ? { Authorization: `Bearer ${token}` } : {};
-        const response = await axios.get(
-          `http://localhost:3005/api/user/users/${userId}`,
-          { headers }
+        // const headers = token ? { Authorization: `Bearer ${token}` } : {};
+        const response = await instance.get(
+          `/users/${userId}`,
+         
         );
         const userData = response.data?.data || {};
         setUser({
@@ -52,10 +53,10 @@ function UserProfile() {
         formData.append('Profileimg', image);
       }
 
-      const response = await axios.put(
-        `http://localhost:3005/api/user/users/${userId}`,
-        formData,
-        { headers }
+      const response = await instance.put(
+        `/users/${userId}`,
+        formData
+      
       );
 
       const updatedUserData = response.data?.data || {};
@@ -76,10 +77,10 @@ function UserProfile() {
 
   const handleDelete = async () => {
     try {
-      const token = localStorage.getItem('token');
+      
       const userId = localStorage.getItem('_id');
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
-      await axios.delete(`http://localhost:3005/api/user/users/${userId}`, { headers });
+      
+      await instance.delete(`/users/${userId}`);
 
       toast('Account deleted successfully');
       window.location.href = '/login';
@@ -114,9 +115,7 @@ function UserProfile() {
     fileInputRef.current.click();
   };
 
-  if (!user) {
-    return <div>Loading...</div>; // or any other loading indicator
-  }
+  
 
   return (
     <div className={styles['form-container']}>
@@ -161,9 +160,10 @@ function UserProfile() {
           Update
         </button>
       </form>
-      <button onClick={handleDelete} className={styles['delete-button']}>
+      {/* <button onClick={handleDelete} className={styles['delete-button']}>
         Delete Account
-      </button>
+      </button> */}
+      <p  className={styles['delete-button']}  onClick={handleDelete}>delete the account</p>
     </div>
   );
 }

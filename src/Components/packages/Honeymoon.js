@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import instance from "../../axiosinterceptor/Axiosinterceptor";
+import instance from "../../axiosinterceptor/userinterrceptor";
 import "./HoneyMoon.css";
 import "tailwindcss/tailwind.css";
 import { toast } from "react-toastify";
@@ -18,11 +18,8 @@ const HoneyMoon = () => {
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const headers = token ? { Authorization: `Bearer ${token}` } : {};
-        const response = await axios.get("http://localhost:3005/api/user/packages", {
+        const response = await instance.get("/packages", {
           params: { Category: "Honeymoon" },
-          headers: headers,
         });
         setPackages(response.data.data);
         setLoading(false);
@@ -37,24 +34,18 @@ const HoneyMoon = () => {
     fetchPackages();
   }, []);
 
- 
   const addToWishlist = async (pkgId) => {
     const token = localStorage.getItem("token");
     const userid = localStorage.getItem("_id");
 
     if (!token) {
-      toast.error("please login");
+      toast.error("Please login to add to wishlist");
       navigate("/login");
       return;
     }
 
     try {
-      const headers = { Authorization: `Bearer ${token}` };
-      const response = await axios.post(
-        `http://localhost:3005/api/user/wishlists/${userid}`,
-        { packageid: pkgId },
-        { headers }
-      );
+      const response = await instance.post(`/wishlists/${userid}`, { packageid: pkgId });
       if (response.status === 200) {
         toast.success("Package successfully added to wishlist");
         setWishlist((prevWishlist) => [...prevWishlist, pkgId]);
@@ -69,20 +60,13 @@ const HoneyMoon = () => {
     const userid = localStorage.getItem("_id");
 
     if (!token) {
-      toast.error("Please login");
+      toast.error("Please login to remove from wishlist");
       navigate("/login");
       return;
     }
 
     try {
-      const headers = { Authorization: `Bearer ${token}` };
-      const response = await axios.delete(
-        `http://localhost:3005/api/user/wishlists/${userid}`,
-        {
-          headers,
-          data: { packageid: pkgId },
-        }
-      );
+      const response = await instance.delete(`/wishlists/${userid}`, { data: { packageid: pkgId } });
       if (response.status === 200) {
         toast.success("Package successfully removed from wishlist");
         setWishlist((prevWishlist) => prevWishlist.filter(id => id !== pkgId));

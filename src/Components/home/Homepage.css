@@ -1,83 +1,10 @@
-/* .main {
-     background: url("../Assests/banner3.jpg"); 
-    height: 100vh;
-    width: 100vw;
-    background-size: cover;
-    background-position: center;
-    filter: brightness(90%);
-  }
-  
-  
-
-
-
-.search {
-  display: flex;
-  
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 200px;
-  padding: 20px;
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.search-input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 7px;
-  font-size: 16px;
-  width: 100%; 
-  max-width: 400px; 
-}
-
-
-.search-input:last-of-type,
-.search-input:nth-last-of-type(2),
-.search-input:nth-last-of-type(3) {
-  background-color: #f2f2f2;
-  color: #333;
-  border-color: #999;
-  font-weight: bold;
-}
-
-
-.input-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-
-.icon {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-  color: gray;
-}
-.search-btn {
-  background-color: #007bff; 
-  color: white; 
-  padding: 10px 20px; 
-  border-radius: 5px; 
-  border: none;
-  cursor: pointer; 
-}
-
-.search-btn:hover {
-  background-color: #0056b3; 
-} */
-
-/* src/components/MainContent.css */
 /* Homepage.css */
-/* background: url('../Assests//hero_general.webp') no-repeat center center; */
-
-/* Homepage.css */
+:root {
+  --primary-color: blue;
+  --secondary-color: white;
+  --background-color: rgba(255, 255, 255, 0.8);
+  --text-color: #333;
+}
 
 .main-content {
   padding: 20px;
@@ -86,26 +13,21 @@
 .hero {
   text-align: center;
   padding: 50px 20px;
-  background: url('../Assests//hero_general.webp') no-repeat center center; 
+  background: url('../Assests/hero_general.webp') no-repeat center center;
   background-size: cover;
-  color: white; 
+  color: var(--secondary-color);
 }
 
 .hero h1 {
   font-size: 36px;
   margin-bottom: 10px;
-  color:blue; 
+  color: var(--primary-color);
   padding: 30px;
 }
 
-/* .hero p {
-  font-size: 18px;
-  margin-bottom: 20px;
-  color: white; 
-} */
-
 .search-box {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
 }
@@ -121,13 +43,13 @@
 
 .search-box input,
 .search-box select {
-  background-color: rgba(255, 255, 255, 0.8); 
-  color: #333;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .search-box button {
-  background-color: blue;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
   cursor: pointer;
   border: none;
 }
@@ -146,11 +68,12 @@
 
 .themes_h1 {
   margin-bottom: 25px;
-  color: blue; 
+  color: var(--primary-color);
 }
 
 .theme-item {
-  width: 150px;
+  width: 100%;
+  max-width: 150px;
   height: 150px;
   background-color: #e0e0e0;
   display: flex;
@@ -169,4 +92,73 @@
 
 .theme-item:hover {
   transform: scale(1.05);
+}
+
+.whatsapp-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 5px;
+}
+
+.whatsapp-link {
+  text-decoration: none;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+}
+
+.whatsapp-icon {
+  font-size: 3rem;
+}
+
+.whatsapp-text {
+  margin-left: 10px;
+  color: var(--secondary-color);
+  font-size: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .search-box {
+    flex-direction: column;
+  }
+
+  .search-box input,
+  .search-box select,
+  .search-box button {
+    width: 100%;
+    max-width: none;
+  }
+
+  .themes-container {
+    gap: 10px;
+  }
+
+  .theme-item {
+    max-width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 24px;
+  }
+
+  .theme-item {
+    max-width: 80px;
+    height: 80px;
+  }
+
+  .whatsapp-icon {
+    font-size: 2.5rem;
+  }
+
+  .whatsapp-text {
+    font-size: 1rem;
+  }
 }
