@@ -1,34 +1,35 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Col, Row, Button, Container } from 'react-bootstrap';
-import axios from 'axios';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Col, Row, Button, Container } from "react-bootstrap";
+import axios from "axios";
 import { toast } from "react-toastify";
 
-
 function AdminLogin() {
-  const [login, setLogin] = useState({ email: '', password: '' });
+  const [login, setLogin] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setLogin({ ...login, [name]: value }); 
-  
+    setLogin({ ...login, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3005/api/admin/admin_login", login);
+      const response = await axios.post(
+        "http://localhost:3005/api/admin/admin_login",
+        login
+      );
       const { data } = response.data;
-      console.log('Login successful:', data);
+      console.log("Login successful:", data);
 
-      localStorage.setItem('adminToken', data);
+      localStorage.setItem("adminToken", data);
 
-      navigate('/adminhome');
+      navigate("/adminhome");
       toast.success("login successsfull");
     } catch (error) {
-      console.error('Login failed:', error.response.data);
-      toast.error("An error occured in log in")
+      console.error("Login failed:", error.response.data);
+      toast.error("An error occured in log in");
     }
   };
 
@@ -48,7 +49,7 @@ function AdminLogin() {
                 type="email"
                 className="form-control"
                 placeholder="Email"
-                name="email" 
+                name="email"
                 value={login.email}
                 onChange={handleInputChange}
               />
@@ -61,7 +62,7 @@ function AdminLogin() {
                 type="password"
                 className="form-control"
                 placeholder="Password"
-                name="password" 
+                name="password"
                 value={login.password}
                 onChange={handleInputChange}
               />

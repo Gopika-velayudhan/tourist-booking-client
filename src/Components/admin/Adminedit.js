@@ -58,6 +58,7 @@ function Adminedit() {
             type="text"
             id="duration"
             name="Duration"
+            
             value={formData.Duration}
             onChange={handleChange}
             className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:border-blue-500"

@@ -1,33 +1,31 @@
 import React, { useEffect, useState } from "react";
 import SideBar from "./Sidebar";
 import { useNavigate } from "react-router-dom";
-import { Card } from "react-bootstrap"; 
+import { Card } from "react-bootstrap";
 import axios from "axios";
 
 const AdminHome = () => {
   const navigate = useNavigate();
 
-  const [userCount, setUserCount] = useState(0)
+  const [userCount, setUserCount] = useState(0);
 
   useEffect(() => {
-     const fetchUserCount = async () => {
-        try{
-          const token = localStorage.getItem("adminToken");
-          const headers = token ? { Authorization: `Bearer ${token}` } : {};
-          const response = await axios.get(
+    const fetchUserCount = async () => {
+      try {
+        const token = localStorage.getItem("adminToken");
+        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+        const response = await axios.get(
           "http://localhost:3005/api/admin/users",
           { headers }
         );
-          setUserCount(response.data.dataCount)
-          console.log(response.data.dataCount);
-        }
-        catch(error){
-          console.log("Error fetching userCount: ",error);
-        }
-     }
-     fetchUserCount()
-  },[])
-
+        setUserCount(response.data.dataCount);
+        console.log(response.data.dataCount);
+      } catch (error) {
+        console.log("Error fetching userCount: ", error);
+      }
+    };
+    fetchUserCount();
+  }, []);
 
   return (
     <div className="flex w-full" style={{ backgroundColor: "white" }}>

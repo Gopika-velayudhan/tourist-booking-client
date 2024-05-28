@@ -10,7 +10,7 @@ const Confirmation = () => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
 
-  const destination = searchParams.get("destination");0.
+  const destination = searchParams.get("destination");
   const duration = searchParams.get("duration");
   const availableDate = searchParams.get("available_date");
   const totalPrice = searchParams.get("total_price");
@@ -66,10 +66,10 @@ const Confirmation = () => {
         },
         { headers: { Authorization: bearerToken } }
       );
-
+      
       const options = {
         key: "rzp_test_eyXHobfs6uqaFU",
-        amount: paymentResponse.data.amount,
+        amount: paymentResponse.data.data.amount,
         currency: paymentResponse.data.currency,
         receipt: paymentResponse.data.receipt,
         name: "Explore_epic",

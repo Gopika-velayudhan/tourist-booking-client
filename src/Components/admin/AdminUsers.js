@@ -3,7 +3,7 @@ import instance from "../../axiosinterceptor/Axiosinterceptor";
 import { FaUserLarge } from "react-icons/fa6";
 import SideBar from "../admin/Sidebar";
 import { TbLockOpen, TbLockOff } from "react-icons/tb";
-import {toast} from 'react-toastify'
+import { toast } from "react-toastify";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -35,7 +35,6 @@ const AdminUsers = () => {
       console.error("Error locking/unlocking user:", error);
     }
   };
-
 
   return (
     <div className="flex">

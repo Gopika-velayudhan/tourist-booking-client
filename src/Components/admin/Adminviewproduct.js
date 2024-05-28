@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import instance from "../../axiosinterceptor/Axiosinterceptor";
 
-
-
 function Adminviewproduct() {
   const [packages, setPackages] = useState([]);
   const navigate = useNavigate();
@@ -17,10 +15,8 @@ function Adminviewproduct() {
       try {
         // const token = localStorage.getItem("adminToken");
         // const headers = token ? { Authorization: `Bearer ${token}` } : {};
-        const response = await instance.get(  '/packages')
-        
-      
-        
+        const response = await instance.get("/packages");
+
         setPackages(response.data.data);
       } catch (error) {
         console.error("Error fetching packages:", error);
@@ -32,15 +28,10 @@ function Adminviewproduct() {
 
   const handleDelete = async (_id) => {
     try {
-     
       const confirmed = window.confirm("Are you sure delete the package");
 
       if (confirmed) {
-        const response = await instance.delete(`/packages/${_id}`)
-          
-          
-          
-        
+        const response = await instance.delete(`/packages/${_id}`);
 
         if (response.status === 200) {
           const updatedPackages = packages.filter((item) => item._id !== _id);
@@ -69,7 +60,6 @@ function Adminviewproduct() {
             <div
               key={item._id}
               className="bg-white shadow-md rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105"
-             
             >
               <div className="p-4">
                 <h3 className="text-lg font-semibold mb-2">
@@ -78,15 +68,13 @@ function Adminviewproduct() {
                 <p className="text-sm text-gray-500 mb-4">
                   {item.Duration} Days
                 </p>
-                
-                  <img
-                  
-                    src={item.images[1]}
-                  
-                    className="w-full h-auto mb-4"
-                    onClick={() => navigate(`/adminsingle/${item._id}`)}
-                  />
-              
+
+                <img
+                  src={item.images[1]}
+                  className="w-full h-auto mb-4"
+                  onClick={() => navigate(`/adminsingle/${item._id}`)}
+                />
+
                 <p className="text-sm text-gray-500 font-semibold mb-4">
                   {item.Price}
                 </p>
@@ -102,7 +90,6 @@ function Adminviewproduct() {
                   className="text-red-500 cursor-pointer"
                   onClick={() => handleDelete(item._id)}
                 />
-              
               </div>
             </div>
           ))}
