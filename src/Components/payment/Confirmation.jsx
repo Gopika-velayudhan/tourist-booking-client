@@ -4,9 +4,12 @@ import { Button } from "react-bootstrap";
 
 import instance from "../../axiosinterceptor/userinterrceptor";
 import "./Confirmation.css";
+import { FadeLoader } from "react-spinners";
+
 
 const Confirmation = () => {
   const [searchParams] = useSearchParams();
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({});
   const navigate = useNavigate();
 
@@ -15,7 +18,6 @@ const Confirmation = () => {
   const availableDate = searchParams.get("available_date");
   const totalPrice = searchParams.get("total_price");
   const packageId = searchParams.get("package_id");
-  
 
   useEffect(() => {
     const handleGet = async () => {
@@ -24,10 +26,7 @@ const Confirmation = () => {
         // const headers = token ? { Authorization: `Bearer ${token}` } : {};
         const userid = localStorage.getItem("_id");
 
-        const response = await instance.get(
-          `/users/${userid}`,
-          
-        );
+        const response = await instance.get(`/users/${userid}`);
         setUser(response.data.data);
       } catch (err) {
         console.error("Error fetching user data", err);
@@ -37,6 +36,7 @@ const Confirmation = () => {
   }, []);
 
   const handlePayment = async () => {
+    setLoading(true);
     const userToken = localStorage.getItem("token");
     const userid = localStorage.getItem("_id");
 
@@ -45,14 +45,13 @@ const Confirmation = () => {
       return;
     }
 
-    const bearerToken = `Bearer ${userToken}`;
-
     try {
-      const bookingResponse = await instance.post(
-        "/bookings",
-        { userId: userid, packageId, amount: totalPrice, currency: "INR" },
-        
-      );
+      const bookingResponse = await instance.post("/bookings", {
+        userId: userid,
+        packageId,
+        amount: totalPrice,
+        currency: "INR",
+      });
 
       const { payment_id, _id: bookingId } = bookingResponse.data.data;
 
@@ -63,10 +62,10 @@ const Confirmation = () => {
           currency: "INR",
           receipt: `receipt_${Date.now()}`,
           payment_id,
-        },
-        { headers: { Authorization: bearerToken } }
+        }
+        // { headers: { Authorization: bearerToken } }
       );
-      
+
       const options = {
         key: "rzp_test_eyXHobfs6uqaFU",
         amount: paymentResponse.data.data.amount,
@@ -100,6 +99,8 @@ const Confirmation = () => {
       }
     } catch (error) {
       console.error("Payment error:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -150,7 +151,13 @@ const Confirmation = () => {
         <p>
           Net fare: ₹{(parseFloat(totalPrice) + totalPrice * 0.18).toFixed(2)}
         </p>
-        <Button onClick={handlePayment}>Pay to Proceed</Button>
+        {loading ? (
+          <div className="d-flex justify-content-center">
+            <FadeLoader color="#007bff" loading={loading} size={15} />
+          </div>
+        ) : (
+          <Button onClick={handlePayment}>Pay to Proceed</Button>
+        )}
       </div>
     </div>
   );

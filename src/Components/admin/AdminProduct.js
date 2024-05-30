@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import instance from "../../axiosinterceptor/Axiosinterceptor";
-
+import {FadeLoader} from 'react-spinners'
 const AdminProduct = () => {
   const [formData, setFormData] = useState({
     Destination: "",
@@ -15,6 +15,7 @@ const AdminProduct = () => {
     images: [],
     Description: "",
   });
+  const[loading,setLoading] = useState(false)
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -44,6 +45,7 @@ const AdminProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const formDataToSend = new FormData();
       formDataToSend.append("Destination", formData.Destination);
@@ -86,6 +88,8 @@ const AdminProduct = () => {
       } else {
         toast.error("An error occurred.");
       }
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -208,9 +212,15 @@ const AdminProduct = () => {
               />
             </div>
 
-            <button type="submit" className="btn btn-primary">
-              Add Product
-            </button>
+            {loading ? (
+              <div className="d-flex justify-content-center">
+                <FadeLoader color="#007bff" loading={loading} size={15} />
+              </div>
+            ) : (
+              <button type="submit" className="btn btn-primary">
+                Add Product
+              </button>
+            )}
           </form>
         </div>
       </div>

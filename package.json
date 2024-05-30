@@ -21,6 +21,7 @@
     "cdbreact": "^1.5.19",
     "chart.js": "^4.4.2",
     "formik": "^2.4.5",
+    "html2canvas": "^1.4.1",
     "js-cookie": "^3.0.5",
     "mdb-react-ui-kit": "^7.2.0",
     "react": "^18.2.0",
@@ -33,7 +34,9 @@
     "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.8",
     "react-toastify": "^10.0.5",
+    "sweetalert2": "^11.11.0",
     "twilio-client": "^1.15.1",
     "web-vitals": "^2.1.4",
     "yup": "^1.4.0"

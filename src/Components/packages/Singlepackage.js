@@ -42,7 +42,7 @@ function Singlepackage() {
   const fetchPackage = async () => {
     try {
       const token = localStorage.getItem("token");
-      // const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      
       if (!token) {
         toast.error("Please login");
         navigate("/login");

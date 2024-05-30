@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import instance from '../../axiosinterceptor/userinterrceptor';
+import html2canvas from 'html2canvas';
+import Swal from 'sweetalert2'; 
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import { FaCloudDownloadAlt } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 import './Booking.css';
 
 function Booking() {
@@ -13,8 +17,6 @@ function Booking() {
   useEffect(() => {
     const fetchBookingDetails = async () => {
       try {
-        // const token = localStorage.getItem("token");
-        // const headers = token ? { Authorization: `Bearer ${token}` } : {};
         const response = await instance.get(`/bookings/${id}`);
         setBooking(response.data.data);
       } catch (err) {
@@ -27,37 +29,94 @@ function Booking() {
     fetchBookingDetails();
   }, [id]);
 
+  const handleDeleteConfirmation = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to delete this booking!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await instance.delete(`/bookings/${id}`);
+          if (response.status === 200) {
+            Swal.fire('Deleted!', 'Your booking has been deleted.', 'success');
+            
+          } else {
+            Swal.fire('Error!', 'Failed to delete booking.', 'error');
+          }
+        } catch (err) {
+          Swal.fire('Error!', 'Failed to delete booking.', 'error');
+        }
+      }
+    });
+  };
+
+  const downloadPageAsImage = () => {
+    const bookingElement = document.getElementById('booking-details');
+    html2canvas(bookingElement).then(canvas => {
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = `booking_${id}.png`;
+      link.click();
+    });
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="booking-container">
-      <div className="booking-header">
-        <h1>Booking Details</h1>
+      <div className="header"></div>
+      <div id="booking-details" className="content">
+        <h1 className="website-name">
+          <span style={{ fontSize: '2rem', fontWeight: 'bold', color: 'goldenrod', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
+            Explore
+          </span>
+          -Epic
+        </h1>
+        <span className="location mt-5px">Near Kinfra, Calicut</span>
+        <span className='phone-number mt-5px'>7736730305</span>
+        <div className="booking-header m-10">
+          <h2>Booking Details</h2>
+        </div>
+        {booking && (
+          <div className="details-container">
+            <div className="booking-details">
+              <p><strong>User:</strong> {booking.user.Username}</p>
+              <p><strong>Package:</strong> {booking.package.Destination}</p>
+              <p><strong>Date:</strong> {booking.date}</p>
+              <p><strong>Time:</strong> {booking.time}</p>
+              <p><strong>Total Amount:</strong> ₹{booking.total_amount}</p>
+            </div>
+            <div className="billing-model">
+              <h2>Billing Information</h2>
+              <p><strong>Total fare:</strong> ₹{booking.total_amount}</p>
+              <p><strong>GST 18%:</strong> ₹{(booking.total_amount * 0.18).toFixed(2)}</p>
+              <p><strong>Net fare:</strong> ₹{(parseFloat(booking.total_amount) + booking.total_amount * 0.18).toFixed(2)}</p>
+            </div>
+          </div>
+        )}
+        <div className="confirmation-text">
+          <h2>Booking Confirmed</h2>
+          <p>Your booking is confirmed. Thank you for choosing our service!</p>
+          <div className="icon-container d-flex flex justify-between">
+            <div className="delete-container" onClick={handleDeleteConfirmation} title="Delete Booking">
+              <MdDelete className='delete-icon' />
+              <span className='text-red-500'>Delete</span>
+            </div>
+            <div className="download-container" onClick={downloadPageAsImage} title="Download Booking Details">
+              <FaCloudDownloadAlt className="download-icon" />
+              <span>Download</span>
+            </div>
+          </div>
+        </div>
       </div>
-      {booking && (
-        <>
-          <div className="booking-details">
-            <p><strong>User:</strong> {booking.user.Username}</p>
-            <p><strong>Package:</strong> {booking.package.Destination}</p>
-            <p><strong>Date:</strong> {booking.date}</p>
-            <p><strong>Time:</strong> {booking.time}</p>
-            <p><strong>Total Amount:</strong> ₹{booking.total_amount}</p>
-          </div>
-          <div className="billing-model">
-            <h2>Billing Information</h2>
-            <p><strong>Total fare:</strong> ₹{booking.total_amount}</p>
-            <p><strong>GST 18%:</strong> ₹{(booking.total_amount * 0.18).toFixed(2)}</p>
-            <p><strong>Net fare:</strong> ₹{(parseFloat(booking.total_amount) + booking.total_amount * 0.18).toFixed(2)}</p>
-          </div>
-          <div className="confirmation-text">
-            <h2>Booking Confirmed</h2>
-            <p>Your booking is confirmed. Thank you for choosing our service!</p>
-          </div>
-        </>
-      )}
     </div>
   );
-};
+}
 
 export default Booking;

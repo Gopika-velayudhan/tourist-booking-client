@@ -1,55 +1,91 @@
-
 .booking-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color:whitesmoke;
-    
-  }
-  
-  .booking-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .booking-details {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .booking-details p {
-    margin: 0;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .billing-model {
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #e9f7e9;
-  }
-  
-  .billing-model h2 {
-    margin-top: 0;
-  }
-  
-  .billing-model p {
-    margin: 5px 0;
-  }
-  
-  .confirmation-text {
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #dff0d8;
-    text-align: center;
-  }
-  
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.website-name {
+  font-size: 32px;
+  font-weight: bold;
+  margin: auto;
+}
+
+.download-icon {
+  font-size: 24px;
+  color: #007bff;
+  margin-right: 10px;
+}
+
+.delete-icon {
+  font-size: 24px;
+  color: red;
+  margin-right: 10px;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+}
+
+.download-container,
+.delete-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.delete-container:hover .delete-icon {
+  color: red;
+}
+
+.download-container:hover .download-icon {
+  color: #0056b3;
+}
+
+.booking-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.details-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.booking-details,
+.billing-model {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 5px;
+  width: 48%;
+}
+
+.booking-details p,
+.billing-model p {
+  margin: 10px 0;
+}
+
+.billing-model h2,
+.confirmation-text h2 {
+  margin-bottom: 15px;
+}
+
+.confirmation-text {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.content {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
