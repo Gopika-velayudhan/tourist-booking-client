@@ -81,7 +81,7 @@ function Booking() {
         <span className="location mt-5px">Near Kinfra, Calicut</span>
         <span className='phone-number mt-5px'>7736730305</span>
         <div className="booking-header m-10">
-          <h2>Booking Details</h2>
+          <h3>Booking Details</h3>
         </div>
         {booking && (
           <div className="details-container">

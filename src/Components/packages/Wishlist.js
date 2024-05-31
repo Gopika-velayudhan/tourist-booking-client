@@ -49,7 +49,7 @@ function Wishlist() {
 
       if (response.status === 200) {
         toast.success("Successfully removed the wishlist item");
-        
+
         setWishlist(wishlist.filter(item => item._id !== pkgId));
       }
     } catch (err) {
@@ -67,7 +67,7 @@ function Wishlist() {
         {wishlist.map((item, index) => (
           <div
             key={index}
-            className="bg-white rounded-lg overflow-hidden shadow-md border border-gray-200 transition duration-300 ease-in-out transform hover:scale-105"
+            className="bg-white rounded-lg overflow-hidden shadow-md border border-gray-200 transition duration-300 ease-in-out transform hover:scale-105 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
           >
             <div className="p-4">
               <h3 className="text-lg font-bold mb-2">{item.Destination}</h3>
@@ -78,8 +78,14 @@ function Wishlist() {
               />
               <p className="mt-2">Duration: {item.Duration}</p>
               <p>Available Date: {item.Available_Date.toDateString()}</p>
-              <Button onClick={() => navigate(`/singlepack/${item._id}`)}>View Your Dream</Button>
-              <Button onClick={() => handledelete(item._id)} style={{ backgroundColor: 'red', color: 'white' }}>Remove Wishlist</Button>
+              <div className="flex justify-between items-center mt-4">
+                <Button onClick={() => navigate(`/singlepack/${item._id}`)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  View Your Dream
+                </Button>
+                <Button onClick={() => handledelete(item._id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                  Remove Wishlist
+                </Button>
+              </div>
             </div>
           </div>
         ))}

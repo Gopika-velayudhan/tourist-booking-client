@@ -12,6 +12,7 @@ function Navbar1() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [login, setLogin] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [search,setsearch] = useState('')
   const name = localStorage.getItem('Username');
 
   const navigate = useNavigate();

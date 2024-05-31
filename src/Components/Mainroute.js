@@ -23,6 +23,7 @@ import Wishlist from "./packages/Wishlist.js";
 import Confirmation from "./payment/Confirmation.jsx";
 import Booking from "./payment/Booking.jsx";
 import Userprofie from "../pages/Userprofie.js";
+import Contact from "./home/Contact.js";
 
 const Mainroute = () => {
   const location = useLocation();
@@ -48,6 +49,7 @@ const Mainroute = () => {
           <Route path="/confirmation/:id" element={<Confirmation />} />
           <Route path="/booking/:id" element={<Booking />} />
           <Route path="/userprofile" element={<Userprofie />} />
+          <Route path="/contact" element={<Contact/>}/>
           
           {/* Admin routes */}
           <Route path="/adminlogin" element={<AdminLogin />} />
