@@ -5,7 +5,6 @@ import html2canvas from 'html2canvas';
 import Swal from 'sweetalert2'; 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { FaCloudDownloadAlt } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
 import './Booking.css';
 
 function Booking() {
@@ -28,32 +27,6 @@ function Booking() {
 
     fetchBookingDetails();
   }, [id]);
-
-  const handleDeleteConfirmation = () => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You are about to delete this booking!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const response = await instance.delete(`/bookings/${id}`);
-          if (response.status === 200) {
-            Swal.fire('Deleted!', 'Your booking has been deleted.', 'success');
-            
-          } else {
-            Swal.fire('Error!', 'Failed to delete booking.', 'error');
-          }
-        } catch (err) {
-          Swal.fire('Error!', 'Failed to delete booking.', 'error');
-        }
-      }
-    });
-  };
 
   const downloadPageAsImage = () => {
     const bookingElement = document.getElementById('booking-details');
@@ -104,10 +77,6 @@ function Booking() {
           <h2>Booking Confirmed</h2>
           <p>Your booking is confirmed. Thank you for choosing our service!</p>
           <div className="icon-container d-flex flex justify-between">
-            <div className="delete-container" onClick={handleDeleteConfirmation} title="Delete Booking">
-              <MdDelete className='delete-icon' />
-              <span className='text-red-500'>Delete</span>
-            </div>
             <div className="download-container" onClick={downloadPageAsImage} title="Download Booking Details">
               <FaCloudDownloadAlt className="download-icon" />
               <span>Download</span>

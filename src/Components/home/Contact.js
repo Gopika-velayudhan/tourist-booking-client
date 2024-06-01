@@ -1,74 +1,121 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import instance from "../../axiosinterceptor/userinterrceptor";
+import "react-toastify/dist/ReactToastify.css";
 import "./Contact.css";
 
 function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      
+      
+      await instance.post("/send-email", formData);
+      toast.success("Email sent successfully!");
+      setFormData({
+        name: "",
+        email: "",
+        message: ""
+      });
+    } catch (error) {
+      toast.error("Error sending email. Please try again.");
+    }
+  };
+
   return (
-    <div className="main">
-      <section className="contact">
-        <div className="content">
-          <h2>Contact us</h2>
-          <p>asdfghjkhgfdsdfghjhgfd</p>
+    <div className="main1">
+      <ToastContainer />
+      <section className="contact1">
+        <div className="content1">
+          <h2>Contact Us</h2>
+          <p>Welcome to the wonderland of all time, explore the beauty of Kerala through Dream Holidays
+          and write your daily with more and more happy moments through Kerala Tour Packages.</p>
         </div>
-        <div className="container">
-          <div className="contactInfo">
-            <div className="box">
-              <div className="icon">
+        <div className="container1">
+          <div className="contactInfo1">
+            <div className="box1">
+              <div className="icon1">
                 <i className="fa fa-map-marker" aria-hidden="true"></i>
               </div>
-              <div className="text">
+              <div className="text1">
                 <h3>Address</h3>
                 <p>
-                  kinfra near road kakkenjeri,
-                  <br /> 
-                  calicut,
+                  kinfra near road,
                   <br /> 
                   676317
                 </p>
               </div>
             </div>
-            <div className="box">
-              <div className="icon">
+            <div className="box1">
+              <div className="icon1">
                 <i className="fa fa-phone" aria-hidden="true"></i>
               </div>
-              <div className="text">
+              <div className="text1">
                 <h3>Phone</h3>
                 <p>123-456-963</p>
               </div>
             </div>
-            <div className="box">
-              <div className="icon">
-                {" "}
-                <i className="fa fa-envelope-o" aria-hidden="true"></i>
+            <div className="box1">
+              <div className="icon1">
+                <FontAwesomeIcon icon={faEnvelope} />
               </div>
-              <div className="text">
+              <div className="text1">
                 <h3>Email</h3>
                 <p>abc@gmail.com</p>
               </div>
             </div>
           </div>
-          <div className="contactForm">
-            <form>
-              <h2>send message</h2>
-              <div className="inputBox">
-                <input type="text" name="" required="required" />
-                <span>FUll Name</span>
+          <div className="contactForm1">
+            <form onSubmit={handleSubmit}>
+              <h2>Send Message</h2>
+              <div className="inputBox1">
+                <input
+                  type="text"
+                  name="name"
+                  required="required"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+                <span>Full Name</span>
               </div>
-              <div className="inputBox">
-                <input type="email" name="" required="required" />
+              <div className="inputBox1">
+                <input
+                  type="email"
+                  name="email"
+                  required="required"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
                 <span>Email</span>
               </div>
-              <div className="inputBox">
-                <textarea required="required"></textarea>
+              <div className="inputBox1">
+                <textarea
+                  name="message"
+                  required="required"
+                  value={formData.message}
+                  onChange={handleChange}
+                ></textarea>
                 <span>Type your message</span>
               </div>
-              <div className="inputBox">
-                <input
-                  type="submit"
-                  value="send"
-                  required="required"
-                  name=""
-                />
+              <div className="inputBox1">
+                <input type="submit" value="Send" required="required" />
               </div>
             </form>
           </div>

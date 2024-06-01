@@ -41,7 +41,7 @@ function Navbar1() {
   };
 
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary sticky-navbar">
       <Container>
         <img src={Logo} alt="Logo" style={{ width: '45px', height: '6vh' }} />
         <Navbar.Brand href="#home" style={{ display: 'flex', textAlign: 'left' }}>
@@ -72,7 +72,6 @@ function Navbar1() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link onClick={() => navigate('/')}>Home</Nav.Link>
-            <Nav.Link onClick={() => navigate('/about')}>About</Nav.Link>
             <NavDropdown
               title="Packages"
               id="responsive-nav"
@@ -90,10 +89,11 @@ function Navbar1() {
                 Family packages
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link onClick={() => navigate('/contacts')}>Contacts</Nav.Link>
+            <Nav.Link onClick={() => navigate('/about')}>About</Nav.Link>
+           
+            <Nav.Link onClick={() => navigate('/contact')}>Contacts</Nav.Link>
             <Form
-              className="d-flex"
-              style={{ marginLeft: '50px', width: '500px' }}
+              className="d-flex form-inline"
               onSubmit={(e) => {
                 e.preventDefault();
                 handleSearch();

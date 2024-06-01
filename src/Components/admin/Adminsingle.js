@@ -12,7 +12,7 @@ const Adminsingle = () => {
     const fetchPackage = async () => {
       try {
         // const token = localStorage.getItem("adminToken");
-        // const headers = token ? { Authorization: `Bearer ${token}` } : {};
+        // const headers = footer ? { Authorization: `Bearer ${token}` } : {};
         const response = await instance.get(`/packages/${id}`);
 
         response.data.data.Available_Date = new Date(

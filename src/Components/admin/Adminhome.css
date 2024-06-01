@@ -1,0 +1,46 @@
+.icon2 {
+    display: flex;
+    align-items: center;
+  }
+  
+  .round-icon {
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px; 
+  }
+  
+  .icon-white {
+    color: white;
+  }
+  
+  .violet {
+    background-color: violet;
+  }
+  
+  .orange {
+    background-color: orange;
+  }
+  
+  .rose {
+    background-color: #D10363;
+  }
+  
+  .text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .container2 {
+    background-color: #CDE8E5;
+    
+  }
+  .card-container3{
+    padding-top: 60px; 
+    padding-bottom: 10px;
+  }
+  

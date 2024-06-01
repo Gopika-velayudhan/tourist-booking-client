@@ -1,51 +1,60 @@
-.main {
+.main1 {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
-.contact {
+
+.contact1 {
   position: relative;
   min-height: 100vh;
   padding: 50px 100px;
   display: flex;
-  justify-content: flex;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: url();
+  background: url("../Assests/contact.png");
   background-size: cover;
 }
-.contact .content {
+
+.contact1 .content1 {
   max-width: 800px;
   text-align: center;
 }
-.contact .content h2 {
+
+.contact1 .content1 h2 {
   font-size: 36px;
   font-weight: 500;
-  color: #fff;
+  color: white;
 }
-.contact .content p {
+
+.contact1 .content1 p {
   font-weight: 300;
-  color: #fff;
+  color: white;
 }
-.container {
+
+.container1 {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 30px;
+  background-color: wheat;
 }
-.container .contactInfo {
+
+.container1 .contactInfo1 {
   width: 50%;
   display: flex;
   flex-direction: column;
 }
-.container .contactInfo .Box {
+
+.container1 .contactInfo1 .box1 {
   position: relative;
   padding: 20px 0;
   display: flex;
 }
-.container .contactInfo .box .icon {
+
+.container1 .contactInfo1 .box1 .icon1 {
   min-width: 60px;
   height: 60px;
   background: #fff;
@@ -55,70 +64,78 @@
   border-radius: 50%;
   font-size: 22px;
 }
-.container .contactInfo .box .text {
+
+.container1 .contactInfo1 .box1 .text1 {
   display: flex;
   margin-left: 20px;
   font-size: 16px;
-  color: #fff;
+  color: black;
   flex-direction: column;
   font-weight: 300;
 }
-.container .contactInfo .box .text h3 {
+
+.container1 .contactInfo1 .box1 .text1 h3 {
   font-weight: 500;
   color: #00bcd4;
 }
-.contactForm {
+
+.contactForm1 {
   width: 40%;
   padding: 40px;
   background: #fff;
 }
-.contactForm h2 {
+
+.contactForm1 h2 {
   font-size: 30px;
   color: #333;
   font-weight: 500;
 }
-.contactForm .inputBox {
+
+.contactForm1 .inputBox1 {
   position: relative;
   width: 100%;
   margin-top: 10px;
 }
-.contactForm .inputBox input,.contactForm .inputBox textarea{
-    width: 100%;
-    padding: 5px 0;
-    font-size: 16px;
-    margin: 10px 0;
-    border: none;
-    border-bottom: 2px solid #333;
-    outline: none;
-    resize: none;
-}
-.contactForm .inputBox span{
-    position: absolute;
-    left: 0;
-    padding: 5px 0;
-    font-size: 16px;
-    margin: 10px 0;
-    pointer-events: none;
-    transition:0.5% ;
-    color: #666;
 
-}
-.contactForm .inputBox input:focus ~ span,
-.contactForm .inputBox input:valid ~ span,
-.contactForm .inputBox textarea:focus ~ span,
-.contactForm .inputBox input:valid ~ span{
-    color: #e91e63;
-    font-size: 12px;
-    transform: translateY(-20px);
-}
-.contactForm .inputBox input[type="submit"]{
-    width: 100px;
-    background: #00bcd4;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    font-size: 18px;
+.contactForm1 .inputBox1 input,
+.contactForm1 .inputBox1 textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  resize: none;
 }
 
+.contactForm1 .inputBox1 span {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.3s ease-in-out;
+  color: #999; 
+}
 
+.contactForm1 .inputBox1 input:focus ~ span,
+.contactForm1 .inputBox1 input:valid ~ span,
+.contactForm1 .inputBox1 textarea:focus ~ span,
+.contactForm1 .inputBox1 input:valid ~ span {
+  color: #e91e63;
+  font-size: 12px;
+  transform: translateY(-20px);
+}
+
+.contactForm1 .inputBox1 input[type="submit"] {
+  width: 100%;
+  background: #00bcd4;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px; 
+  margin-top: 20px; 
+}

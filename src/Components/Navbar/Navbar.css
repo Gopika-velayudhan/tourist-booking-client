@@ -1,20 +1,63 @@
-.head{
-display: flex;
-text-align: start;
+.sticky-navbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #ffffffb4;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-/* Navbar.css */
 
 .navbar-nav .nav-link:hover {
-    color: darkgreen; 
-    text-decoration: underline; 
-    font-size: bold;
+  color: blue;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.navbar-nav .nav-link:focus {
+  color: darkgreen;
+  text-decoration: underline;
+}
+
+.navbar-nav .nav-link.dropdown-toggle::after {
+  display: none !important;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+}
+
+.head span:first-child {
+  font-size: 2rem;
+  font-weight: bold;
+  color: goldenrod;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.head span:last-child {
+  font-size: 2rem;
+  font-weight: bold;
+  color: black;
+  font-family: cursive;
+}
+
+.navbar-nav .nav-link {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.form-inline {
+  margin-left: 50px;
+  width: 500px;
+}
+
+.form-inline .form-control {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .form-inline {
+    margin-left: 0;
+    width: 100%;
   }
-  
-  .navbar-nav .nav-link:focus {
-    color:darkgreen; 
-    text-decoration: underline; 
-  }
-  .navbar-nav .nav-link.dropdown-toggle::after {
-    display: none !important;
-  }
-  
+}

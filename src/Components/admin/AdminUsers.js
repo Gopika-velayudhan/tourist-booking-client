@@ -72,7 +72,11 @@ const AdminUsers = () => {
               {users.map((item) => (
                 <tr key={item._id}>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <FaUserLarge className="text-blue-500 w-6 h-6" />
+                    <img
+                      src={item.Profileimg}
+                      alt="Profile"
+                      className="w-7 h-7 rounded-md" 
+                    />
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {item.Username}
