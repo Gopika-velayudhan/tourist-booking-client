@@ -1,23 +1,18 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
-import SideBar from "./Sidebar";
 import { useParams } from "react-router-dom";
+import SideBar from "./Sidebar";
+import { Row, Col, Card } from "react-bootstrap"; 
 import instance from "../../axiosinterceptor/Axiosinterceptor";
 
 const Adminsingle = () => {
   const { id } = useParams();
-  const [packag, setPackage] = useState(null);
+  const [packag, setPackage] = useState(null); 
 
   useEffect(() => {
     const fetchPackage = async () => {
       try {
-        // const token = localStorage.getItem("adminToken");
-        // const headers = footer ? { Authorization: `Bearer ${token}` } : {};
         const response = await instance.get(`/packages/${id}`);
-
-        response.data.data.Available_Date = new Date(
-          response.data.data.Available_Date
-        );
+        response.data.data.Available_Date = new Date(response.data.data.Available_Date);
         setPackage(response.data.data);
       } catch (err) {
         console.error("Error fetching single package", err);
@@ -35,48 +30,42 @@ const Adminsingle = () => {
         <SideBar />
       </div>
       <div className="flex flex-wrap justify-center gap-4 p-8">
-        {packag && (
-          <div
-            key={packag._id}
-            className="bg-white rounded-lg shadow-md p-6 max-w-xl w-full"
-          >
-            <h3 className="text-3xl font-bold mb-4 text-black">
-              {packag.Destination}
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="flex gap-4">
-                {packag.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`Image ${index + 1} of ${packag.Destination}`}
-                    className="w-auto h-auto max-h-64 rounded-md shadow-md"
-                  />
-                ))}
-              </div>
-            </div>
-            <div className="">
-              <div className="mt-4">
-                <h4 className="text-lg font-bold">Description:</h4>
-                <p className="text-sm">{packag.Description}</p>
-              </div>
-            </div>
-            <div className="">
-              <div className="mt-4">
-                <h4 className="text-lg font-bold">Category:</h4>
-                <p className="text-semibold">{packag.Category}</p>
-              </div>
-            </div>
-            <div className="">
-              <div className="mt-4">
-                <h4 className="text-lg font-bold">Available_Date:</h4>
-
-                <p className="text-semibold">
-                  {packag.Available_Date.toLocaleDateString()}
-                </p>
-              </div>
-            </div>
-          </div>
+        {packag && ( 
+          <Col lg={15}> 
+            <Card className="mb-4">
+              <Card.Body>
+                <Card.Title className="text-center">
+                  {packag.Destination} 
+                </Card.Title>
+                <div className="photoarray">
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="col-span-3">
+                      <Card.Img
+                        className="main-image"
+                        src={packag.images[0]} 
+                        alt={`Image 1 of ${packag.Destination}`} 
+                      />
+                    </div>
+                    {packag.images.slice(1).map((image, index) => (
+                      <div key={index} className="col-span-1">
+                        <Card.Img
+                          className="secondary-image"
+                          src={image}
+                          alt={`Image ${index + 2} of ${packag.Destination}`} 
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="mt-3">
+                  <h4>Plan Of The Trip</h4>
+                  <p>{packag.Description}</p>
+                  <h5>₹{packag.Price}-/Day</h5> 
+                  <h5>{packag.Category}</h5> 
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
         )}
       </div>
     </div>

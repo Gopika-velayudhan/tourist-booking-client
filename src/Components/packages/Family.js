@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
@@ -56,7 +55,9 @@ const Family = () => {
           toast.error("Failed to remove package from wishlist.");
         }
       } else {
-        const response = await instance.post(`/wishlists/${userid}`, { packageid: packageId });
+        const response = await instance.post(`/wishlists/${userid}`, {
+          packageid: packageId,
+        });
 
         if (response.data.status === "Success") {
           console.log("Package added to wishlist:", packageId);
@@ -76,55 +77,53 @@ const Family = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
-      {loading ? (
-        Array.from({ length: 8 }).map((_, index) => (
-          <div key={index} className="skeleton-card">
-            <div className="skeleton-image"></div>
-            <div className="skeleton-details">
-              <div className="skeleton-text" style={{ width: '60%' }}></div>
-              <div className="skeleton-text" style={{ width: '40%' }}></div>
-              <div className="skeleton-button"></div>
+      {loading
+        ? Array.from({ length: 8 }).map((_, index) => (
+            <div key={index} className="skeleton-card">
+              <div className="skeleton-image"></div>
+              <div className="skeleton-details">
+                <div className="skeleton-text" style={{ width: "60%" }}></div>
+                <div className="skeleton-text" style={{ width: "40%" }}></div>
+                <div className="skeleton-button"></div>
+              </div>
             </div>
-          </div>
-        ))
-      ) : (
-        packages.map((pkg, index) => (
-          <Card key={index} className="relative w-full h-100">
-            <div className="flex justify-between items-center absolute top-2 right-2 z-10">
-              {wishlist.includes(pkg._id) ? (
-                <AiFillHeart
-                  className="text-3xl text-black-500 cursor-pointer"
-                  onClick={() => handleWishlistToggle(pkg._id)}
-                />
-              ) : (
-                <AiOutlineHeart
-                  className="text-3xl text-black-500 cursor-pointer"
-                  onClick={() => handleWishlistToggle(pkg._id)}
-                />
-              )}
-            </div>
-            <Card.Img
-              variant="top"
-              src={pkg.images[0]}
-              alt={pkg.Destination}
-              className="object-cover h-40"
-            />
-            <Card.Body>
-              <Card.Title>{pkg.Destination}</Card.Title>
-              <Card.Text>
-                <p>Price: ${pkg.Price}</p>
-                <p>Duration: {pkg.Duration} days</p>
-              </Card.Text>
-              <Button
-                variant="primary"
-                onClick={() => navigate(`/singlepack/${pkg._id}`)}
-              >
-                View Details
-              </Button>
-            </Card.Body>
-          </Card>
-        ))
-      )}
+          ))
+        : packages.map((pkg, index) => (
+            <Card key={index} className="relative w-full h-100">
+              <div className="flex justify-between items-center absolute top-2 right-2 z-10">
+                {wishlist.includes(pkg._id) ? (
+                  <AiFillHeart
+                    className="text-3xl text-black-500 cursor-pointer"
+                    onClick={() => handleWishlistToggle(pkg._id)}
+                  />
+                ) : (
+                  <AiOutlineHeart
+                    className="text-3xl text-black-500 cursor-pointer"
+                    onClick={() => handleWishlistToggle(pkg._id)}
+                  />
+                )}
+              </div>
+              <Card.Img
+                variant="top"
+                src={pkg.images[0]}
+                alt={pkg.Destination}
+                className="object-cover h-40"
+              />
+              <Card.Body>
+                <Card.Title>{pkg.Destination}</Card.Title>
+                <Card.Text>
+                  <p>Price: ${pkg.Price}</p>
+                  <p>Duration: {pkg.Duration} days</p>
+                </Card.Text>
+                <Button
+                  variant="primary"
+                  onClick={() => navigate(`/singlepack/${pkg._id}`)}
+                >
+                  View Details
+                </Button>
+              </Card.Body>
+            </Card>
+          ))}
     </div>
   );
 };

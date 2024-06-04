@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import instance from "../../axiosinterceptor/Axiosinterceptor";
 import {FadeLoader} from 'react-spinners'
+import SideBar from "./Sidebar";
 const AdminProduct = () => {
   const [formData, setFormData] = useState({
     Destination: "",
@@ -103,6 +104,7 @@ const AdminProduct = () => {
       className="container-md mt-5 d-flex"
       style={{ maxWidth: "600px", margin: "auto" }}
     >
+      
       <div className="card">
         <div className="card-header bg-primary text-white">
           <h2 className="mb-0">Add a Product</h2>

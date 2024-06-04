@@ -66,7 +66,9 @@ function Home() {
             value={searchQuery.Price}
             onChange={handleInputChange}
           />
-          <button onClick={handleSearch} className="search-btn">Explore</button>
+          <button onClick={handleSearch} className="search-btn">
+            Explore
+          </button>
         </div>
       </section>
       <section className="themes">

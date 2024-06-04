@@ -11,28 +11,26 @@ function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    message: ""
+    message: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      
-      
       await instance.post("/send-email", formData);
       toast.success("Email sent successfully!");
       setFormData({
         name: "",
         email: "",
-        message: ""
+        message: "",
       });
     } catch (error) {
       toast.error("Error sending email. Please try again.");
@@ -45,8 +43,11 @@ function Contact() {
       <section className="contact1">
         <div className="content1">
           <h2>Contact Us</h2>
-          <p>Welcome to the wonderland of all time, explore the beauty of Kerala through Dream Holidays
-          and write your daily with more and more happy moments through Kerala Tour Packages.</p>
+          <p>
+            Welcome to the wonderland of all time, explore the beauty of Kerala
+            through Dream Holidays and write your daily with more and more happy
+            moments through Kerala Tour Packages.
+          </p>
         </div>
         <div className="container1">
           <div className="contactInfo1">
@@ -58,7 +59,7 @@ function Contact() {
                 <h3>Address</h3>
                 <p>
                   kinfra near road,
-                  <br /> 
+                  <br />
                   676317
                 </p>
               </div>

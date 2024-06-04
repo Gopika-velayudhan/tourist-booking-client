@@ -20,7 +20,7 @@ function Wishlist() {
           { headers }
         );
 
-        response.data.data.forEach(item => {
+        response.data.data.forEach((item) => {
           item.Available_Date = new Date(item.Available_Date);
         });
         setWishlist(response.data.data);
@@ -36,7 +36,7 @@ function Wishlist() {
   const handledelete = async (pkgId) => {
     try {
       const token = localStorage.getItem("token");
-      const userid = localStorage.getItem('_id');
+      const userid = localStorage.getItem("_id");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
       const response = await axios.delete(
@@ -50,13 +50,13 @@ function Wishlist() {
       if (response.status === 200) {
         toast.success("Successfully removed the wishlist item");
 
-        setWishlist(wishlist.filter(item => item._id !== pkgId));
+        setWishlist(wishlist.filter((item) => item._id !== pkgId));
       }
     } catch (err) {
       console.error("Error deleting wishlist item:", err);
       toast.error("Error deleting wishlist item");
     }
-  }
+  };
 
   return (
     <div className="px-4 py-8">
@@ -79,10 +79,16 @@ function Wishlist() {
               <p className="mt-2">Duration: {item.Duration}</p>
               <p>Available Date: {item.Available_Date.toDateString()}</p>
               <div className="flex justify-between items-center mt-4">
-                <Button onClick={() => navigate(`/singlepack/${item._id}`)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <Button
+                  onClick={() => navigate(`/singlepack/${item._id}`)}
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                >
                   View Your Dream
                 </Button>
-                <Button onClick={() => handledelete(item._id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                <Button
+                  onClick={() => handledelete(item._id)}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                >
                   Remove Wishlist
                 </Button>
               </div>

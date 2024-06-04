@@ -13,8 +13,7 @@ function Adminviewproduct() {
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        // const token = localStorage.getItem("adminToken");
-        // const headers = token ? { Authorization: `Bearer ${token}` } : {};
+       
         const response = await instance.get("/packages");
 
         setPackages(response.data.data);

@@ -24,6 +24,7 @@ import Confirmation from "./payment/Confirmation.jsx";
 import Booking from "./payment/Booking.jsx";
 import Userprofie from "../pages/Userprofie.js";
 import Contact from "./home/Contact.js";
+import AdminBooking from "./admin/AdminBooking.js";
 
 const Mainroute = () => {
   const location = useLocation();
@@ -49,8 +50,8 @@ const Mainroute = () => {
           <Route path="/confirmation/:id" element={<Confirmation />} />
           <Route path="/booking/:id" element={<Booking />} />
           <Route path="/userprofile" element={<Userprofie />} />
-          <Route path="/contact" element={<Contact/>}/>
-          
+          <Route path="/contact" element={<Contact />} />
+
           {/* Admin routes */}
           <Route path="/adminlogin" element={<AdminLogin />} />
           <Route path="/adminusers" element={<Adminusers />} />
@@ -60,6 +61,7 @@ const Mainroute = () => {
           <Route path="/adminview" element={<Adminviewproduct />} />
           <Route path="/adminedit/:id" element={<Adminedit />} />
           <Route path="/adminsingle/:id" element={<Adminsingle />} />
+          <Route path="/adminbooking" element={<AdminBooking/>}/>
         </Routes>
       </div>
     </>

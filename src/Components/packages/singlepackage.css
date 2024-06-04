@@ -1,4 +1,3 @@
-/* singlepackage.css */
 .photoarray .grid {
   display: grid;
   gap: 1rem;
@@ -22,8 +21,6 @@
   border-radius: 10px;
 }
 
-
-
 @media (max-width: 992px) {
   .photoarray .grid-cols-3 {
     grid-template-columns: 1fr;
@@ -35,5 +32,30 @@
 
   .secondary-image {
     height: 100px;
+  }
+}
+
+/* Additional media queries for smaller screens */
+@media (max-width: 768px) {
+  .main-image {
+    height: 150px;
+  }
+
+  .secondary-image {
+    height: 75px;
+  }
+}
+
+@media (max-width: 576px) {
+  .photoarray .grid {
+    gap: 0.5rem;
+  }
+
+  .main-image {
+    height: 100px;
+  }
+
+  .secondary-image {
+    height: 50px;
   }
 }

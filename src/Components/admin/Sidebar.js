@@ -46,7 +46,7 @@ import {toast} from 'react-toastify'
             <NavLink exact to="/adminusers" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="users">Users</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/vieworder" activeClassName="activeClicked">
+            <NavLink exact to="/adminbooking" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="store">Booking Packages</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/adminview" activeClassName="activeClicked">

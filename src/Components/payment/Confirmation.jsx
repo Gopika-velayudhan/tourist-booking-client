@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
-
 import instance from "../../axiosinterceptor/userinterrceptor";
 import "./Confirmation.css";
 import { FadeLoader } from "react-spinners";
-
 
 const Confirmation = () => {
   const [searchParams] = useSearchParams();
@@ -22,10 +20,7 @@ const Confirmation = () => {
   useEffect(() => {
     const handleGet = async () => {
       try {
-        // const token = localStorage.getItem("token");
-        // const headers = token ? { Authorization: `Bearer ${token}` } : {};
         const userid = localStorage.getItem("_id");
-
         const response = await instance.get(`/users/${userid}`);
         setUser(response.data.data);
       } catch (err) {
@@ -63,7 +58,6 @@ const Confirmation = () => {
           receipt: `receipt_${Date.now()}`,
           payment_id,
         }
-        // { headers: { Authorization: bearerToken } }
       );
 
       const options = {
@@ -105,17 +99,19 @@ const Confirmation = () => {
   };
 
   return (
-    <div className="container1">
-      <div className="header1">
+    <div className="container4">
+      <div className="header4">
         <h2>{destination}</h2>
-        <table className="confirmation-table1">
-          <tbody>
+        <table className="confirmation-table4">
+          <thead>
             <tr>
-              <td>Location:</td>
-              <td>Available Date & Time:</td>
-              <td>Duration:</td>
-              <td>Departure Date & Time:</td>
+              <th>Location</th>
+              <th>Available Date & Time</th>
+              <th>Duration</th>
+              <th>Departure Date & Time</th>
             </tr>
+          </thead>
+          <tbody>
             <tr>
               <td>{destination}</td>
               <td>{availableDate} 12:00 PM</td>
@@ -125,16 +121,18 @@ const Confirmation = () => {
           </tbody>
         </table>
       </div>
-      <div className="guest-details1">
+      <div className="guest-details4">
         <h3>Guest Details</h3>
         {user && (
-          <table className="confirmation-table1">
-            <tbody>
+          <table className="confirmation-table4">
+            <thead>
               <tr>
-                <td>Name of Guest:</td>
-                <td>Mobile Number:</td>
-                <td>Email Address:</td>
+                <th>Name of Guest</th>
+                <th>Mobile Number</th>
+                <th>Email Address</th>
               </tr>
+            </thead>
+            <tbody>
               <tr>
                 <td>{user.Username}</td>
                 <td>{user.Phonenumber}</td>
@@ -144,7 +142,7 @@ const Confirmation = () => {
           </table>
         )}
       </div>
-      <div className="total-price1">
+      <div className="total-price4">
         <h3>Total Price</h3>
         <p>Total fare: ₹{totalPrice}</p>
         <p>GST 18%: ₹{(totalPrice * 0.18).toFixed(2)}</p>
@@ -153,7 +151,7 @@ const Confirmation = () => {
         </p>
         {loading ? (
           <div className="d-flex justify-content-center">
-            <FadeLoader color="#007bff" loading={loading} size={15} />
+            <FadeLoader color="#28a745" loading={loading} size={15} />
           </div>
         ) : (
           <Button onClick={handlePayment}>Pay to Proceed</Button>

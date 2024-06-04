@@ -19,11 +19,7 @@ const AdminHome = () => {
   useEffect(() => {
     const fetchUserCount = async () => {
       try {
-        
-        const response = await instance.get(
-          "/users"
-          
-        );
+        const response = await instance.get("/users");
         setUsercount(response.data.dataCount);
         setUser(response.data.data);
       } catch (error) {
@@ -36,11 +32,7 @@ const AdminHome = () => {
   useEffect(() => {
     const fetchBookingCount = async () => {
       try {
-        
-        const response = await instance.get(
-          "/bookings"
-          
-        );
+        const response = await instance.get("/bookings");
         setBookingCount(response.data.datacount);
       } catch (error) {
         console.log("Error fetching bookingCount: ", error);
@@ -52,11 +44,7 @@ const AdminHome = () => {
   useEffect(() => {
     const fetchPackageCount = async () => {
       try {
-        
-        const response = await instance.get(
-          "/packages",
-          
-        );
+        const response = await instance.get("/packages");
         setPackageCount(response.data.datacount);
       } catch (error) {
         console.log("Error fetching packageCount: ", error);
@@ -75,9 +63,8 @@ const AdminHome = () => {
         <Sidebar />
       </div>
       <div className="flex-grow-1 p-3 container2">
-        <div className="card-container3 d-flex justify-content-between mb-3 ">
+        <div className="card-container3 d-flex justify-content-between mb-3">
           <Card
-            style={{ width: "25rem" }} 
             className="mb-2 m-2"
             onClick={() => navigate("/adminusers")}
           >
@@ -94,9 +81,8 @@ const AdminHome = () => {
             </Card.Body>
           </Card>
           <Card
-            style={{ width: "25rem" }} 
             className="mb-2 m-2"
-            onClick={() => navigate("/vieworder")}
+            onClick={() => navigate("/adminbooking")}
           >
             <Card.Body>
               <div className="icon2">
@@ -111,9 +97,8 @@ const AdminHome = () => {
             </Card.Body>
           </Card>
           <Card
-            style={{ width: "25rem" }} 
             className="mb-2 m-2"
-            onClick={()=>navigate("/adminview")}
+            onClick={() => navigate("/adminview")}
           >
             <Card.Body>
               <div className="icon2">
@@ -156,7 +141,7 @@ const AdminHome = () => {
                     <img
                       src={item.Profileimg}
                       alt="Profile"
-                      className="w-7 h-7 rounded-md" 
+                      className="w-7 h-7 rounded-md"
                     />
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
