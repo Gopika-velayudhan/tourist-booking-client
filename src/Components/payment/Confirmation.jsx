@@ -151,10 +151,10 @@ const Confirmation = () => {
         </p>
         {loading ? (
           <div className="d-flex justify-content-center">
-            <FadeLoader color="#28a745" loading={loading} size={15} />
+            <FadeLoader color="blue" loading={loading} size={15} />
           </div>
         ) : (
-          <Button onClick={handlePayment}>Pay to Proceed</Button>
+          <Button onClick={handlePayment} style={{backgroundColor:"blue"}}>Pay to Proceed</Button>
         )}
       </div>
     </div>

@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUsers, faShoppingCart, faLock } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUsers,
+  faShoppingCart,
+  faLock,
+} from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../admin/Sidebar";
 
 import instance from "../../axiosinterceptor/Axiosinterceptor";
@@ -64,10 +68,7 @@ const AdminHome = () => {
       </div>
       <div className="flex-grow-1 p-3 container2">
         <div className="card-container3 d-flex justify-content-between mb-3">
-          <Card
-            className="mb-2 m-2"
-            onClick={() => navigate("/adminusers")}
-          >
+          <Card className="mb-2 m-2" onClick={() => navigate("/adminusers")}>
             <Card.Body>
               <div className="icon2">
                 <div className="round-icon violet">
@@ -80,14 +81,14 @@ const AdminHome = () => {
               </div>
             </Card.Body>
           </Card>
-          <Card
-            className="mb-2 m-2"
-            onClick={() => navigate("/adminbooking")}
-          >
+          <Card className="mb-2 m-2" onClick={() => navigate("/adminbooking")}>
             <Card.Body>
               <div className="icon2">
                 <div className="round-icon orange">
-                  <FontAwesomeIcon icon={faShoppingCart} className="icon-white" />
+                  <FontAwesomeIcon
+                    icon={faShoppingCart}
+                    className="icon-white"
+                  />
                 </div>
                 <div className="text-container">
                   <h3>{bookingCount}</h3>
@@ -96,10 +97,7 @@ const AdminHome = () => {
               </div>
             </Card.Body>
           </Card>
-          <Card
-            className="mb-2 m-2"
-            onClick={() => navigate("/adminview")}
-          >
+          <Card className="mb-2 m-2" onClick={() => navigate("/adminview")}>
             <Card.Body>
               <div className="icon2">
                 <div className="round-icon rose">

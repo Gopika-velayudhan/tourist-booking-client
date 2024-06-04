@@ -1,44 +1,40 @@
-// import React from 'react';
-// import './About.css';
-// import img1 from '../Assests/about1.jpg'
-// import img2 from '../Assests/aout1.jpg'
-// import img3 from '../Assests/aout2.jpg'
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import img1 from "../Assests/about5.jpg";
+import img2 from "../Assests/about6.jpg";
+import img3 from "../Assests/About4.jpg";
+import "./About.css";
 
-// const About = () => {
-//   return (
-//     <div className="about-container">
-//       <div className="about-header">
-//         <h1>Who We Are</h1>
-//       </div>
-//       <div className="about-content">
-//         <div className="about-images">
-//           <video controls>
-//             <source src={img1} type="video/mp4" />
-//             Your browser does not support the video tag.
-//           </video>
-//           <img src={img2} alt="Scenery 1" />
-//           <img src={img3} alt="Scenery 2" />
-//         </div>
-//         <div className="about-text">
-//           <h2>Welcome to Dream Holidays</h2>
-//           <p>
-//             Welcome to the wonderland of all time, explore the beauty of Kerala through Dream Holidays
-//             and write your daily with more and more happy moments through Kerala Tour Packages. We
-//             help you to craft the outing in Kerala by exploring the elegance and culture of Kerala.
-//             Dream Holidays welcomes you to explore the gracefulness of Kerala through exciting Kerala
-//             Tour Packages.
-//           </p>
-//           <p>
-//             We invite you to experience the charismatic architecture of Kerala to have a remarkable
-//             travel memory in the entire life. We believe in the culture of India ‘Athithi Devo Bhava’
-//             which means treating the Guest as God, so we are really honest to say that we believe in
-//             the happiness of our Guests.
-//           </p>
-//         </div>
-//       </div>
-      
-//     </div>
-//   );
-// };
+function About() {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
 
-// export default About;
+  return (
+    <div className="about-container">
+      <div className="about-main">
+        <h3 className="about-head">ABOUT ExploreEpic</h3>
+        <h1 className="about-sub">World Best Travel Group</h1>
+        <p className="about-para">
+          Explore Epic is your ultimate travel companion, guiding you to
+          discover hidden gems and iconic landmarks worldwide. Our expertly
+          curated itineraries ensure you embark on unforgettable adventures
+          and create lasting memories. At Explore Epic, we take you beyond
+          the ordinary, bringing you closer to the heart of every
+          destination. We handle every detail of your journey, allowing you
+          to unwind and relax, ensuring a seamless and enjoyable travel
+          experience.
+        </p>
+        <button className="about-but">Discover More</button>
+      </div>
+      <div className="image1">
+        <img src={img1} alt="About Image 1" className="img1" data-aos="fade-up" />
+        <img src={img2} alt="About Image 2" className="img2" data-aos="fade-up" data-aos-delay="350" />
+        <img src={img3} alt="About Image 3" className="img3" data-aos="fade-up" data-aos-delay="700" />
+      </div>
+    </div>
+  );
+}
+
+export default About;

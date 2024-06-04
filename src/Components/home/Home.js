@@ -1,8 +1,8 @@
 import React from "react";
 import "./Homepage.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import img1 from "../Assests/honeymoon_home.webp";
 import img2 from "../Assests/family_home.webp";
 import img3 from "../Assests/adventure_home.webp";
@@ -10,8 +10,13 @@ import img4 from "../Assests/friends_group.webp";
 import img5 from "../Assests/nature_home.webp";
 import img6 from "../Assests/wildlife_home.webp";
 import { FaWhatsappSquare } from "react-icons/fa";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function Home() {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState({
     Destination: "",
@@ -40,7 +45,9 @@ function Home() {
   return (
     <main className="main-content">
       <section className="hero">
-        <h1>Turn Your Dream Holiday Into Reality</h1>
+        <h1 data-aos="fade-down" data-aos-delay="350">
+          Turn Your Dream Holiday Into Reality
+        </h1>
         <div className="search-box">
           <input
             type="text"
@@ -72,7 +79,9 @@ function Home() {
         </div>
       </section>
       <section className="themes">
-        <h2 className="themes_h1">Explore destinations by theme</h2>
+        <h2 className="themes_h1" data-aos="fade-down" data-aos-delay="350">
+          Explore destinations by theme
+        </h2>
         <div className="themes-container">
           {[img1, img2, img3, img4, img5, img6].map((img, index) => (
             <div className="theme-item" key={index}>
