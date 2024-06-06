@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
+
 import { toast, ToastContainer } from "react-toastify";
 import instance from "../../axiosinterceptor/userinterrceptor";
 import "react-toastify/dist/ReactToastify.css";
+import { FadeLoader } from "react-spinners";
 import "./Contact.css";
 
 function Contact() {
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,6 +27,7 @@ function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await instance.post("/send-email", formData);
       toast.success("Email sent successfully!");
@@ -34,6 +38,8 @@ function Contact() {
       });
     } catch (error) {
       toast.error("Error sending email. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -84,41 +90,45 @@ function Contact() {
             </div>
           </div>
           <div className="contactForm1">
-            <form onSubmit={handleSubmit}>
-              <h2>Send Message</h2>
-              <div className="inputBox1">
-                <input
-                  type="text"
-                  name="name"
-                  required="required"
-                  value={formData.name}
-                  onChange={handleChange}
-                />
-                <span>Full Name</span>
-              </div>
-              <div className="inputBox1">
-                <input
-                  type="email"
-                  name="email"
-                  required="required"
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-                <span>Email</span>
-              </div>
-              <div className="inputBox1">
-                <textarea
-                  name="message"
-                  required="required"
-                  value={formData.message}
-                  onChange={handleChange}
-                ></textarea>
-                <span>Type your message</span>
-              </div>
-              <div className="inputBox1">
-                <input type="submit" value="Send" required="required" />
-              </div>
-            </form>
+            {loading ? (
+              <FadeLoader color="blue" />
+            ) : (
+              <form onSubmit={handleSubmit}>
+                <h2>Send Message</h2>
+                <div className="inputBox1">
+                  <input
+                    type="text"
+                    name="name"
+                    required="required"
+                    value={formData.name}
+                    onChange={handleChange}
+                  />
+                  <span>Full Name</span>
+                </div>
+                <div className="inputBox1">
+                  <input
+                    type="email"
+                    name="email"
+                    required="required"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                  <span>Email</span>
+                </div>
+                <div className="inputBox1">
+                  <textarea
+                    name="message"
+                    required="required"
+                    value={formData.message}
+                    onChange={handleChange}
+                  ></textarea>
+                  <span>Type your message</span>
+                </div>
+                <div className="inputBox1">
+                  <input type="submit" value="Send" required="required" />
+                </div>
+              </form>
+            )}
           </div>
         </div>
       </section>

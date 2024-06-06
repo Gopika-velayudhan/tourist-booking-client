@@ -1,0 +1,44 @@
+/* Footer.css */
+
+.footer-head span:first-child {
+    font-size: 2rem;
+    font-weight: bold;
+    color: goldenrod;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .footer-head span:last-child {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+    font-family: cursive;
+  }
+  
+  .icon-container {
+    margin-left: 150px;
+  }
+  
+  .icon-container .text-dark:hover {
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .icon-container {
+      display: flex; 
+      flex-direction: row;
+      justify-content: center; 
+      align-items: center;
+      margin-left: 0;
+    }
+  
+    .footer-head span {
+      display: block;
+      text-align: center;
+    }
+  
+    .footer-logo {
+      max-width: 50px; 
+    }
+  }
+  

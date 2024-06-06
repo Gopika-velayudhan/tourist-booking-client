@@ -26,6 +26,8 @@ import Userprofie from "../pages/Userprofie.js";
 import Contact from "./home/Contact.js";
 import AdminBooking from "./admin/AdminBooking.js";
 import Service from "./home/Service.js";
+import Footer from "./footer/Footer.js";
+
 
 const Mainroute = () => {
   const location = useLocation();
@@ -52,7 +54,7 @@ const Mainroute = () => {
           <Route path="/booking/:id" element={<Booking />} />
           <Route path="/userprofile" element={<Userprofie />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/service" element={<Service/>}/>
+          <Route path="/service" element={<Service />} />
 
           {/* Admin routes */}
           <Route path="/adminlogin" element={<AdminLogin />} />
@@ -63,8 +65,9 @@ const Mainroute = () => {
           <Route path="/adminview" element={<Adminviewproduct />} />
           <Route path="/adminedit/:id" element={<Adminedit />} />
           <Route path="/adminsingle/:id" element={<Adminsingle />} />
-          <Route path="/adminbooking" element={<AdminBooking/>}/>
+          <Route path="/adminbooking" element={<AdminBooking />} />
         </Routes>
+        {isAdminPath ? null : <Footer />} 
       </div>
     </>
   );

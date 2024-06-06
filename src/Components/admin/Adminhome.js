@@ -2,13 +2,8 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUsers,
-  faShoppingCart,
-  faLock,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUsers, faShoppingCart, faLock } from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../admin/Sidebar";
-
 import instance from "../../axiosinterceptor/Axiosinterceptor";
 import "./Adminhome.css";
 
@@ -62,15 +57,13 @@ const AdminHome = () => {
   }, [user]);
 
   return (
-    <div className="d-flex w-100">
-      <div>
-        <Sidebar />
-      </div>
-      <div className="flex-grow-1 p-3 container2">
-        <div className="card-container3 d-flex justify-content-between mb-3">
-          <Card className="mb-2 m-2" onClick={() => navigate("/adminusers")}>
+    <div className="admin-home-container8">
+      <Sidebar />
+      <div className="main-content8">
+        <div className="card-container8">
+          <Card className="card8" onClick={() => navigate("/adminusers")}>
             <Card.Body>
-              <div className="icon2">
+              <div className="icon8">
                 <div className="round-icon violet">
                   <FontAwesomeIcon icon={faUsers} className="icon-white" />
                 </div>
@@ -81,14 +74,11 @@ const AdminHome = () => {
               </div>
             </Card.Body>
           </Card>
-          <Card className="mb-2 m-2" onClick={() => navigate("/adminbooking")}>
+          <Card className="card8" onClick={() => navigate("/adminbooking")}>
             <Card.Body>
-              <div className="icon2">
+              <div className="icon8">
                 <div className="round-icon orange">
-                  <FontAwesomeIcon
-                    icon={faShoppingCart}
-                    className="icon-white"
-                  />
+                  <FontAwesomeIcon icon={faShoppingCart} className="icon-white" />
                 </div>
                 <div className="text-container">
                   <h3>{bookingCount}</h3>
@@ -97,9 +87,9 @@ const AdminHome = () => {
               </div>
             </Card.Body>
           </Card>
-          <Card className="mb-2 m-2" onClick={() => navigate("/adminview")}>
+          <Card className="card8" onClick={() => navigate("/adminview")}>
             <Card.Body>
-              <div className="icon2">
+              <div className="icon8">
                 <div className="round-icon rose">
                   <FontAwesomeIcon icon={faLock} className="icon-white" />
                 </div>
@@ -111,44 +101,26 @@ const AdminHome = () => {
             </Card.Body>
           </Card>
         </div>
-        <div className="max-w-full mx-auto p-6 bg-white rounded-md shadow-md overflow-x-auto">
-          <h2 className="text-lg font-semibold mb-4 text-center text-orange-900 uppercase">
-            User List
-          </h2>
-          <table className="min-w-full divide-y divide-gray-300 border border-gray-200">
-            <thead className="bg-gray-200 text-gray-700">
+        <div className="table-container">
+          <h2 className="table-title">User List</h2>
+          <table className="user-table">
+            <thead>
               <tr>
-                <th className="px-6 py-3 text-left font-medium uppercase tracking-wider">
-                  Profile
-                </th>
-                <th className="px-6 py-3 text-left font-medium uppercase tracking-wider">
-                  Username
-                </th>
-                <th className="px-6 py-3 text-left font-medium uppercase tracking-wider">
-                  Email
-                </th>
-                <th className="px-6 py-3 text-left font-medium uppercase tracking-wider">
-                  PhoneNumber
-                </th>
+                <th>Profile</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>PhoneNumber</th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-300">
+            <tbody>
               {user.map((item) => (
                 <tr key={item._id}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <img
-                      src={item.Profileimg}
-                      alt="Profile"
-                      className="w-7 h-7 rounded-md"
-                    />
+                  <td>
+                    <img src={item.Profileimg} alt="Profile" className="profile-img" />
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {item.Username}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{item.email}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {item.Phonenumber}
-                  </td>
+                  <td>{item.Username}</td>
+                  <td>{item.email}</td>
+                  <td>{item.Phonenumber}</td>
                 </tr>
               ))}
             </tbody>

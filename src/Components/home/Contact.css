@@ -57,7 +57,7 @@
   position: relative;
   padding: 20px 0;
   display: flex;
-  align-items: center; /* Center align items within each box */
+  align-items: center; 
 }
 
 .container1 .contactInfo1 .box1 .icon1 {

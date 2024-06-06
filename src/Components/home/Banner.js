@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import instance from '../../axiosinterceptor/userinterrceptor';
 import { useNavigate } from 'react-router-dom';
+import "aos/dist/aos.css";
+import Aos from "aos";
 import './Banner.css';
 
 function Banner() {
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
   const [pack, setPack] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchpack = async () => {
@@ -26,7 +31,12 @@ function Banner() {
         <div className="card-row6">
           {pack.slice(0, 3).map((packageItem, index) => (
             <div key={index} className="card6">
-              <img src={packageItem.images[1]} alt="Location" className="card-image6" onClick={()=>navigate("/honeymoon")}/>
+              <img 
+                src={packageItem.images[1]} 
+                alt="Location" 
+                className="card-image6" 
+                onClick={() => navigate("/honeymoon")} 
+              />
               <h2 className="card-title6">{packageItem.Destination}</h2>
             </div>
           ))}
@@ -34,7 +44,12 @@ function Banner() {
         <div className="card-row6">
           {pack.slice(3, 6).map((packageItem, index) => (
             <div key={index} className="card6">
-              <img src={packageItem.images[1]} alt="Location" className="card-image6" onClick={()=>navigate("/honeymoon")}/>
+              <img 
+                src={packageItem.images[1]} 
+                alt="Location" 
+                className="card-image6" 
+                onClick={() => navigate("/honeymoon")} 
+              />
               <h2 className="card-title6">{packageItem.Destination}</h2>
             </div>
           ))}

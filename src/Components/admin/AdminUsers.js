@@ -4,6 +4,7 @@ import { FaUserLarge } from "react-icons/fa6";
 import SideBar from "../admin/Sidebar";
 import { TbLockOpen, TbLockOff } from "react-icons/tb";
 import { toast } from "react-toastify";
+import './AdminUsers.css';
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -71,21 +72,23 @@ const AdminUsers = () => {
             <tbody className="bg-white divide-y divide-gray-300">
               {users.map((item) => (
                 <tr key={item._id}>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-4 whitespace-nowrap" data-label="Profile">
                     <img
                       src={item.Profileimg}
                       alt="Profile"
                       className="w-7 h-7 rounded-md" 
                     />
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-4 whitespace-nowrap" data-label="Username">
                     {item.Username}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{item.email}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-4 whitespace-nowrap" data-label="Email">
+                    {item.email}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap" data-label="PhoneNumber">
                     {item.Phonenumber}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-4 whitespace-nowrap" data-label="Block">
                     {item.isBlocked ? (
                       <TbLockOff
                         className="text-red-500 w-6 h-6 cursor-pointer"

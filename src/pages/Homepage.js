@@ -19,7 +19,7 @@ function Homepage() {
         <Service/>
         <Banner/>
         <Contact/>
-        <Footer/>
+        
     </div>
   )
 }

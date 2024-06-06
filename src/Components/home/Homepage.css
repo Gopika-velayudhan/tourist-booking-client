@@ -1,4 +1,3 @@
-/* Homepage.css */
 :root {
   --primary-color: blue;
   --secondary-color: white;
@@ -30,10 +29,10 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
+  margin-top: 20px;
 }
 
 .search-box input,
-.search-box select,
 .search-box button {
   padding: 10px;
   font-size: 16px;
@@ -41,10 +40,11 @@
   border-radius: 5px;
 }
 
-.search-box input,
-.search-box select {
+.search-box input {
   background-color: var(--background-color);
   color: var(--text-color);
+  flex: 1;
+  min-width: 150px;
 }
 
 .search-box button {
@@ -97,8 +97,8 @@
 .whatsapp-container {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  padding: 5px;
+  justify-content: center;
+  padding: 20px 0;
 }
 
 .whatsapp-link {
@@ -118,20 +118,35 @@
   font-size: 1.25rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .hero h1 {
     font-size: 28px;
   }
 
   .search-box {
     flex-direction: column;
+    align-items: center;
   }
 
   .search-box input,
-  .search-box select,
   .search-box button {
     width: 100%;
-    max-width: none;
+    max-width: 300px;
+  }
+
+  .themes-container {
+    gap: 10px;
+  }
+
+  .theme-item {
+    max-width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 24px;
   }
 
   .themes-container {
@@ -142,11 +157,20 @@
     max-width: 100px;
     height: 100px;
   }
+
+  .whatsapp-container {
+    justify-content: center;
+  }
+
+  .whatsapp-text {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
   .hero h1 {
-    font-size: 24px;
+    font-size: 20px;
+    padding: 20px;
   }
 
   .theme-item {

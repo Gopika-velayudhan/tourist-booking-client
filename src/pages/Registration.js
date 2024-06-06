@@ -26,17 +26,16 @@ const Registration = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3005/api/user/userregister",
+        "http://localhost:3005/api/user/userRegister",
         values,
         {
           headers: { "Content-Type": "application/json" },
         }
       );
 
-      if (response && response.status === 201) {
-        console.log(response);
-        toast.success("Registration Success");
-        navigate("/login");
+      if (response && response.status === 200) {
+        toast.success("Registration Success. OTP sent to your email.");
+        navigate("/verifyotp", { state: { email: values.email } });
       }
     } catch (error) {
       console.error("Error:", error);
@@ -48,94 +47,46 @@ const Registration = () => {
   };
 
   return (
-    <>
-      <div
-        className="container d-flex justify-content-center align-items-center register"
-        style={{ minHeight: "100vh" }}
-      >
-        <div
-          className="rounded shadow p-3 mb-5 bg-white fom"
-          style={{ width: "25rem" }}
+    <div className="container d-flex justify-content-center align-items-center register" style={{ minHeight: "100vh" }}>
+      <div className="rounded shadow p-3 mb-5 bg-white fom" style={{ width: "25rem" }}>
+        <Formik
+          initialValues={{
+            Username: "",
+            email: "",
+            Phonenumber: "",
+            password: "",
+          }}
+          validationSchema={RegistrationSchema}
+          onSubmit={handleSubmit}
         >
-          <Formik
-            initialValues={{
-              Username: "",
-              email: "",
-              Phonenumber: "",
-              password: "",
-            }}
-            validationSchema={RegistrationSchema}
-            onSubmit={handleSubmit}
-          >
-            {({ isSubmitting }) => (
-              <Form>
-                <Field
-                  type="text"
-                  name="Username"
-                  placeholder="Username"
-                  className="form-control mt-3"
-                />
-                <ErrorMessage
-                  name="Username"
-                  component="div"
-                  className="text-danger"
-                />
+          {({ isSubmitting }) => (
+            <Form>
+              <Field type="text" name="Username" placeholder="Username" className="form-control mt-3" />
+              <ErrorMessage name="Username" component="div" className="text-danger" />
 
-                <Field
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  className="form-control mt-4"
-                />
-                <ErrorMessage
-                  name="email"
-                  component="div"
-                  className="text-danger"
-                />
+              <Field type="email" name="email" placeholder="Email" className="form-control mt-4" />
+              <ErrorMessage name="email" component="div" className="text-danger" />
 
-                <Field
-                  type="tel"
-                  name="Phonenumber"
-                  placeholder="Mobile number"
-                  className="form-control mt-4"
-                />
-                <ErrorMessage
-                  name="Phonenumber"
-                  component="div"
-                  className="text-danger"
-                />
+              <Field type="tel" name="Phonenumber" placeholder="Mobile number" className="form-control mt-4" />
+              <ErrorMessage name="Phonenumber" component="div" className="text-danger" />
 
-                <Field
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  className="form-control mt-4"
-                />
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className="text-danger"
-                />
+              <Field type="password" name="password" placeholder="Password" className="form-control mt-4" />
+              <ErrorMessage name="password" component="div" className="text-danger" />
 
-                <button
-                  className="btn btn-primary rounded mt-4 w-100"
-                  type="submit"
-                  disabled={isSubmitting || isLoading}
-                >
-                  {isSubmitting || isLoading ? "Loading...." : "SignUP"}
-                </button>
-                <p className="mt-4">
-                  Already have an account?{" "}
-                  <Link to="/login" style={{ textDecoration: "none" }}>
-                    Login
-                  </Link>
-                </p>
-              </Form>
-            )}
-          </Formik>
-        </div>
+              <button className="btn btn-primary rounded mt-4 w-100" type="submit" disabled={isSubmitting || isLoading}>
+                {isSubmitting || isLoading ? "Loading...." : "SignUP"}
+              </button>
+              <p className="mt-4">
+                Already have an account?{" "}
+                <Link to="/login" style={{ textDecoration: "none" }}>
+                  Login
+                </Link>
+              </p>
+            </Form>
+          )}
+        </Formik>
       </div>
-    </>
+    </div>
   );
 };
 

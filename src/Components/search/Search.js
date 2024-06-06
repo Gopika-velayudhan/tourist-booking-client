@@ -36,7 +36,7 @@ function Search() {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching properties:', error);
-        setError('Error fetching properties. Please try again later.');
+        setError('This package not found');
         setLoading(false);
       }
     };

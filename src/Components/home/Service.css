@@ -2,6 +2,8 @@
   padding: 50px 20px;
   font-family: Arial, sans-serif;
   background-image: url("../Assests/contact.png");
+  background-size: cover;
+  background-position: center;
 }
 
 .section-heading {
@@ -44,4 +46,44 @@
 .service-description {
   color: #666;
   line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .section-heading {
+    font-size: 28px;
+  }
+
+  .service-card {
+    padding: 15px;
+  }
+
+  .service-title {
+    font-size: 22px;
+  }
+
+  .service-icon {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-heading {
+    font-size: 24px;
+  }
+
+  .service-card {
+    padding: 10px;
+  }
+
+  .service-title {
+    font-size: 20px;
+  }
+
+  .service-icon {
+    font-size: 28px;
+  }
+
+  .service-description {
+    font-size: 14px;
+  }
 }

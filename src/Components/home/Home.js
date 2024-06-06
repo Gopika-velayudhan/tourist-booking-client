@@ -1,7 +1,6 @@
-import React from "react";
-import "./Homepage.css";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Homepage.css";
 
 import img1 from "../Assests/honeymoon_home.webp";
 import img2 from "../Assests/family_home.webp";
@@ -17,6 +16,7 @@ function Home() {
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
+
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState({
     Destination: "",

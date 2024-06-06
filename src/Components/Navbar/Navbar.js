@@ -27,7 +27,12 @@ function Navbar1() {
 
       const intervalId = setInterval(fetchWishlistCount, 20000); 
 
-      return () => clearInterval(intervalId);
+      window.addEventListener('wishlistUpdated', fetchWishlistCount);
+
+      return () => {
+        clearInterval(intervalId);
+        window.removeEventListener('wishlistUpdated', fetchWishlistCount);
+      };
     }
   }, []);
 
@@ -49,15 +54,7 @@ function Navbar1() {
     }
   };
 
-  const handleChange = (e) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleSearch = () => {
-    if (inputValue.trim() !== "") {
-      navigate(`/search?location=${inputValue}`);
-    }
-  };
+  
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -71,15 +68,11 @@ function Navbar1() {
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary sticky-navbar">
       <Container>
-        <img src={Logo} alt="Logo" style={{ width: "45px", height: "6vh" }} />
         <Navbar.Brand href="#home" style={{ display: "flex", textAlign: "left" }}>
+          <img src={Logo} alt="Logo" className="logo-img" />
           <div className="head">
-            <span style={{ fontSize: "2rem", fontWeight: "bold", color: "goldenrod", textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)" }}>
-              Explore
-            </span>
-            <span style={{ fontSize: "2rem", fontWeight: "bold", color: "black", fontFamily: "cursive" }}>
-              Epic
-            </span>
+            <span>Explore</span>
+            <span>Epic</span>
           </div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -105,23 +98,7 @@ function Navbar1() {
             </NavDropdown>
             <Nav.Link onClick={() => navigate("/about")}>About</Nav.Link>
             <Nav.Link onClick={() => navigate("/contact")}>Contacts</Nav.Link>
-            <Form
-              className="d-flex form-inline"
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleSearch();
-              }}
-            >
-              <Form.Control
-                type="search"
-                placeholder="Search here...."
-                className="me-2"
-                aria-label="Search"
-                value={inputValue}
-                onChange={handleChange}
-              />
-              <FaSearch style={{ marginTop: "10px" }} />
-            </Form>
+            
           </Nav>
           <NavDropdown title={name ? <>{name}</> : <>Login</>} id="responsive-nav">
             {!name && (

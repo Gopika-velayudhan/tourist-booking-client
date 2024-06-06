@@ -58,6 +58,7 @@
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .booking-details,
@@ -88,4 +89,50 @@
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .booking-details,
+  .billing-model {
+    width: 100%;
+  }
+
+  .website-name {
+    font-size: 28px;
+  }
+  
+  .download-icon {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .booking-container {
+    padding: 10px;
+  }
+
+  .website-name {
+    font-size: 24px;
+  }
+
+  .booking-header h3 {
+    font-size: 18px;
+  }
+
+  .booking-details p,
+  .billing-model p {
+    font-size: 14px;
+  }
+
+  .download-icon {
+    font-size: 18px;
+  }
+
+  .icon-container {
+    justify-content: center;
+  }
+
+  .details-container {
+    gap: 10px;
+  }
 }

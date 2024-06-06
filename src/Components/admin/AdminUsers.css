@@ -1,0 +1,222 @@
+.flex {
+    display: flex;
+  }
+  
+  .h-screen {
+    height: 100vh;
+  }
+  
+  .max-w-full {
+    max-width: 100%;
+  }
+  
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .mt-8 {
+    margin-top: 2rem;
+  }
+  
+  .p-6 {
+    padding: 1.5rem;
+  }
+  
+  .bg-white {
+    background-color: #fff;
+  }
+  
+  .rounded-md {
+    border-radius: 0.375rem; 
+  }
+  
+  .shadow-md {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .overflow-x-auto {
+    overflow-x: auto;
+  }
+  
+  .text-lg {
+    font-size: 1.125rem; 
+  }
+  
+  .font-semibold {
+    font-weight: 600;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-orange-900 {
+    color: #ed8936;
+  }
+  
+  .uppercase {
+    text-transform: uppercase;
+  }
+  
+  .min-w-full {
+    min-width: 100%;
+  }
+  
+  .divide-y {
+    border-collapse: separate;
+    border-spacing: 0 0.5rem; 
+  }
+  
+  .divide-gray-300 > tr > td,
+  .divide-gray-300 > tr > th {
+    border-color: #e2e8f0; 
+  }
+  
+  .border {
+    border-width: 1px;
+    border-style: solid;
+  }
+  
+  .border-gray-200 {
+    border-color: #edf2f7;
+  }
+  
+  .bg-gray-100 {
+    background-color: #f7fafc;
+  }
+  
+  .py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .whitespace-nowrap {
+    white-space: nowrap;
+  }
+  
+  .w-7 {
+    width: 1.75rem; 
+  }
+  
+  .h-7 {
+    height: 1.75rem; 
+  }
+  
+  .text-red-500 {
+    color: #f56565;
+  }
+  
+  .text-green-500 {
+    color: #48bb78;
+  }
+  
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .divide-y {
+      border-spacing: 0; 
+    }
+  
+    .py-4 {
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+    }
+  
+    .text-lg {
+      font-size: 1rem;
+    }
+  
+    .w-6 {
+      width: 1.5rem; 
+    }
+  
+    .h-6 {
+      height: 1.5rem; 
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .overflow-x-auto {
+      padding: 0;
+    }
+  
+    .px-6 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  
+    .table {
+      display: block;
+      width: 100%;
+    }
+  
+    .thead,
+    .tbody,
+    .tr,
+    .th,
+    .td {
+      display: block;
+    }
+  
+    .tr {
+      margin-bottom: 0.625rem;
+    }
+  
+    .th {
+      font-weight: bold;
+      text-align: left;
+    }
+  
+    .td {
+      text-align: right;
+      padding-left: 50%;
+      position: relative;
+    }
+  
+    .td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 1rem;
+      width: calc(50% - 1rem);
+      white-space: nowrap;
+      text-align: left;
+      font-weight: bold;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .text-lg {
+      font-size: 0.875rem;
+    }
+  
+    .py-4 {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+  
+    .table {
+      display: block;
+      width: 100%;
+    }
+  
+    .th, .td {
+      padding: 0.5rem;
+    }
+  
+    .td {
+      padding-left: 40%;
+    }
+  
+    .td::before {
+      left: 0.5rem;
+      width: 40%;
+    }
+  }
+  

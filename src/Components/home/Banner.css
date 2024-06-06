@@ -50,3 +50,44 @@
   height: auto;
   border-radius: 8px;
 }
+
+@media (max-width: 992px) {
+  .card-row6 {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card6 {
+    width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner-title6 {
+    font-size: 28px;
+  }
+
+  .card6 {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .card-title6 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-title6 {
+    font-size: 24px;
+  }
+
+  .card6 {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .card-title6 {
+    font-size: 20px;
+  }
+}

@@ -30,11 +30,21 @@ function Booking() {
 
   const downloadPageAsImage = () => {
     const bookingElement = document.getElementById('booking-details');
+    const downloadContainer = document.querySelector('.download-container');
+    
+    if (downloadContainer) {
+      downloadContainer.style.display = 'none';
+    }
+
     html2canvas(bookingElement).then(canvas => {
       const link = document.createElement('a');
       link.href = canvas.toDataURL('image/png');
       link.download = `booking_${id}.png`;
       link.click();
+
+      if (downloadContainer) {
+        downloadContainer.style.display = 'flex';
+      }
     });
   };
 
