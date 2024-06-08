@@ -1,38 +1,36 @@
-import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import styles from './Userprofile.module.css';
-import instance from '../axiosinterceptor/userinterrceptor';
-import { toast } from 'react-toastify';
+import React, { useState, useEffect, useRef } from "react";
+import styles from "./Userprofile.module.css";
+import { FadeLoader } from "react-spinners";
+import instance from "../axiosinterceptor/userinterrceptor";
+import { toast } from "react-toastify";
+
 
 function UserProfile() {
   const [user, setUser] = useState({
-    Profileimg: '',
-    Username: '',
-    email: '',
-    Phonenumber: '',
+    Profileimg: "",
+    Username: "",
+    email: "",
+    Phonenumber: "",
   });
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const fileInputRef = useRef(null);
 
   useEffect(() => {
     const handleGet = async () => {
       try {
-        // const token = localStorage.getItem('token');
-        const userId = localStorage.getItem('_id');
-        // const headers = token ? { Authorization: `Bearer ${token}` } : {};
-        const response = await instance.get(
-          `/users/${userId}`,
-         
-        );
+        const userId = localStorage.getItem("_id");
+
+        const response = await instance.get(`/users/${userId}`);
         const userData = response.data?.data || {};
         setUser({
-          Profileimg: userData.Profileimg || '',
-          Username: userData.Username || '',
-          email: userData.email || '',
-          Phonenumber: userData.Phonenumber || '',
+          Profileimg: userData.Profileimg || "",
+          Username: userData.Username || "",
+          email: userData.email || "",
+          Phonenumber: userData.Phonenumber || "",
         });
       } catch (err) {
-        console.error('Error fetching data', err);
+        console.error("Error fetching data", err);
       }
     };
     handleGet();
@@ -40,52 +38,36 @@ function UserProfile() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      const token = localStorage.getItem('token');
-      const userId = localStorage.getItem('_id');
+      const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("_id");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
       const formData = new FormData();
-      formData.append('Username', user.Username);
-      formData.append('email', user.email);
-      formData.append('Phonenumber', user.Phonenumber);
+      formData.append("Username", user.Username);
+      formData.append("email", user.email);
+      formData.append("Phonenumber", user.Phonenumber);
       if (image) {
-        formData.append('Profileimg', image);
+        formData.append("Profileimg", image);
       }
 
-      const response = await instance.put(
-        `/users/${userId}`,
-        formData
-      
-      );
+      const response = await instance.put(`/users/${userId}`, formData);
 
       const updatedUserData = response.data?.data || {};
       setUser((prevUser) => ({
         ...prevUser,
-        Profileimg: updatedUserData.Profileimg || '',
-        Username: updatedUserData.Username || '',
-        email: updatedUserData.email || '',
-        Phonenumber: updatedUserData.Phonenumber || '',
+        Profileimg: updatedUserData.Profileimg || "",
+        Username: updatedUserData.Username || "",
+        email: updatedUserData.email || "",
+        Phonenumber: updatedUserData.Phonenumber || "",
       }));
 
-      // Show a success message
-      toast.success('Profile updated successfully');
+      toast.success("Profile updated successfully");
     } catch (err) {
-      console.error('Error updating profile', err);
-    }
-  };
-
-  const handleDelete = async () => {
-    try {
-      
-      const userId = localStorage.getItem('_id');
-      
-      await instance.delete(`/users/${userId}`);
-
-      toast('Account deleted successfully');
-      window.location.href = '/login';
-    } catch (err) {
-      console.error('Error deleting account', err);
+      console.error("Error updating profile", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -115,19 +97,17 @@ function UserProfile() {
     fileInputRef.current.click();
   };
 
-  
-
   return (
-    <div className={styles['form-container']}>
+    <div className={styles["form-container"]}>
       <h2>Profile</h2>
-      <div className={styles['photo-container']} onClick={handleImageClick}>
+      <div className={styles["photo-container"]} onClick={handleImageClick}>
         <img
-          src={user.Profileimg || 'default-profile-img.png'}
+          src={user.Profileimg || "default-profile-img.png"}
           alt="Profile"
-          className={styles['profile-photo']}
+          className={styles["profile-photo"]}
         />
       </div>
-      <form className={styles['form1']} onSubmit={handleUpdate}>
+      <form className={styles["form1"]} onSubmit={handleUpdate}>
         <input
           type="text"
           name="Username"
@@ -153,17 +133,19 @@ function UserProfile() {
           type="file"
           name="Profileimg"
           ref={fileInputRef}
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           onChange={handleImageChange}
         />
-        <button type="submit" className={styles['submit-button']}>
-          Update
-        </button>
+        {loading ? (
+          <div className="d-flex justify-content-center">
+            <FadeLoader color="#007bff" loading={loading} size={15} />
+          </div>
+        ) : (
+          <button type="submit" className={styles["submit-button"]}>
+            Update
+          </button>
+        )}
       </form>
-      {/* <button onClick={handleDelete} className={styles['delete-button']}>
-        Delete Account
-      </button> */}
-      <p  className={styles['delete-button']}  onClick={handleDelete}>delete the account</p>
     </div>
   );
 }

@@ -15,6 +15,7 @@
   background: url('../Assests/hero_general.webp') no-repeat center center;
   background-size: cover;
   color: var(--secondary-color);
+  position: relative;
 }
 
 .hero h1 {
@@ -22,6 +23,7 @@
   margin-bottom: 10px;
   color: var(--primary-color);
   padding: 30px;
+  margin-bottom: 60px; /* Adjusted to provide space above the search box */
 }
 
 .search-box {
@@ -29,7 +31,11 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  margin-top: 20px;
+  margin-top: 50px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .search-box input,
@@ -38,13 +44,7 @@
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
-}
-
-.search-box input {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  flex: 1;
-  min-width: 150px;
+  width: 150px; /* Set a fixed width */
 }
 
 .search-box button {
@@ -52,6 +52,7 @@
   color: var(--secondary-color);
   cursor: pointer;
   border: none;
+  width: 100px; /* Set a fixed width */
 }
 
 .themes {
@@ -126,6 +127,9 @@
   .search-box {
     flex-direction: column;
     align-items: center;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .search-box input,
@@ -165,6 +169,12 @@
   .whatsapp-text {
     font-size: 1rem;
   }
+
+  .search-box input,
+  .search-box button {
+    width: 100%;
+    max-width: 280px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -184,5 +194,19 @@
 
   .whatsapp-text {
     font-size: 1rem;
+  }
+
+  .search-box {
+    flex-direction: column;
+    align-items: center;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .search-box input,
+  .search-box button {
+    width: 100%;
+    max-width: 240px;
   }
 }

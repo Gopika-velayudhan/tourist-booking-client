@@ -57,89 +57,88 @@ const Login = () => {
   };
 
   return (
-    <>
-      <Container
-        className="d-flex justify-content-center align-items-center"
-        style={{ minHeight: "100vh" }}
+    <Container
+      className="d-flex justify-content-center align-items-center"
+      style={{ minHeight: "100vh", padding: "1rem" }}
+    >
+      <div
+        className="shadow p-3 mb-5 bg-white rounded"
+        style={{ width: "100%", maxWidth: "25rem" }}
       >
-        <div
-          className="shadow p-3 mb-5 bg-white rounded m-3"
-          style={{ width: "25rem" }}
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
         >
-          <Formik
-            initialValues={{ email: "", password: "" }}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-          >
-            {(formik) => (
-              <Form onSubmit={formik.handleSubmit}>
-                <Row className="mb-3">
-                  <Col>
-                    <Field
-                      type="email"
-                      name="email"
-                      className={`form-control ${
-                        formik.touched.email && formik.errors.email
-                          ? "is-invalid"
-                          : ""
-                      }`}
-                      placeholder="Email"
-                    />
-                    <ErrorMessage
-                      name="email"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </Col>
-                </Row>
+          {(formik) => (
+            <Form onSubmit={formik.handleSubmit}>
+              <Row className="mb-3">
+                <Col>
+                  <Field
+                    type="email"
+                    name="email"
+                    className={`form-control ${
+                      formik.touched.email && formik.errors.email
+                        ? "is-invalid"
+                        : ""
+                    }`}
+                    placeholder="Email"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="invalid-feedback"
+                  />
+                </Col>
+              </Row>
 
-                <Row className="mb-3">
-                  <Col>
-                    <Field
-                      type="password"
-                      name="password"
-                      className={`form-control ${
-                        formik.touched.password && formik.errors.password
-                          ? "is-invalid"
-                          : ""
-                      }`}
-                      placeholder="Password"
-                    />
-                    <ErrorMessage
-                      name="password"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </Col>
-                </Row>
+              <Row className="mb-3">
+                <Col>
+                  <Field
+                    type="password"
+                    name="password"
+                    className={`form-control ${
+                      formik.touched.password && formik.errors.password
+                        ? "is-invalid"
+                        : ""
+                    }`}
+                    placeholder="Password"
+                  />
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className="invalid-feedback"
+                  />
+                </Col>
+              </Row>
 
-                <Row className="mb-3">
-                  <Col>
-                    <h6 className="text-primary">Forgot password</h6>
-                  </Col>
-                </Row>
+              <Row className="mb-3">
+                <Col>
+                  <h6 className="text-primary">Forgot password</h6>
+                </Col>
+              </Row>
 
-                <Row className="mb-3">
-                  <Col>
-                    <Button variant="success" block type="submit">
-                      Login
-                    </Button>
-                  </Col>
-                </Row>
+              <Row className="mb-3">
+                <Col>
+                  <Button variant="success" block type="submit">
+                    Login
+                  </Button>
+                </Col>
+              </Row>
 
-                <Row>
-                  <Col>
-                    <h6 className="mt-3">
-                      Don't have an account? <Link to="/register">Register</Link>
-                    </h6>
-                  </Col>
-                </Row>
-              </Form>
-            )}
-          </Formik>
-        </div>
-      </Container>
-    </>
+              <Row>
+                <Col>
+                  <h6 className="mt-3 text-center">
+                    Don't have an account?{" "}
+                    <Link to="/register">Register</Link>
+                  </h6>
+                </Col>
+              </Row>
+            </Form>
+          )}
+        </Formik>
+      </div>
+    </Container>
   );
 };
 

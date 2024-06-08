@@ -36,7 +36,10 @@ function Search() {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching properties:', error);
-        setError('This package not found');
+        if(error.response && error.response.status == 404){
+          setError('No packages found for the specified criteria');
+        }
+       
         setLoading(false);
       }
     };

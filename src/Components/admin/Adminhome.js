@@ -16,40 +16,26 @@ const AdminHome = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserCount = async () => {
+    const fetchData = async () => {
       try {
-        const response = await instance.get("/users");
-        setUsercount(response.data.dataCount);
-        setUser(response.data.data);
-      } catch (error) {
-        console.log("Error fetching userCount: ", error);
-      }
-    };
-    fetchUserCount();
-  }, []);
+        const [userResponse, bookingResponse, packageResponse] = await Promise.all([
+          instance.get("/users"),
+          instance.get("/bookings"),
+          instance.get("/packages"),
+        ]);
 
-  useEffect(() => {
-    const fetchBookingCount = async () => {
-      try {
-        const response = await instance.get("/bookings");
-        setBookingCount(response.data.datacount);
-      } catch (error) {
-        console.log("Error fetching bookingCount: ", error);
-      }
-    };
-    fetchBookingCount();
-  }, []);
+        setUsercount(userResponse.data.dataCount);
+        setUser(userResponse.data.data);
 
-  useEffect(() => {
-    const fetchPackageCount = async () => {
-      try {
-        const response = await instance.get("/packages");
-        setPackageCount(response.data.datacount);
+        setBookingCount(bookingResponse.data.datacount);
+
+        setPackageCount(packageResponse.data.datacount);
       } catch (error) {
-        console.log("Error fetching packageCount: ", error);
+        console.log("Error fetching data: ", error);
       }
     };
-    fetchPackageCount();
+
+    fetchData();
   }, []);
 
   useEffect(() => {

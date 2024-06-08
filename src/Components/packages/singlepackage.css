@@ -20,6 +20,17 @@
   object-fit: cover;
   border-radius: 10px;
 }
+.review-avatar{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ddd;
+}
 
 @media (max-width: 992px) {
   .photoarray .grid-cols-3 {

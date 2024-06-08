@@ -41,8 +41,8 @@ const OtpVerification = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
-      <div className="shadow p-3 bg-white rounded m-3" style={{ width: "25rem" }}>
+    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh", padding: "1rem" }}>
+      <div className="shadow p-3 bg-white rounded" style={{ width: "100%", maxWidth: "25rem" }}>
         <form className="mt-4" onSubmit={handleSubmit}>
           <label htmlFor="otp" className="mb-2">
             Enter OTP sent to your phone:
@@ -53,14 +53,13 @@ const OtpVerification = () => {
             value={otp}
             onChange={handleOtpChange}
             className="form-control mb-3"
-            style={{ width: "100%", maxWidth: "100%", margin: "0 auto" }}
             placeholder="Enter OTP"
             required
           />
           <Button variant="success" type="submit" block>
             Verify OTP
           </Button>
-          {error && <div className="error mt-2">{error}</div>}
+          {error && <div className="text-danger mt-2">{error}</div>}
         </form>
       </div>
     </div>

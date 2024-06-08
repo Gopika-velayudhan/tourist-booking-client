@@ -27,16 +27,16 @@ import Contact from "./home/Contact.js";
 import AdminBooking from "./admin/AdminBooking.js";
 import Service from "./home/Service.js";
 import Footer from "./footer/Footer.js";
-
+import AdminCategory from "./admin/AdminCategory.js";
 
 const Mainroute = () => {
   const location = useLocation();
   const isAdminPath = location.pathname.startsWith("/admin");
 
   return (
-    <>
-      <div>
-        {isAdminPath ? null : <Navbar1 />}
+    <div className="d-flex flex-column min-vh-100">
+      {isAdminPath ? null : <Navbar1 />}
+      <div className="flex-grow-1">
         <Routes>
           {/* User routes */}
           <Route path="/" element={<Homepage />} />
@@ -52,7 +52,7 @@ const Mainroute = () => {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/confirmation/:id" element={<Confirmation />} />
           <Route path="/booking/:id" element={<Booking />} />
-          <Route path="/userprofile" element={<Userprofie />} />
+          <Route path="/profile" element={<Userprofie />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/service" element={<Service />} />
 
@@ -66,10 +66,11 @@ const Mainroute = () => {
           <Route path="/adminedit/:id" element={<Adminedit />} />
           <Route path="/adminsingle/:id" element={<Adminsingle />} />
           <Route path="/adminbooking" element={<AdminBooking />} />
+          <Route path="/admincategory" element={<AdminCategory />} />
         </Routes>
-        {isAdminPath ? null : <Footer />} 
       </div>
-    </>
+      {isAdminPath ? null : <Footer />}
+    </div>
   );
 };
 

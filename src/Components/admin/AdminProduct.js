@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import instance from "../../axiosinterceptor/Axiosinterceptor";
-import {FadeLoader} from 'react-spinners'
+import { FadeLoader } from 'react-spinners'
 import SideBar from "./Sidebar";
+
 const AdminProduct = () => {
   const [formData, setFormData] = useState({
     Destination: "",
@@ -16,7 +17,8 @@ const AdminProduct = () => {
     images: [],
     Description: "",
   });
-  const[loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [Category, setCategory] = useState([]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -90,7 +92,7 @@ const AdminProduct = () => {
         toast.error("An error occurred.");
       }
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -99,17 +101,25 @@ const AdminProduct = () => {
     return today.toISOString().split('T')[0];
   };
 
+  useEffect(() => {
+    const handleGet = async () => {
+      try {
+        const response = await instance.get("/categories");
+        setCategory(response.data);
+        console.log(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    handleGet();
+  }, []);
+
   return (
-    <div
-      className="container-md mt-5 d-flex"
-      style={{ maxWidth: "600px", margin: "auto" }}
-    >
-      
+    <div className="container-md mt-5 d-flex" style={{ maxWidth: "600px", margin: "auto" }}>
       <div className="card">
         <div className="card-header bg-primary text-white">
           <h2 className="mb-0">Add a Product</h2>
         </div>
-
         <div className="card-body" style={{ padding: "20px" }}>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -139,7 +149,6 @@ const AdminProduct = () => {
                   required
                 />
               </div>
-
               <div className="col-md-4">
                 <label htmlFor="Category" className="form-label">
                   <i className="fas fa-list" /> Category:
@@ -151,13 +160,12 @@ const AdminProduct = () => {
                   onChange={handleChange}
                   required
                 >
-                  <option value="" >Select Category</option>
-                  <option value="Honeymoon">Honeymoon</option>
-                  <option value="Family">Family</option>
-                  <option value="Adventure">Adventure</option>
+                  <option value="">Select Category</option>
+                  {Category.map((item) => (
+                    <option key={item._id} value={item.category}>{item.category}</option>
+                  ))}
                 </select>
               </div>
-
               <div className="col-md-4">
                 <label htmlFor="Price" className="form-label">
                   <FontAwesomeIcon icon={faDollarSign} /> Price:

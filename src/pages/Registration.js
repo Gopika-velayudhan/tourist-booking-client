@@ -47,8 +47,9 @@ const Registration = () => {
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center register" style={{ minHeight: "100vh" }}>
-      <div className="rounded shadow p-3 mb-5 bg-white fom" style={{ width: "25rem" }}>
+    <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: "100vh", padding: "1rem" }}>
+      <div className="rounded shadow p-3 bg-white" style={{ width: "100%", maxWidth: "25rem", margin: "0 auto" }}>
+        <h2>Sign UP</h2>
         <Formik
           initialValues={{
             Username: "",

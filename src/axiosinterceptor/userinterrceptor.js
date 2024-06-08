@@ -4,9 +4,9 @@ import { toast } from "react-toastify";
 const token = localStorage.getItem("token");
 
 const instance = axios.create({
-  baseURL: "http://localhost:3005/api/user",
+  baseURL: process.env.REACT_APP_API_BASE_URL1,
 });
-
+console.log(process.env.REACT_APP_API_BASE_URL1);
 instance.interceptors.request.use(
   (config) => {
     console.log(config);
@@ -29,8 +29,6 @@ instance.interceptors.response.use(
       console.error("Error Response:", error.response.data);
       if (error.response.status === 401) {
         toast.error("Unauthorized. Check your authentication credentials.");
-      } else {
-        toast.error(error.response.data.message || "Error submitting form.");
       }
     } else if (error.request) {
       console.error("Request Error:", error.request);

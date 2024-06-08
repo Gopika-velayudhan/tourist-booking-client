@@ -5,7 +5,7 @@ import SideBar from "./Sidebar";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import instance from "../../axiosinterceptor/Axiosinterceptor";
-import "./Adminviewproduct.css"; // Ensure this file contains the styles
+import "./Adminviewproduct.css";
 
 function Adminviewproduct() {
   const [packages, setPackages] = useState([]);
@@ -27,16 +27,12 @@ function Adminviewproduct() {
   const handleDelete = async (_id) => {
     try {
       const confirmed = window.confirm("Are you sure to delete the package?");
-
       if (confirmed) {
         const response = await instance.delete(`/packages/${_id}`);
-
         if (response.status === 200) {
-          const updatedPackages = packages.filter((item) => item._id !== _id);
-          setPackages(updatedPackages);
+          setPackages(packages.filter((item) => item._id !== _id));
           toast.success("Successfully deleted package");
         } else {
-          console.log("Failed to delete package");
           toast.error("Oops! Something went wrong.");
         }
       }

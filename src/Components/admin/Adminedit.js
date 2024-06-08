@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import instance from "../../axiosinterceptor/Axiosinterceptor";
-import { FadeLoader } from "react-spinners";
 import SideBar from "./Sidebar";
 
 function Adminedit() {
   const { id } = useParams();
+  const [Category, setCategory] = useState([]);
 
   const formik = useFormik({
     initialValues: {
@@ -28,13 +28,47 @@ function Adminedit() {
     onSubmit: async (values) => {
       try {
         const response = await instance.put(`/packages/${id}`, values);
-        toast.success("updated successfully");
-        console.log(response.data);
+        toast.success("Updated successfully");
       } catch (error) {
-        console.error("Error updating property:", error);
+        console.error("Error updating package:", error);
+        toast.error("Failed to update package.");
       }
     },
   });
+  useEffect(() => {
+    const fetchcategory = async () => {
+      try {
+        const response = await instance.get("/categories");
+        setCategory(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchcategory();
+  }, []);
+
+  useEffect(() => {
+    const fetchPackage = async () => {
+      try {
+        const response = await instance.get(`/packages/${id}`);
+        const packageData = response.data.data;
+        formik.setValues({
+          Destination: packageData.Destination || "",
+          Duration: packageData.Duration || "",
+          Category: packageData.Category || "",
+          Available_Date: packageData.Available_Date
+            ? packageData.Available_Date.split("T")[0]
+            : "",
+          Price: packageData.Price || "",
+        });
+      } catch (error) {
+        console.error("Error fetching package:", error);
+        toast.error("Failed to fetch package details.");
+      }
+    };
+
+    fetchPackage();
+  }, [id]);
 
   return (
     <div className="flex">
@@ -87,9 +121,11 @@ function Adminedit() {
             className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:border-blue-500"
           >
             <option value="">Select Category</option>
-            <option value="Honeymoon">Honeymoon</option>
-            <option value="Family">Family</option>
-            <option value="Adventure">Adventure</option>
+            {Category.map((item) => (
+              <option key={item._id} value={item.category}>
+                {item.category}
+              </option>
+            ))}
           </select>
           {formik.touched.Category && formik.errors.Category ? (
             <div className="text-red-500">{formik.errors.Category}</div>

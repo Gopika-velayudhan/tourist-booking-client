@@ -112,7 +112,7 @@ function Navbar1() {
             <NavDropdown.Item onClick={() => navigate("/register")}>
               Sign up
             </NavDropdown.Item>
-            <NavDropdown.Item onClick={() => navigate("/userprofile")}>
+            <NavDropdown.Item onClick={() => navigate("/profile")}>
               Profile
             </NavDropdown.Item>
           </NavDropdown>

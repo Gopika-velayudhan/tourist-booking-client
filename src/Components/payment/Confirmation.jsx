@@ -34,6 +34,7 @@ const Confirmation = () => {
     setLoading(true);
     const userToken = localStorage.getItem("token");
     const userid = localStorage.getItem("_id");
+    const email = user.email;
 
     if (!userToken) {
       console.log("token not found...");
@@ -50,24 +51,22 @@ const Confirmation = () => {
 
       const { payment_id, _id: bookingId } = bookingResponse.data.data;
 
-      const paymentResponse = await instance.post(
-        "/payment",
-        {
-          amount: totalPrice * 100,
-          currency: "INR",
-          receipt: `receipt_${Date.now()}`,
-          payment_id,
-        }
-      );
+      const paymentResponse = await instance.post("/payment", {
+        email,
+        amount: totalPrice * 100,
+        currency: "INR",
+        receipt: `receipt_${Date.now()}`,
+        payment_id,
+      });
 
       const options = {
         key: "rzp_test_eyXHobfs6uqaFU",
         amount: paymentResponse.data.data.amount,
-        currency: paymentResponse.data.currency,
-        receipt: paymentResponse.data.receipt,
+        currency: paymentResponse.data.data.currency,
+        receipt: paymentResponse.data.data.receipt,
         name: "Explore_epic",
         description: "Test Transaction",
-        order_id: paymentResponse.data.id,
+        order_id: paymentResponse.data.data.id,
         handler: (res) => {
           alert(`Payment successful: ${res.razorpay_payment_id}`);
           navigate(`/booking/${bookingId}`);
@@ -154,7 +153,9 @@ const Confirmation = () => {
             <FadeLoader color="blue" loading={loading} size={15} />
           </div>
         ) : (
-          <Button onClick={handlePayment} style={{backgroundColor:"blue"}}>Pay to Proceed</Button>
+          <Button onClick={handlePayment} style={{ backgroundColor: "blue" }}>
+            Pay to Proceed
+          </Button>
         )}
       </div>
     </div>

@@ -21,9 +21,9 @@ import {toast} from 'react-toastify'
    const handleLogout = () => {
     localStorage.removeItem('adminToken');
     setLogin(false);
-
-    navigate('/');
     toast.success("Logout")
+    navigate('/');
+    
   };
 
   return (
@@ -54,6 +54,9 @@ import {toast} from 'react-toastify'
             </NavLink>
             <NavLink exact to="/adminproduct" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="plus">Add Package</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/admincategory" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="plus">Category</CDBSidebarMenuItem>
             </NavLink>
             
             <NavLink exact to="/" activeClassName="activeClicked">

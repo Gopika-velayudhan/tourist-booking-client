@@ -29,9 +29,7 @@ instance.interceptors.response.use(
       console.error("Error Response:", error.response.data);
       if (error.response.status === 401) {
         toast.error("Unauthorized. Check your authentication credentials.");
-      } else {
-        toast.error(error.response.data.message || "Error submitting form.");
-      }
+      } 
     } else if (error.request) {
       console.error("Request Error:", error.request);
       toast.error("No response received from the server.");
