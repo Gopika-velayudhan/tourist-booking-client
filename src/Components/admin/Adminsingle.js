@@ -11,7 +11,7 @@ const Adminsingle = () => {
   useEffect(() => {
     const fetchPackage = async () => {
       try {
-        const response = await instance.get(`/packages/${id}`);
+        const response = await instance.get(`/api/admin/packages/${id}`);
         response.data.data.Available_Date = new Date(response.data.data.Available_Date);
         setPackage(response.data.data);
       } catch (err) {

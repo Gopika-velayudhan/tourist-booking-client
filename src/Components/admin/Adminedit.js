@@ -27,7 +27,7 @@ function Adminedit() {
     }),
     onSubmit: async (values) => {
       try {
-        const response = await instance.put(`/packages/${id}`, values);
+        const response = await instance.put(`/api/admin/packages/${id}`, values);
         toast.success("Updated successfully");
       } catch (error) {
         console.error("Error updating package:", error);
@@ -38,7 +38,7 @@ function Adminedit() {
   useEffect(() => {
     const fetchcategory = async () => {
       try {
-        const response = await instance.get("/categories");
+        const response = await instance.get("/api/admin/categories");
         setCategory(response.data);
       } catch (err) {
         console.log(err);
@@ -50,7 +50,7 @@ function Adminedit() {
   useEffect(() => {
     const fetchPackage = async () => {
       try {
-        const response = await instance.get(`/packages/${id}`);
+        const response = await instance.get(`/api/admin/packages/${id}`);
         const packageData = response.data.data;
         formik.setValues({
           Destination: packageData.Destination || "",

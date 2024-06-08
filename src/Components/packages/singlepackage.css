@@ -25,11 +25,14 @@
   height: 50px;
   border-radius: 50%;
   overflow: hidden;
-  margin-right: 1rem;
+  margin-left: 2.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #ddd;
+}
+.review-button{
+  
 }
 
 @media (max-width: 992px) {

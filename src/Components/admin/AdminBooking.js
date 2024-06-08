@@ -10,7 +10,7 @@ function AdminBooking() {
   useEffect(() => {
     const fetchBooking = async () => {
       try {
-        const response = await instance.get('/bookings');
+        const response = await instance.get('/api/admin/bookings');
         if (response && response.data && response.data.data && response.data.data.length > 0) {
           setBooking(response.data.data);
         }

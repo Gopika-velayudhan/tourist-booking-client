@@ -15,7 +15,7 @@ function Banner() {
   useEffect(() => {
     const fetchpack = async () => {
       try {
-        const response = await instance.get("/getpackages");
+        const response = await instance.get("/api/user/getpackages");
         setPack(response.data.data.slice(0, 6)); 
       } catch (err) {
         console.log(err, "error fetching data");

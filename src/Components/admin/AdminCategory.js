@@ -16,7 +16,7 @@ function AdminCategory() {
 
   const fetchCategories = async () => {
     try {
-      const response = await instance.get("/categories");
+      const response = await instance.get("/api/admin/categories");
       setCategories(response.data);
     } catch (error) {
       console.error(error);

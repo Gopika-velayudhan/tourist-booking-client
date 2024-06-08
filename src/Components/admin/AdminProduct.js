@@ -48,6 +48,7 @@ const AdminProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     setLoading(true);
     try {
       const formDataToSend = new FormData();
@@ -61,7 +62,7 @@ const AdminProduct = () => {
       }
       formDataToSend.append("Description", formData.Description);
 
-      const response = await instance.post("/packages", formDataToSend, {
+      const response = await instance.post("/api/admin/packages", formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -79,6 +80,7 @@ const AdminProduct = () => {
           images: [],
           Description: "",
         });
+        
         console.log(formData, "full data");
       } else {
         toast.error(response.data.message || "Error submitting form.");
@@ -104,7 +106,7 @@ const AdminProduct = () => {
   useEffect(() => {
     const handleGet = async () => {
       try {
-        const response = await instance.get("/categories");
+        const response = await instance.get("/api/admin/categories");
         setCategory(response.data);
         console.log(response.data);
       } catch (err) {

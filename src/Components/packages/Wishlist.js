@@ -1,4 +1,4 @@
-import axios from "axios";
+import instance from "../../axiosinterceptor/userinterrceptor";
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
@@ -15,8 +15,8 @@ function Wishlist() {
         const userid = localStorage.getItem("_id");
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-        const response = await axios.get(
-          `http://localhost:3005/api/user/wishlists/${userid}`,
+        const response = await instance.get(
+          `/api/user/wishlists/${userid}`,
           { headers }
         );
 
@@ -39,8 +39,8 @@ function Wishlist() {
       const userid = localStorage.getItem("_id");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-      const response = await axios.delete(
-        `http://localhost:3005/api/user/wishlists/${userid}`,
+      const response = await instance.delete(
+        `/api/user/wishlists/${userid}`,
         {
           headers,
           data: { packageid: pkgId },

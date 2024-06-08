@@ -4,9 +4,9 @@ import { toast } from "react-toastify";
 const token = localStorage.getItem("token");
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL1,
+  baseURL: process.env.REACT_APP_BASE_URL,
 });
-console.log(process.env.REACT_APP_API_BASE_URL1);
+
 instance.interceptors.request.use(
   (config) => {
     console.log(config);

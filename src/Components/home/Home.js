@@ -8,7 +8,7 @@ import img3 from "../Assests/adventure_home.webp";
 import img4 from "../Assests/friends_group.webp";
 import img5 from "../Assests/nature_home.webp";
 import img6 from "../Assests/wildlife_home.webp";
-import { FaWhatsappSquare } from "react-icons/fa";
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -45,7 +45,7 @@ function Home() {
   return (
     <main className="main-content">
       <section className="hero">
-        <h1 data-aos="fade-down" data-aos-delay="350" >
+        <h1 data-aos="fade-down" data-aos-delay="350">
           Turn Your Dream Holiday Into Reality
         </h1>
         <div className="search-box">
@@ -89,17 +89,7 @@ function Home() {
             </div>
           ))}
         </div>
-        {/* <div className="whatsapp-container">
-          <a
-            href="https://api.whatsapp.com/send?phone=7736730305"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="whatsapp-link"
-          >
-            <FaWhatsappSquare className="whatsapp-icon" />
-          </a>
-          <h4 className="whatsapp-text">Chat with us</h4>
-        </div> */}
+        
       </section>
     </main>
   );

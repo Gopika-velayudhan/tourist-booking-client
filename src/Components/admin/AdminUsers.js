@@ -24,7 +24,7 @@ const AdminUsers = () => {
   const handleLock = async (id, isBlocked) => {
     try {
       const action = isBlocked ? "unblock" : "block";
-      const url = `/users/${id}?action=${action}`;
+      const url = `/api/admin/users/${id}?action=${action}`;
       const response = await instance.patch(url, {});
       setUsers((prevUsers) =>
         prevUsers.map((item) =>

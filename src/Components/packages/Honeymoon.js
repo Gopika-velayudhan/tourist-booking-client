@@ -13,11 +13,12 @@ const HoneyMoon = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [wishlist, setWishlist] = useState([]);
+  const [ratings, setRatings] = useState({});
 
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const response = await instance.get("/packages", {
+        const response = await instance.get("/api/user/packages", {
           params: { Category: "Honeymoon" },
         });
         setPackages(response.data.data);
@@ -30,7 +31,21 @@ const HoneyMoon = () => {
       }
     };
 
+    const fetchRatings = async () => {
+      try {
+        const response = await instance.get("/api/review/packages/packageId/reviews");
+        
+        
+        setRatings(response.data.data);
+        console.log(response.data.data);
+        
+      } catch (error) {
+        console.error("Error fetching ratings:", error);
+      }
+    };
+
     fetchPackages();
+    fetchRatings();
 
     const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
     setWishlist(storedWishlist);
@@ -41,7 +56,7 @@ const HoneyMoon = () => {
       const userid = localStorage.getItem("_id");
 
       if (wishlist.includes(packageId)) {
-        const response = await instance.delete(`/wishlists/${userid}`, {
+        const response = await instance.delete(`/api/user/wishlists/${userid}`, {
           data: { packageid: packageId },
         });
 
@@ -55,7 +70,7 @@ const HoneyMoon = () => {
           toast.error("Failed to remove package from wishlist.");
         }
       } else {
-        const response = await instance.post(`/wishlists/${userid}`, {
+        const response = await instance.post(`/api/user/wishlists/${userid}`, {
           packageid: packageId,
         });
 
@@ -74,6 +89,8 @@ const HoneyMoon = () => {
       console.error("Error toggling wishlist:", error);
     }
   };
+
+  
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
@@ -114,6 +131,8 @@ const HoneyMoon = () => {
                 <Card.Text>
                   <p>Price: ${pkg.Price}</p>
                   <p>Duration: {pkg.Duration} days</p>
+                  <div> {"★".repeat(ratings.rating)}
+                  {"☆".repeat(5 - ratings.rating)}</div>
                 </Card.Text>
                 <Button
                   variant="primary"

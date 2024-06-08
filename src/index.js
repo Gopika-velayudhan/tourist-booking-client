@@ -5,26 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
-import axios from 'axios'
+import { UserProvider } from './pages/Usecontext';
 
-// const adminToken = localStorage.getItem('adminToken')
 
-// const instance = axios.create({
-//   baseURL:"http://localhost:3005"
-// })
-// instance.interceptors.request.use((request)=>{
-//   console.log(request);
-//   if(adminToken){
-//     request.headers.Authorization = `Bearer ${adminToken}`
-//   }
-// })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
   <React.StrictMode>
     <BrowserRouter>
+    <UserProvider>
     <App />
+    </UserProvider>
     </BrowserRouter>
    
   </React.StrictMode>

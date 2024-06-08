@@ -60,6 +60,19 @@
   height: 6vh;
 }
 
+.navbar-profile {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-profile-img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+}
+
 @media (max-width: 992px) {
   .form-inline {
     margin-left: 0;
@@ -70,7 +83,8 @@
     font-size: 0.9rem;
   }
 
-  .head span:first-child, .head span:last-child {
+  .head span:first-child,
+  .head span:last-child {
     font-size: 1.5rem;
   }
 
@@ -82,14 +96,15 @@
 
 @media (max-width: 768px) {
   .form-inline {
-    display: none; 
+    display: none;
   }
 
   .navbar-nav .nav-link {
     font-size: 0.8rem;
   }
 
-  .head span:first-child, .head span:last-child {
+  .head span:first-child,
+  .head span:last-child {
     font-size: 1.2rem;
   }
 

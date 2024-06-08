@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import instance from '../../axiosinterceptor/userinterrceptor';
 import html2canvas from 'html2canvas';
-import Swal from 'sweetalert2'; 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { FaCloudDownloadAlt } from "react-icons/fa";
 import './Booking.css';
@@ -16,7 +15,7 @@ function Booking() {
   useEffect(() => {
     const fetchBookingDetails = async () => {
       try {
-        const response = await instance.get(`/bookings/${id}`);
+        const response = await instance.get(`/api/user/bookings/${id}`);
         setBooking(response.data.data);
       } catch (err) {
         setError(err.response ? err.response.data.message : err.message);

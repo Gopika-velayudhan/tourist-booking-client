@@ -28,6 +28,7 @@ import AdminBooking from "./admin/AdminBooking.js";
 import Service from "./home/Service.js";
 import Footer from "./footer/Footer.js";
 import AdminCategory from "./admin/AdminCategory.js";
+import Reviewpackage from "./packages/Reviewpackage.js";
 
 const Mainroute = () => {
   const location = useLocation();
@@ -55,6 +56,7 @@ const Mainroute = () => {
           <Route path="/profile" element={<Userprofie />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/service" element={<Service />} />
+          <Route path="/review" element={<Reviewpackage/>}/>
 
           {/* Admin routes */}
           <Route path="/adminlogin" element={<AdminLogin />} />

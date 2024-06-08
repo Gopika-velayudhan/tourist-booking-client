@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+// UserProfile.js
+import React, { useState, useEffect, useRef, useContext } from "react";
 import styles from "./Userprofile.module.css";
 import { FadeLoader } from "react-spinners";
 import instance from "../axiosinterceptor/userinterrceptor";
 import { toast } from "react-toastify";
-
+import { UserContext } from "../pages/Usecontext";
 
 function UserProfile() {
   const [user, setUser] = useState({
@@ -15,13 +16,13 @@ function UserProfile() {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef(null);
+  const { setProfileImg } = useContext(UserContext);
 
   useEffect(() => {
     const handleGet = async () => {
       try {
         const userId = localStorage.getItem("_id");
-
-        const response = await instance.get(`/users/${userId}`);
+        const response = await instance.get(`/api/user/users/${userId}`);
         const userData = response.data?.data || {};
         setUser({
           Profileimg: userData.Profileimg || "",
@@ -29,21 +30,19 @@ function UserProfile() {
           email: userData.email || "",
           Phonenumber: userData.Phonenumber || "",
         });
+        setProfileImg(userData.Profileimg || "");
       } catch (err) {
         console.error("Error fetching data", err);
       }
     };
     handleGet();
-  }, []);
+  }, [setProfileImg]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const token = localStorage.getItem("token");
       const userId = localStorage.getItem("_id");
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
-
       const formData = new FormData();
       formData.append("Username", user.Username);
       formData.append("email", user.email);
@@ -51,9 +50,7 @@ function UserProfile() {
       if (image) {
         formData.append("Profileimg", image);
       }
-
-      const response = await instance.put(`/users/${userId}`, formData);
-
+      const response = await instance.put(`/api/user/users/${userId}`, formData);
       const updatedUserData = response.data?.data || {};
       setUser((prevUser) => ({
         ...prevUser,
@@ -62,7 +59,7 @@ function UserProfile() {
         email: updatedUserData.email || "",
         Phonenumber: updatedUserData.Phonenumber || "",
       }));
-
+      setProfileImg(updatedUserData.Profileimg || "");
       toast.success("Profile updated successfully");
     } catch (err) {
       console.error("Error updating profile", err);
@@ -88,6 +85,7 @@ function UserProfile() {
           ...prevState,
           Profileimg: reader.result,
         }));
+        setProfileImg(reader.result);
       }
     };
     reader.readAsDataURL(e.target.files[0]);

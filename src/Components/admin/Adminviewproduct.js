@@ -14,7 +14,7 @@ function Adminviewproduct() {
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const response = await instance.get("/packages");
+        const response = await instance.get("/api/admin/packages");
         setPackages(response.data.data);
       } catch (error) {
         console.error("Error fetching packages:", error);
@@ -28,7 +28,7 @@ function Adminviewproduct() {
     try {
       const confirmed = window.confirm("Are you sure to delete the package?");
       if (confirmed) {
-        const response = await instance.delete(`/packages/${_id}`);
+        const response = await instance.delete(`/api/admin/packages/${_id}`);
         if (response.status === 200) {
           setPackages(packages.filter((item) => item._id !== _id));
           toast.success("Successfully deleted package");

@@ -8,6 +8,18 @@
 .header4 {
   text-align: center;
   margin-bottom: 20px;
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.content4 {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .confirmation-table4 {

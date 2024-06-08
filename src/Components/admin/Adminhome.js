@@ -19,9 +19,9 @@ const AdminHome = () => {
     const fetchData = async () => {
       try {
         const [userResponse, bookingResponse, packageResponse] = await Promise.all([
-          instance.get("/users"),
-          instance.get("/bookings"),
-          instance.get("/packages"),
+          instance.get("/api/admin/users"),
+          instance.get("/api/admin/bookings"),
+          instance.get("/api/admin/packages"),
         ]);
 
         setUsercount(userResponse.data.dataCount);

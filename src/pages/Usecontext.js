@@ -1,34 +1,19 @@
-// // UserContext.js
-// import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from "react";
 
-// export const UserContext = createContext();
+export const UserContext = createContext();
 
-// export const UserProvider = ({ children }) => {
-//   const [user, setUser] = useState({
-//     Profileimg: '',
-//     Username: localStorage.getItem('Username') || '',
-//     email: '',
-//     Phonenumber: '',
-//   });
+export const UserProvider = ({ children }) => {
+  const [profileImg, setProfileImg] = useState(localStorage.getItem("profileImg") || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png");
 
-//   const updateUser = (userData) => {
-//     setUser(userData);
-//     localStorage.setItem('Username', userData.Username);
-//   };
+  useEffect(() => {
+    if (profileImg) {
+      localStorage.setItem("profileImg", profileImg);
+    }
+  }, [profileImg]);
 
-//   const clearUser = () => {
-//     setUser({
-//       Profileimg: '',
-//       Username: '',
-//       email: '',
-//       Phonenumber: '',
-//     });
-//     localStorage.removeItem('Username');
-//   };
-
-//   return (
-//     <UserContext.Provider value={{ user, updateUser, clearUser }}>
-//       {children}
-//     </UserContext.Provider>
-//   );
-// };
+  return (
+    <UserContext.Provider value={{ profileImg, setProfileImg }}>
+      {children}
+    </UserContext.Provider>
+  );
+};

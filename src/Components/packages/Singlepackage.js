@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
-import Rating from "react-rating-stars-component";
+
 import instance from "../../axiosinterceptor/userinterrceptor";
 import "./singlepackage.css";
 import "./Review.css";
@@ -11,8 +10,7 @@ import "./Review.css";
 function Singlepackage() {
   const [packages, setPackages] = useState(null);
   const [reviews, setReviews] = useState([]);
-  const [reviewText, setReviewText] = useState("");
-  const [rating, setRating] = useState(0);
+
   const navigate = useNavigate();
   const { id } = useParams();
   const [formState, setFormState] = useState({
@@ -48,7 +46,7 @@ function Singlepackage() {
         navigate("/login");
         return;
       }
-      const response = await instance.get(`/packages/${id}`);
+      const response = await instance.get(`/api/user/packages/${id}`);
       setPackages(response.data.data);
     } catch (err) {
       console.error("Error fetching package", err);
@@ -57,13 +55,7 @@ function Singlepackage() {
 
   const fetchReviews = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
-
-      const response = await axios.get(
-        `http://localhost:3005/api/review/packages/${id}/reviews`,
-        { headers }
-      );
+      const response = await instance.get(`/api/review/packages/${id}/reviews`);
       setReviews(response.data.data);
     } catch (err) {
       console.error("Error fetching reviews", err);
@@ -85,31 +77,8 @@ function Singlepackage() {
 
   const handleConfirm = () => {
     navigate(
-      `/confirmation/${id}?destination=${packages.Destination}&duration=${formState.Duration}&available_date=${formState.Available_Date}&total_price=${formState.Price}&package_id=${id}`
+      `/confirmation/${id}?destination=${packages.Destination}&duration=${formState.Duration}&available_date=${formState.Available_Date}&total_price=${formState.Price}&package_id=${id}&image=${packages.images[0]}`
     );
-  };
-
-  const handleReviewSubmit = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const userid = localStorage.getItem("_id");
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
-
-      const response = await axios.post(
-        `http://localhost:3005/api/review/reviews`,
-        { user: userid, package: id, rating, reviewText },
-        { headers }
-      );
-      if (response.status === 201) {
-        toast.success("Review submitted successfully!");
-        setReviewText("");
-        setRating(0);
-        fetchReviews();
-      }
-    } catch (err) {
-      console.error("Error submitting review", err);
-      toast.error("Error submitting review");
-    }
   };
 
   const getCurrentDate = () => {
@@ -235,30 +204,7 @@ function Singlepackage() {
               </div>
             </div>
           ))}
-          {/* <Form className="review-form mt-4">
-            <Form.Group className="mb-3">
-              <Form.Label>Write a review</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                value={reviewText}
-                onChange={(e) => setReviewText(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Rating</Form.Label>
-              <Rating
-                count={5}
-                size={24}
-                value={rating}
-                onChange={(newRating) => setRating(newRating)}
-                activeColor="#ffd700"
-              />
-            </Form.Group>
-            <Button variant="primary" onClick={handleReviewSubmit}>
-              Submit Review
-            </Button>
-          </Form> */}
+         <button onClick={()=>navigate("/review")} className="review-button">Rate the Package</button>
         </div>
       </div>
     </Container>

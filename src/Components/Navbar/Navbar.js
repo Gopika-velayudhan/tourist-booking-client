@@ -1,49 +1,48 @@
-import React, { useState, useEffect } from "react";
-import { Container, Nav, Navbar, NavDropdown, Form, Badge } from "react-bootstrap";
-import { FaSearch } from "react-icons/fa";
+import React, { useState, useEffect, useContext } from "react";
+import { Container, Nav, Navbar, NavDropdown, Badge } from "react-bootstrap";
 import Logo from "../Assests/Logo.png";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { toast } from "react-toastify";
-import instance from '../../axiosinterceptor/userinterrceptor'; 
+import instance from "../../axiosinterceptor/userinterrceptor";
+import { UserContext } from "../../pages/Usecontext";
 import "./Navbar.css";
 
 function Navbar1() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [login, setLogin] = useState(false);
-  const [inputValue, setInputValue] = useState("");
   const [wishlistCount, setWishlistCount] = useState(0);
   const name = localStorage.getItem("Username");
-
   const navigate = useNavigate();
+  const { profileImg, setProfileImg } = useContext(UserContext);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     setLogin(!!token);
 
     if (token) {
-      fetchWishlistCount(); 
+      fetchWishlistCount();
 
-      const intervalId = setInterval(fetchWishlistCount, 20000); 
+      const intervalId = setInterval(fetchWishlistCount, 20000);
 
-      window.addEventListener('wishlistUpdated', fetchWishlistCount);
+      window.addEventListener("wishlistUpdated", fetchWishlistCount);
 
       return () => {
         clearInterval(intervalId);
-        window.removeEventListener('wishlistUpdated', fetchWishlistCount);
+        window.removeEventListener("wishlistUpdated", fetchWishlistCount);
       };
     }
   }, []);
 
   const fetchWishlistCount = async () => {
     try {
-      const userId = localStorage.getItem("_id"); 
+      const userId = localStorage.getItem("_id");
       if (!userId) {
         console.error("User ID not found in local storage");
         return;
       }
-      const response = await instance.get(`/wishlists/${userId}`);
+      const response = await instance.get(`/api/user/wishlists/${userId}`);
       if (response.data && response.data.datacount !== undefined) {
         setWishlistCount(response.data.datacount);
       } else {
@@ -54,21 +53,27 @@ function Navbar1() {
     }
   };
 
-  
-
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("Username");
     localStorage.removeItem("userId");
+    localStorage.removeItem("profileImg");
     setLogin(false);
     navigate("/");
     toast.success("Logged out successfully");
   };
 
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary sticky-navbar">
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      className="bg-body-tertiary sticky-navbar"
+    >
       <Container>
-        <Navbar.Brand href="#home" style={{ display: "flex", textAlign: "left" }}>
+        <Navbar.Brand
+          href="#home"
+          style={{ display: "flex", textAlign: "left" }}
+        >
           <img src={Logo} alt="Logo" className="logo-img" />
           <div className="head">
             <span>Explore</span>
@@ -98,9 +103,26 @@ function Navbar1() {
             </NavDropdown>
             <Nav.Link onClick={() => navigate("/about")}>About</Nav.Link>
             <Nav.Link onClick={() => navigate("/contact")}>Contacts</Nav.Link>
-            
           </Nav>
-          <NavDropdown title={name ? <>{name}</> : <>Login</>} id="responsive-nav">
+          <NavDropdown
+            title={
+              <>
+                {name ? (
+                  <div className="navbar-profile">
+                    <span>{name}</span>
+                    <img
+                      src={profileImg || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"}
+                      alt="Profile"
+                      className="navbar-profile-img"
+                    />
+                  </div>
+                ) : (
+                  <>Login</>
+                )}
+              </>
+            }
+            id="responsive-nav"
+          >
             {!name && (
               <NavDropdown.Item onClick={() => navigate("/login")}>
                 Sign In
@@ -124,7 +146,11 @@ function Navbar1() {
               <div style={{ position: "relative", display: "inline-block" }}>
                 <IoMdHeartEmpty style={{ fontSize: "24px" }} />
                 {wishlistCount > 0 && (
-                  <Badge pill bg="danger" style={{ position: "absolute", top: "-8px", right: "-8px" }}>
+                  <Badge
+                    pill
+                    bg="danger"
+                    style={{ position: "absolute", top: "-8px", right: "-8px" }}
+                  >
                     {wishlistCount}
                   </Badge>
                 )}

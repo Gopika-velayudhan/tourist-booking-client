@@ -17,7 +17,7 @@ const Advanture = () => {
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const response = await instance.get("/packages", {
+        const response = await instance.get("/api/user/packages", {
           params: { Category: "Advanture" },
         });
         setPackages(response.data.data);
@@ -41,7 +41,7 @@ const Advanture = () => {
       const userid = localStorage.getItem("_id");
 
       if (wishlist.includes(packageId)) {
-        const response = await instance.delete(`/wishlists/${userid}`, {
+        const response = await instance.delete(`/api/user/wishlists/${userid}`, {
           data: { packageid: packageId },
         });
 
@@ -55,7 +55,7 @@ const Advanture = () => {
           toast.error("Failed to remove package from wishlist.");
         }
       } else {
-        const response = await instance.post(`/wishlists/${userid}`, {
+        const response = await instance.post(`/api/user/wishlists/${userid}`, {
           packageid: packageId,
         });
 

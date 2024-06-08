@@ -16,12 +16,13 @@ const Confirmation = () => {
   const availableDate = searchParams.get("available_date");
   const totalPrice = searchParams.get("total_price");
   const packageId = searchParams.get("package_id");
+  const image = searchParams.get("image");
 
   useEffect(() => {
     const handleGet = async () => {
       try {
         const userid = localStorage.getItem("_id");
-        const response = await instance.get(`/users/${userid}`);
+        const response = await instance.get(`/api/user/users/${userid}`);
         setUser(response.data.data);
       } catch (err) {
         console.error("Error fetching user data", err);
@@ -42,7 +43,7 @@ const Confirmation = () => {
     }
 
     try {
-      const bookingResponse = await instance.post("/bookings", {
+      const bookingResponse = await instance.post("/api/user/bookings", {
         userId: userid,
         packageId,
         amount: totalPrice,
@@ -51,7 +52,7 @@ const Confirmation = () => {
 
       const { payment_id, _id: bookingId } = bookingResponse.data.data;
 
-      const paymentResponse = await instance.post("/payment", {
+      const paymentResponse = await instance.post("/api/user/payment", {
         email,
         amount: totalPrice * 100,
         currency: "INR",
@@ -60,7 +61,7 @@ const Confirmation = () => {
       });
 
       const options = {
-        key: "rzp_test_eyXHobfs6uqaFU",
+        key: process.env.React_App_rzara_key_id,
         amount: paymentResponse.data.data.amount,
         currency: paymentResponse.data.data.currency,
         receipt: paymentResponse.data.data.receipt,
@@ -99,8 +100,10 @@ const Confirmation = () => {
 
   return (
     <div className="container4">
-      <div className="header4">
+      <div className="header4" style={{ backgroundImage: `url(${image})` }}>
         <h2>{destination}</h2>
+      </div>
+      <div className="content4">
         <table className="confirmation-table4">
           <thead>
             <tr>
@@ -119,44 +122,44 @@ const Confirmation = () => {
             </tr>
           </tbody>
         </table>
-      </div>
-      <div className="guest-details4">
-        <h3>Guest Details</h3>
-        {user && (
-          <table className="confirmation-table4">
-            <thead>
-              <tr>
-                <th>Name of Guest</th>
-                <th>Mobile Number</th>
-                <th>Email Address</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{user.Username}</td>
-                <td>{user.Phonenumber}</td>
-                <td>{user.email}</td>
-              </tr>
-            </tbody>
-          </table>
-        )}
-      </div>
-      <div className="total-price4">
-        <h3>Total Price</h3>
-        <p>Total fare: ₹{totalPrice}</p>
-        <p>GST 18%: ₹{(totalPrice * 0.18).toFixed(2)}</p>
-        <p>
-          Net fare: ₹{(parseFloat(totalPrice) + totalPrice * 0.18).toFixed(2)}
-        </p>
-        {loading ? (
-          <div className="d-flex justify-content-center">
-            <FadeLoader color="blue" loading={loading} size={15} />
-          </div>
-        ) : (
-          <Button onClick={handlePayment} style={{ backgroundColor: "blue" }}>
-            Pay to Proceed
-          </Button>
-        )}
+        <div className="guest-details4">
+          <h3>Guest Details</h3>
+          {user && (
+            <table className="confirmation-table4">
+              <thead>
+                <tr>
+                  <th>Name of Guest</th>
+                  <th>Mobile Number</th>
+                  <th>Email Address</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{user.Username}</td>
+                  <td>{user.Phonenumber}</td>
+                  <td>{user.email}</td>
+                </tr>
+              </tbody>
+            </table>
+          )}
+        </div>
+        <div className="total-price4">
+          <h3>Total Price</h3>
+          <p>Total fare: ₹{totalPrice}</p>
+          <p>GST 18%: ₹{(totalPrice * 0.18).toFixed(2)}</p>
+          <p>
+            Net fare: ₹{(parseFloat(totalPrice) + totalPrice * 0.18).toFixed(2)}
+          </p>
+          {loading ? (
+            <div className="d-flex justify-content-center">
+              <FadeLoader color="blue" loading={loading} size={15} />
+            </div>
+          ) : (
+            <Button onClick={handlePayment} style={{ backgroundColor: "blue" }}>
+              Pay to Proceed
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );
