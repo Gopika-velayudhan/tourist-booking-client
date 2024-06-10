@@ -30,6 +30,7 @@
 
 .icon-container {
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -47,6 +48,19 @@
 
 .download-container:hover .download-icon {
   color: #0056b3;
+}
+
+.home-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.home-button:hover {
+  background-color: #0056b3;
 }
 
 .booking-header {

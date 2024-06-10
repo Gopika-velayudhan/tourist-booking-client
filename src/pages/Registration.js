@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
+import instance from "../axiosinterceptor/userinterrceptor";
 import { toast } from "react-toastify";
 import "./Registration.css";
 
@@ -25,8 +25,8 @@ const Registration = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(
-        "http://localhost:3005/api/user/userRegister",
+      const response = await instance.post(
+        "/api/user/userRegister",
         values,
         {
           headers: { "Content-Type": "application/json" },

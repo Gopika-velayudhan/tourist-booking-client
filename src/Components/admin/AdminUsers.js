@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import instance from "../../axiosinterceptor/Axiosinterceptor";
-import { FaUserLarge } from "react-icons/fa6";
+
 import SideBar from "../admin/Sidebar";
 import { TbLockOpen, TbLockOff } from "react-icons/tb";
 import { toast } from "react-toastify";
@@ -12,7 +12,7 @@ const AdminUsers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await instance.get("/users");
+        const response = await instance.get("/api/admin/users");
         setUsers(response.data.data);
       } catch (error) {
         console.error("Error fetching users:", error);

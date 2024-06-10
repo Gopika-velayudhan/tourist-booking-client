@@ -1,212 +1,79 @@
-:root {
-  --primary-color: blue;
-  --secondary-color: white;
-  --background-color: rgba(255, 255, 255, 0.8);
-  --text-color: #333;
+/* src/components/Homepage.css */
+.landing-page {
+  font-family: Arial, sans-serif;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.main-content {
-  padding: 20px;
-}
-
-.hero {
-  text-align: center;
-  padding: 50px 20px;
-  background: url('../Assests/hero_general.webp') no-repeat center center;
+.landing-header {
+  background: url("../Assests/Beautiful.jpg") no-repeat center center;
   background-size: cover;
-  color: var(--secondary-color);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  color: white;
+  text-align: center;
   position: relative;
 }
 
-.hero h1 {
-  font-size: 36px;
-  margin-bottom: 10px;
-  color: var(--primary-color);
-  padding: 30px;
-  margin-bottom: 60px; /* Adjusted to provide space above the search box */
+.header-title {
+  font-size: 1.2rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-bottom: 0;
 }
 
-.search-box {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 50px;
+.header-subtitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #95d2b3;
+  text-transform: uppercase;
+}
+
+.highlight {
+  color: #d8efd3;
+}
+
+.quote-form {
   position: absolute;
   bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-}
+  width: 70%;
+  max-width: 1000px;
 
-.search-box input,
-.search-box button {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 150px; /* Set a fixed width */
-}
-
-.search-box button {
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  cursor: pointer;
-  border: none;
-  width: 100px; /* Set a fixed width */
-}
-
-.themes {
-  text-align: center;
-  padding: 50px 20px;
-}
-
-.themes-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.themes_h1 {
-  margin-bottom: 25px;
-  color: var(--primary-color);
-}
-
-.theme-item {
-  width: 100%;
-  max-width: 150px;
-  height: 150px;
-  background-color: #e0e0e0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-
-.theme-item img {
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 10px;
-}
-
-.theme-item:hover {
-  transform: scale(1.05);
-}
-
-.whatsapp-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 20px 0;
-}
-
-.whatsapp-link {
-  text-decoration: none;
-  color: var(--primary-color);
+  margin: 0 auto;
   display: flex;
-  align-items: center;
+  justify-content: center;
 }
 
-.whatsapp-icon {
-  font-size: 3rem;
+.quote-form .form-control {
+  margin-bottom: 10px;
 }
 
-.whatsapp-text {
-  margin-left: 10px;
-  color: var(--secondary-color);
-  font-size: 1.25rem;
+.get-quotes-button {
+  width: 100%;
 }
 
-@media (max-width: 992px) {
-  .hero h1 {
-    font-size: 28px;
+@media (min-width: 768px) {
+  .header-title {
+    font-size: 2rem;
   }
 
-  .search-box {
-    flex-direction: column;
-    align-items: center;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+  .header-subtitle {
+    font-size: 4rem;
   }
 
-  .search-box input,
-  .search-box button {
-    width: 100%;
-    max-width: 300px;
+  .quote-form .form-control {
+    margin-bottom: 0;
   }
 
-  .themes-container {
-    gap: 10px;
-  }
-
-  .theme-item {
-    max-width: 120px;
-    height: 120px;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 24px;
-  }
-
-  .themes-container {
-    gap: 10px;
-  }
-
-  .theme-item {
-    max-width: 100px;
-    height: 100px;
-  }
-
-  .whatsapp-container {
-    justify-content: center;
-  }
-
-  .whatsapp-text {
-    font-size: 1rem;
-  }
-
-  .search-box input,
-  .search-box button {
-    width: 100%;
-    max-width: 280px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero h1 {
-    font-size: 20px;
-    padding: 20px;
-  }
-
-  .theme-item {
-    max-width: 80px;
-    height: 80px;
-  }
-
-  .whatsapp-icon {
-    font-size: 2.5rem;
-  }
-
-  .whatsapp-text {
-    font-size: 1rem;
-  }
-
-  .search-box {
-    flex-direction: column;
-    align-items: center;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .search-box input,
-  .search-box button {
-    width: 100%;
-    max-width: 240px;
+  .get-quotes-button {
+    width: auto;
   }
 }

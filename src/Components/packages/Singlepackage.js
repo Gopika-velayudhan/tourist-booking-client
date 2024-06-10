@@ -10,6 +10,8 @@ import "./Review.css";
 function Singlepackage() {
   const [packages, setPackages] = useState(null);
   const [reviews, setReviews] = useState([]);
+  const [overallRating, setOverallRating] = useState(0);
+  const [reviewCount, setReviewCount] = useState(0);
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -55,10 +57,14 @@ function Singlepackage() {
 
   const fetchReviews = async () => {
     try {
+    
       const response = await instance.get(`/api/review/packages/${id}/reviews`);
       setReviews(response.data.data);
-    } catch (err) {
-      console.error("Error fetching reviews", err);
+      setReviewCount(response.data.dataCount);
+      setOverallRating(response.data.overallRating);
+      console.log(response);
+    } catch (error) {
+      console.log("Error fetching reviews:", error);
     }
   };
 
@@ -76,9 +82,11 @@ function Singlepackage() {
   }, [formState.Duration, packages]);
 
   const handleConfirm = () => {
-    navigate(
-      `/confirmation/${id}?destination=${packages.Destination}&duration=${formState.Duration}&available_date=${formState.Available_Date}&total_price=${formState.Price}&package_id=${id}&image=${packages.images[0]}`
-    );
+    if (packages && packages.images && packages.images[0]) {
+      navigate(
+        `/confirmation/${id}?destination=${packages.Destination}&duration=${formState.Duration}&available_date=${formState.Available_Date}&total_price=${formState.Price}&package_id=${id}&image=${packages.images[0]}`
+      );
+    }
   };
 
   const getCurrentDate = () => {
@@ -97,30 +105,35 @@ function Singlepackage() {
                   {packages.Destination}
                 </Card.Title>
                 <div className="photoarray">
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="col-span-3">
-                      <Card.Img
-                        className="main-image"
-                        src={packages.images[0]}
-                        alt={`Image 1 of ${packages.Destination}`}
-                      />
-                    </div>
-                    {packages.images.slice(1).map((image, index) => (
-                      <div key={index} className="col-span-1">
+                  {packages.images && (
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="col-span-3">
                         <Card.Img
-                          className="secondary-image"
-                          src={image}
-                          alt={`Image ${index + 2} of ${packages.Destination}`}
+                          className="main-image"
+                          src={packages.images[0]}
+                          alt={`Image 1 of ${packages.Destination}`}
                         />
                       </div>
-                    ))}
-                  </div>
+                      {packages.images.slice(1).map((image, index) => (
+                        <div key={index} className="col-span-1">
+                          <Card.Img
+                            className="secondary-image"
+                            src={image}
+                            alt={`Image ${index + 2} of ${packages.Destination}`}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <div className="mt-3">
                   <h4>Plan Of The Trip</h4>
                   <p>{packages.Description}</p>
                   <h5>₹{packages.Price}-/Day</h5>
                   <h5>{packages.Category}</h5>
+                  <h5>
+                    Rating: {overallRating} ★
+                  </h5>
                 </div>
               </Card.Body>
             </Card>
@@ -185,14 +198,14 @@ function Singlepackage() {
             <div key={index} className="review-card">
               <div className="review-header">
                 <div className="review-avatar">
-                  {review.user.Profileimg ? (
+                  {review.user && review.user.Profileimg ? (
                     <img src={review.user.Profileimg} alt="Profile" />
                   ) : (
-                    <div>{review.user.Username[0]}</div>
+                    <div>{review.user && review.user.Username && review.user.Username[0]}</div>
                   )}
                 </div>
                 <div className="review-details">
-                  <h3>{review.user.Username}</h3>
+                  <h3>{review.user && review.user.Username}</h3>
                 </div>
               </div>
               <div className="review-body">
@@ -204,7 +217,9 @@ function Singlepackage() {
               </div>
             </div>
           ))}
-         <button onClick={()=>navigate("/review")} className="review-button">Rate the Package</button>
+          <Button onClick={() => navigate("/review")} className="review-button">
+            Rate the Package
+          </Button>
         </div>
       </div>
     </Container>

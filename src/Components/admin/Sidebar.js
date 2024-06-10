@@ -9,7 +9,6 @@ import {
   CDBSidebarMenuItem,
 } from "cdbreact";
 import { NavLink, useNavigate } from "react-router-dom";
-import { AiOutlineLogout } from "react-icons/ai";
 import {toast} from 'react-toastify'
 
 
@@ -59,12 +58,10 @@ import {toast} from 'react-toastify'
               <CDBSidebarMenuItem icon="plus">Category</CDBSidebarMenuItem>
             </NavLink>
             
-            <NavLink exact to="/" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
-            </NavLink>
             <NavLink exact to="/" activeClassName="activeClicked" onClick={handleLogout}>
-              <CDBSidebarMenuItem icon="logout" >LogOut </CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="home">Logout</CDBSidebarMenuItem>
             </NavLink>
+           
           </CDBSidebarMenu>
         </CDBSidebarContent>
 

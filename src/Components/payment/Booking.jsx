@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import instance from '../../axiosinterceptor/userinterrceptor';
 import html2canvas from 'html2canvas';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -11,6 +11,7 @@ function Booking() {
   const [booking, setBooking] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBookingDetails = async () => {
@@ -30,7 +31,7 @@ function Booking() {
   const downloadPageAsImage = () => {
     const bookingElement = document.getElementById('booking-details');
     const downloadContainer = document.querySelector('.download-container');
-    
+
     if (downloadContainer) {
       downloadContainer.style.display = 'none';
     }
@@ -85,11 +86,12 @@ function Booking() {
         <div className="confirmation-text">
           <h2>Booking Confirmed</h2>
           <p>Your booking is confirmed. Thank you for choosing our service!</p>
-          <div className="icon-container d-flex flex justify-between">
+          <div className="icon-container">
             <div className="download-container" onClick={downloadPageAsImage} title="Download Booking Details">
               <FaCloudDownloadAlt className="download-icon" />
               <span>Download</span>
             </div>
+            <button className="home-button" onClick={() => navigate("/")}>Go to Home</button>
           </div>
         </div>
       </div>

@@ -31,7 +31,7 @@ function AdminCategory() {
     }
 
     try {
-      const response = await instance.post("/categories", {
+      const response = await instance.post("/api/admin/categories", {
         category: newCategory,
       });
       if (response.status === 201) {
@@ -47,7 +47,7 @@ function AdminCategory() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await instance.delete(`/categories/${id}`);
+      const response = await instance.delete(`/api/admin/categories/${id}`);
       if (response.status === 200) {
         toast.success("Category deleted successfully");
         fetchCategories();
@@ -60,7 +60,7 @@ function AdminCategory() {
 
   const handleUpdate = async (id) => {
     try {
-      const response = await instance.put(`/categories/${id}`, {
+      const response = await instance.put(`/api/admin/categories/${id}`, {
         category: editCategoryName,
       });
       if (response.status === 200) {

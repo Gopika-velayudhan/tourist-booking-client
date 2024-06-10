@@ -21,8 +21,9 @@ const HoneyMoon = () => {
         const response = await instance.get("/api/user/packages", {
           params: { Category: "Honeymoon" },
         });
-        setPackages(response.data.data);
-        console.log("Fetched data:", response.data.data);
+        const fetchedPackages = response.data.data;
+        setPackages(fetchedPackages);
+        console.log("Fetched data:", fetchedPackages);
       } catch (error) {
         setError(error);
         console.error("Error fetching packages:", error);
@@ -31,21 +32,7 @@ const HoneyMoon = () => {
       }
     };
 
-    const fetchRatings = async () => {
-      try {
-        const response = await instance.get("/api/review/packages/packageId/reviews");
-        
-        
-        setRatings(response.data.data);
-        console.log(response.data.data);
-        
-      } catch (error) {
-        console.error("Error fetching ratings:", error);
-      }
-    };
-
     fetchPackages();
-    fetchRatings();
 
     const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
     setWishlist(storedWishlist);
@@ -56,9 +43,12 @@ const HoneyMoon = () => {
       const userid = localStorage.getItem("_id");
 
       if (wishlist.includes(packageId)) {
-        const response = await instance.delete(`/api/user/wishlists/${userid}`, {
-          data: { packageid: packageId },
-        });
+        const response = await instance.delete(
+          `/api/user/wishlists/${userid}`,
+          {
+            data: { packageid: packageId },
+          }
+        );
 
         if (response.data.status === "success") {
           console.log("Package removed from wishlist:", packageId);
@@ -89,8 +79,6 @@ const HoneyMoon = () => {
       console.error("Error toggling wishlist:", error);
     }
   };
-
-  
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
@@ -131,8 +119,15 @@ const HoneyMoon = () => {
                 <Card.Text>
                   <p>Price: ${pkg.Price}</p>
                   <p>Duration: {pkg.Duration} days</p>
-                  <div> {"★".repeat(ratings.rating)}
-                  {"☆".repeat(5 - ratings.rating)}</div>
+                  {ratings[pkg._id] && (
+                    <>
+                      <p>
+                        Average Rating:{" "}
+                        {ratings[pkg._id].averageRating.toFixed(1)}
+                      </p>
+                      <p>Total Reviews: {ratings[pkg._id].totalReviewCount}</p>
+                    </>
+                  )}
                 </Card.Text>
                 <Button
                   variant="primary"

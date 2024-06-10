@@ -61,7 +61,7 @@ const Confirmation = () => {
       });
 
       const options = {
-        key: process.env.React_App_rzara_key_id,
+        key:process.env.React_App_Razropay_key_id,
         amount: paymentResponse.data.data.amount,
         currency: paymentResponse.data.data.currency,
         receipt: paymentResponse.data.data.receipt,

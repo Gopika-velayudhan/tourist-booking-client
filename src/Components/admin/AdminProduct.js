@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import instance from "../../axiosinterceptor/Axiosinterceptor";
-import { FadeLoader } from 'react-spinners'
+import { FadeLoader } from 'react-spinners';
 import SideBar from "./Sidebar";
 
 const AdminProduct = () => {
@@ -33,11 +33,6 @@ const AdminProduct = () => {
         ...prevData,
         images: imagesArray,
       }));
-    } else if (id === "Available_Date") {
-      setFormData((prevData) => ({
-        ...prevData,
-        Available_Date: value,
-      }));
     } else {
       setFormData((prevData) => ({
         ...prevData,
@@ -48,7 +43,7 @@ const AdminProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     setLoading(true);
     try {
       const formDataToSend = new FormData();
@@ -70,6 +65,10 @@ const AdminProduct = () => {
 
       if (response.status === 201) {
         toast.success(response.data.message);
+        console.log("Package ID:", response.data.packageId); 
+        
+        // Save the package ID to localStorage
+        localStorage.setItem('packageId', response.data.packageId);
 
         setFormData({
           Destination: "",
@@ -80,8 +79,6 @@ const AdminProduct = () => {
           images: [],
           Description: "",
         });
-        
-        console.log(formData, "full data");
       } else {
         toast.error(response.data.message || "Error submitting form.");
       }

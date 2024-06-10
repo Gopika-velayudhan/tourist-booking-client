@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+import instance from "../axiosinterceptor/userinterrceptor";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 
@@ -24,7 +24,7 @@ const OtpVerification = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3005/api/user/verify-otp", {
+      const response = await instance.post("/api/user/verify-otp", {
         email: location.state.email,
         otp,
       });

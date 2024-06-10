@@ -1,98 +1,104 @@
+// src/components/Home.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Homepage.css";
-
-import img1 from "../Assests/honeymoon_home.webp";
-import img2 from "../Assests/family_home.webp";
-import img3 from "../Assests/adventure_home.webp";
-import img4 from "../Assests/friends_group.webp";
-import img5 from "../Assests/nature_home.webp";
-import img6 from "../Assests/wildlife_home.webp";
-
+import './Homepage.css';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 function Home() {
-  useEffect(() => {
-    AOS.init({ duration: 1000 });
-  }, []);
+    useEffect(() => {
+        AOS.init({ duration: 1000 });
+    }, []);
 
-  const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState({
-    Destination: "",
-    Duration: "",
-    Price: "",
-  });
+    const navigate = useNavigate();
+    const [searchQuery, setSearchQuery] = useState({
+        Destination: "",
+        Duration: "",
+        Price: "",
+    });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setSearchQuery((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setSearchQuery((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
 
-  const handleSearch = () => {
-    const { Destination, Duration, Price } = searchQuery;
-    const query = new URLSearchParams({
-      location: Destination,
-      duration: Duration,
-      price: Price,
-    }).toString();
-    navigate(`/search?${query}`);
-  };
+    const handleSearch = () => {
+        const { Destination, Duration, Price } = searchQuery;
+        const query = new URLSearchParams({
+            location: Destination,
+            duration: Duration,
+            price: Price,
+        }).toString();
+        navigate(`/search?${query}`);
+    };
 
-  return (
-    <main className="main-content">
-      <section className="hero">
-        <h1 data-aos="fade-down" data-aos-delay="350">
-          Turn Your Dream Holiday Into Reality
-        </h1>
-        <div className="search-box">
-          <input
-            type="text"
-            name="Destination"
-            placeholder="Search for trips"
-            className="search-input"
-            value={searchQuery.Destination}
-            onChange={handleInputChange}
-          />
-          <input
-            type="number"
-            name="Duration"
-            placeholder="Days in trips"
-            className="search-input"
-            value={searchQuery.Duration}
-            onChange={handleInputChange}
-          />
-          <input
-            type="number"
-            name="Price"
-            placeholder="Trip budget"
-            className="search-input"
-            value={searchQuery.Price}
-            onChange={handleInputChange}
-          />
-          <button onClick={handleSearch} className="search-btn">
-            Explore
-          </button>
-        </div>
-      </section>
-      <section className="themes">
-        <h2 className="themes_h1" data-aos="fade-down" data-aos-delay="350">
-          Explore destinations by theme
-        </h2>
-        <div className="themes-container">
-          {[img1, img2, img3, img4, img5, img6].map((img, index) => (
-            <div className="theme-item" key={index}>
-              <img src={img} alt={`theme-${index}`} />
+    return (
+        <div className="landing-page">
+            <header className="landing-header">
+                <Container>
+                    <Row className="align-items-center">
+                        <Col>
+                            <h1 className="header-title">
+                                LET'S TRAVEL BEAUTIFUL KERALA WITH US
+                            </h1>
+                            <h2 className="header-subtitle">
+                                UNCOVER THE MAGIC OF <span className="highlight">INDIA</span> WITH Explore_EPIC
+                            </h2>
+                        </Col>
+                    </Row>
+                </Container>
+            </header>
+            <div className="quote-form">
+                <Container>
+                    <Row className="justify-content-center">
+                        <Col xs={12} md={3}>
+                            <input
+                                type="text"
+                                className="form-control"
+                                name="Destination"
+                                value={searchQuery.Destination}
+                                placeholder="Destination"
+                                onChange={handleInputChange}
+                            />
+                        </Col>
+                        <Col xs={12} md={3}>
+                            <input
+                                type="number"
+                                className="form-control"
+                                name="Duration"
+                                value={searchQuery.Duration}
+                                placeholder="Days in trips"
+                                onChange={handleInputChange}
+                            />
+                        </Col>
+                        <Col xs={12} md={2}>
+                            <input
+                                type="number"
+                                className="form-control"
+                                name="Price"
+                                value={searchQuery.Price}
+                                placeholder="Trips in Budget"
+                                onChange={handleInputChange}
+                            />
+                        </Col>
+                        <Col xs={12} md={2}>
+                            <Button
+                                variant="primary"
+                                className="get-quotes-button"
+                                onClick={handleSearch}
+                            >
+                                Explore
+                            </Button>
+                        </Col>
+                    </Row>
+                </Container>
             </div>
-          ))}
         </div>
-        
-      </section>
-    </main>
-  );
-}
+    );
+};
 
 export default Home;

@@ -2,9 +2,10 @@
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
 import { toast } from "react-toastify";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import instance from "../axiosinterceptor/userinterrceptor";
 import * as Yup from "yup";
 
 const Login = () => {
@@ -30,8 +31,8 @@ const Login = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const response = await axios.post(
-        "http://localhost:3005/api/user/login",
+      const response = await instance.post(
+        "/api/user/login",
         values,
         {
           headers: {

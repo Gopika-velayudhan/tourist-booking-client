@@ -49,7 +49,7 @@
   }
 }
 
-/* Additional media queries for smaller screens */
+
 @media (max-width: 768px) {
   .main-image {
     height: 150px;
