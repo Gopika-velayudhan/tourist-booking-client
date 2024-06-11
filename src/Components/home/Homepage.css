@@ -1,4 +1,3 @@
-/* src/components/Homepage.css */
 .landing-page {
   font-family: Arial, sans-serif;
   position: relative;
@@ -41,15 +40,15 @@
 
 .quote-form {
   position: absolute;
-  bottom: 20px;
-  width: 70%;
+  top: 20px; 
+  width: 60%;
   max-width: 1000px;
-
   background-color: rgba(255, 255, 255, 0.8);
   padding: 20px 0;
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  border-radius: 20px; 
 }
 
 .quote-form .form-control {
@@ -60,6 +59,7 @@
   width: 100%;
 }
 
+/* Responsive Styles */
 @media (min-width: 768px) {
   .header-title {
     font-size: 2rem;
@@ -75,5 +75,14 @@
 
   .get-quotes-button {
     width: auto;
+  }
+
+  .landing-header {
+    min-height: 60vh; 
+  }
+
+  .quote-form {
+    bottom: 40px;
+    top: unset; 
   }
 }

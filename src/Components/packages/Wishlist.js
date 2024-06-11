@@ -15,10 +15,7 @@ function Wishlist() {
         const userid = localStorage.getItem("_id");
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-        const response = await instance.get(
-          `/api/user/wishlists/${userid}`,
-          { headers }
-        );
+        const response = await instance.get(`/api/user/wishlists/${userid}`, { headers });
 
         response.data.data.forEach((item) => {
           item.Available_Date = new Date(item.Available_Date);
@@ -39,13 +36,10 @@ function Wishlist() {
       const userid = localStorage.getItem("_id");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-      const response = await instance.delete(
-        `/api/user/wishlists/${userid}`,
-        {
-          headers,
-          data: { packageid: pkgId },
-        }
-      );
+      const response = await instance.delete(`/api/user/wishlists/${userid}`, {
+        headers,
+        data: { packageid: pkgId },
+      });
 
       if (response.status === 200) {
         toast.success("Successfully removed the wishlist item");
@@ -60,24 +54,24 @@ function Wishlist() {
 
   return (
     <div className="px-4 py-8">
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">
+      <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mb-4 text-center">
         My Dream World Wishlist
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {wishlist.map((item, index) => (
           <div
             key={index}
-            className="bg-white rounded-lg overflow-hidden shadow-md border border-gray-200 transition duration-300 ease-in-out transform hover:scale-105 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
+            className="bg-white rounded-lg overflow-hidden shadow-md border border-gray-200 transition duration-300 ease-in-out transform hover:scale-105"
           >
             <div className="p-4">
-              <h3 className="text-lg font-bold mb-2">{item.Destination}</h3>
+              <h3 className="text-lg sm:text-xl font-bold mb-2">{item.Destination}</h3>
               <img
                 src={item.images[0]}
                 alt={item.Destination}
-                className="w-full h-48 object-cover border border-gray-200 shadow-sm"
+                className="w-full h-48 object-cover border border-gray-200 shadow-sm mb-4"
               />
-              <p className="mt-2">Duration: {item.Duration}</p>
-              <p>Available Date: {item.Available_Date.toDateString()}</p>
+              <p className="mt-2 text-sm sm:text-base">Duration: {item.Duration} days</p>
+              <p className="text-sm sm:text-base">Available Date: {item.Available_Date.toDateString()}</p>
               <div className="flex justify-between items-center mt-4">
                 <Button
                   onClick={() => navigate(`/singlepack/${item._id}`)}

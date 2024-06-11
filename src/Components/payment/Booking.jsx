@@ -56,10 +56,7 @@ function Booking() {
       <div className="header"></div>
       <div id="booking-details" className="content">
         <h1 className="website-name">
-          <span style={{ fontSize: '2rem', fontWeight: 'bold', color: 'goldenrod', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
-            Explore
-          </span>
-          -Epic
+          <span className="explore-epic">Explore</span>-Epic
         </h1>
         <span className="location mt-5px">Near Kinfra, Calicut</span>
         <span className='phone-number mt-5px'>7736730305</span>

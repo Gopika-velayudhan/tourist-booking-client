@@ -16,15 +16,16 @@
   margin: auto;
 }
 
+.explore-epic {
+  font-size: 2rem;
+  font-weight: bold;
+  color: goldenrod;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 .download-icon {
   font-size: 24px;
   color: #007bff;
-  margin-right: 10px;
-}
-
-.delete-icon {
-  font-size: 24px;
-  color: red;
   margin-right: 10px;
 }
 
@@ -32,18 +33,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.download-container,
-.delete-container {
+.download-container {
   display: flex;
   align-items: center;
   cursor: pointer;
   color: #007bff;
-}
-
-.delete-container:hover .delete-icon {
-  color: red;
 }
 
 .download-container:hover .download-icon {
@@ -80,7 +78,8 @@
   background-color: #f9f9f9;
   padding: 15px;
   border-radius: 5px;
-  width: 48%;
+  flex: 1;
+  min-width: 280px;
 }
 
 .booking-details p,
@@ -106,17 +105,24 @@
 }
 
 @media (max-width: 768px) {
-  .booking-details,
-  .billing-model {
-    width: 100%;
-  }
-
   .website-name {
     font-size: 28px;
   }
-  
+
   .download-icon {
     font-size: 20px;
+  }
+
+  .home-button {
+    padding: 8px 16px;
+  }
+
+  .booking-header h3 {
+    font-size: 20px;
+  }
+
+  .details-container {
+    flex-direction: column;
   }
 }
 
@@ -142,11 +148,7 @@
     font-size: 18px;
   }
 
-  .icon-container {
-    justify-content: center;
-  }
-
-  .details-container {
-    gap: 10px;
+  .home-button {
+    padding: 6px 12px;
   }
 }

@@ -57,8 +57,8 @@ function Singlepackage() {
 
   const fetchReviews = async () => {
     try {
-    
       const response = await instance.get(`/api/review/packages/${id}/reviews`);
+      
       setReviews(response.data.data);
       setReviewCount(response.data.dataCount);
       setOverallRating(response.data.overallRating);
@@ -67,6 +67,7 @@ function Singlepackage() {
       console.log("Error fetching reviews:", error);
     }
   };
+  
 
   useEffect(() => {
     if (id) {

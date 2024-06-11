@@ -24,16 +24,7 @@ const Reviewpackage = () => {
       const userid = localStorage.getItem("_id");
       const packageid = localStorage.getItem("packageId");
       
-      if (!userid || !packageid) {
-        throw new Error("User ID or Package ID is missing.");
-      }
-
-      
-      const hasBooked = await checkIfUserBookedPackage(userid, packageid);
-      if (!hasBooked) {
-        throw new Error("You can only review a package you have booked.");
-      }
-
+     
       const response = await instance.post("/api/review/reviews", {
         user: userid,
         package: packageid,

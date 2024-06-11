@@ -1,11 +1,10 @@
-
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import instance from "../axiosinterceptor/userinterrceptor";
 import { toast } from "react-toastify";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import instance from "../axiosinterceptor/userinterrceptor";
+import axios from "axios";
 import * as Yup from "yup";
 
 const Login = () => {
@@ -13,12 +12,12 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLoginSuccess = (token, userDetails) => {
-    const { _id, Username, email, Phonenumber } = userDetails;
+    const { _id, Username, } = userDetails;
     localStorage.setItem("token", token);
     localStorage.setItem("_id", _id);
     localStorage.setItem("Username", Username);
-    localStorage.setItem("email", email);
-    localStorage.setItem("Phonenumber", Phonenumber);
+    // localStorage.setItem("email", email);
+    // localStorage.setItem("Phonenumber", Phonenumber);
 
     navigate("/");
     toast.success("Login successful");
@@ -40,6 +39,7 @@ const Login = () => {
           },
         }
       );
+      console.log(response);
       const { token, user } = response.data;
       handleLoginSuccess(token, user);
     } catch (error) {
