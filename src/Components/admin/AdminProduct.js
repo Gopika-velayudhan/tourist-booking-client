@@ -67,7 +67,7 @@ const AdminProduct = () => {
         toast.success(response.data.message);
         console.log("Package ID:", response.data.packageId); 
         
-        // Save the package ID to localStorage
+        
         localStorage.setItem('packageId', response.data.packageId);
 
         setFormData({

@@ -1,30 +1,29 @@
-import React, { useState } from 'react';
-import instance from '../../axiosinterceptor/userinterrceptor';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { FaStar } from 'react-icons/fa';
+import React, { useState } from "react";
+import instance from "../../axiosinterceptor/userinterrceptor";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { FaStar } from "react-icons/fa";
 
 const Reviewpackage = () => {
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(0);
-  const [error, setError] = useState(""); 
+  const [error, setError] = useState("");
 
   const handleReviewChange = (e) => {
     setReview(e.target.value);
-    setError(""); 
+    setError("");
   };
 
   const handleRatingChange = (value) => {
     setRating(value);
-    setError(""); 
+    setError("");
   };
 
   const addReview = async () => {
     try {
       const userid = localStorage.getItem("_id");
       const packageid = localStorage.getItem("packageId");
-      
-     
+
       const response = await instance.post("/api/review/reviews", {
         user: userid,
         package: packageid,
@@ -51,7 +50,9 @@ const Reviewpackage = () => {
       const response = await instance.get(`/api/user/bookings/${userid}`);
       if (response.status === 200) {
         const bookings = response.data;
-        const hasBooked = bookings.some((booking) => booking.package === packageid);
+        const hasBooked = bookings.some(
+          (booking) => booking.package === packageid
+        );
         return hasBooked;
       }
       return false;
@@ -80,7 +81,9 @@ const Reviewpackage = () => {
           )}
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label htmlFor="rating" className="form-label">Rating</label>
+              <label htmlFor="rating" className="form-label">
+                Rating
+              </label>
               <div className="rating-stars">
                 {[...Array(5)].map((star, i) => {
                   const ratingValue = i + 1;
@@ -104,7 +107,9 @@ const Reviewpackage = () => {
               </div>
             </div>
             <div className="mb-3">
-              <label htmlFor="review" className="form-label">Review</label>
+              <label htmlFor="review" className="form-label">
+                Review
+              </label>
               <textarea
                 id="review"
                 name="review"
@@ -116,7 +121,13 @@ const Reviewpackage = () => {
                 disabled={!!error}
               ></textarea>
             </div>
-            <button type="submit" className="btn btn-primary" disabled={!!error}>Submit Review</button>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={!!error}
+            >
+              Submit Review
+            </button>
           </form>
         </div>
       </div>

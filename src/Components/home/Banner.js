@@ -30,7 +30,7 @@ function Banner() {
       <div className="card-container6">
         <div className="card-row6">
           {pack.slice(0, 3).map((packageItem, index) => (
-            <div key={index} className="card6">
+            <div key={index} className="card6" data-aos="fade-up">
               <img 
                 src={packageItem.images[1]} 
                 alt="Location" 
@@ -43,7 +43,7 @@ function Banner() {
         </div>
         <div className="card-row6">
           {pack.slice(3, 6).map((packageItem, index) => (
-            <div key={index} className="card6">
+            <div key={index} className="card6" data-aos="fade-up">
               <img 
                 src={packageItem.images[1]} 
                 alt="Location" 

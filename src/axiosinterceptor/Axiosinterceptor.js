@@ -2,7 +2,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const adminToken = localStorage.getItem("adminToken");
-console.log(adminToken,"fghjklkjhgfd");
+console.log(adminToken, "fghjklkjhgfd");
 
 const instance = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
@@ -30,7 +30,7 @@ instance.interceptors.response.use(
       console.error("Error Response:", error.response.data);
       if (error.response.status === 401) {
         toast.error("Unauthorized. Check your authentication credentials.");
-      } 
+      }
     } else if (error.request) {
       console.error("Request Error:", error.request);
       toast.error("No response received from the server.");

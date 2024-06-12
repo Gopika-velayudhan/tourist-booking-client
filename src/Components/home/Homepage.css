@@ -30,17 +30,17 @@
 .header-subtitle {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #95d2b3;
+  color: #55AD9B;
   text-transform: uppercase;
 }
 
 .highlight {
-  color: #d8efd3;
+  color: #95D2B3;
 }
 
 .quote-form {
   position: absolute;
-  top: 20px; 
+  top: 20px;
   width: 60%;
   max-width: 1000px;
   background-color: rgba(255, 255, 255, 0.8);
@@ -48,7 +48,7 @@
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  border-radius: 20px; 
+  border-radius: 20px;
 }
 
 .quote-form .form-control {
@@ -78,11 +78,76 @@
   }
 
   .landing-header {
-    min-height: 60vh; 
+    min-height: 60vh;
   }
 
   .quote-form {
     bottom: 40px;
-    top: unset; 
+    top: unset;
+  }
+}
+
+/* Additional responsive adjustments */
+@media (max-width: 768px) {
+  .header-title {
+    font-size: 1.5rem;
+  }
+
+  .header-subtitle {
+    font-size: 2.5rem;
+  }
+
+  .quote-form {
+    width: 80%;
+    padding: 10px;
+  }
+
+  .quote-form .form-control {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .header-title {
+    font-size: 1.2rem;
+  }
+
+  .header-subtitle {
+    font-size: 2rem;
+  }
+
+  .quote-form {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .quote-form .form-control {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 1rem;
+  }
+
+  .header-subtitle {
+    font-size: 1.5rem;
+  }
+
+  .quote-form {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .quote-form .form-control {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .get-quotes-button {
+    font-size: 0.9rem;
   }
 }

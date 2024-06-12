@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import instance from "../../axiosinterceptor/userinterrceptor";
-import "./Confirmation.css";
 import { FadeLoader } from "react-spinners";
+import "./Confirmation.css";
 
 const Confirmation = () => {
   const [searchParams] = useSearchParams();
@@ -61,7 +61,7 @@ const Confirmation = () => {
       });
 
       const options = {
-        key:process.env.React_App_Razropay_key_id,
+        key: process.env.React_App_Razropay_key_id,
         amount: paymentResponse.data.data.amount,
         currency: paymentResponse.data.data.currency,
         receipt: paymentResponse.data.data.receipt,
@@ -145,10 +145,10 @@ const Confirmation = () => {
         </div>
         <div className="total-price4">
           <h3>Total Price</h3>
-          <p>Total fare: ₹{totalPrice}</p>
-          <p>GST 18%: ₹{(totalPrice * 0.18).toFixed(2)}</p>
+          <p>Total fare: <span className="highlight">₹{totalPrice}</span></p>
+          <p>GST 18%: <span className="highlight">₹{(totalPrice * 0.18).toFixed(2)}</span></p>
           <p>
-            Net fare: ₹{(parseFloat(totalPrice) + totalPrice * 0.18).toFixed(2)}
+            Net fare: <span className="highlight">₹{(parseFloat(totalPrice) + totalPrice * 0.18).toFixed(2)}</span>
           </p>
           {loading ? (
             <div className="d-flex justify-content-center">

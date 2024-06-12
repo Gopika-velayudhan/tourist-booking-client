@@ -8,7 +8,7 @@
 .contact1 {
   position: relative;
   min-height: 100vh;
-  padding: 50px 20px; 
+  padding: 50px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +20,7 @@
 .contact1 .content1 {
   max-width: 800px;
   text-align: center;
-  padding: 0 20px; 
+  padding: 0 20px;
 }
 
 .contact1 .content1 h2 {
@@ -41,23 +41,23 @@
   justify-content: center;
   align-items: center;
   margin-top: 30px;
-  background-color:whitesmoke;
-  padding: 20px; 
+  background-color: whitesmoke;
+  padding: 20px;
 }
 
 .container1 .contactInfo1 {
-  width: 100%; 
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  margin-bottom: 20px; 
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .container1 .contactInfo1 .box1 {
   position: relative;
   padding: 20px 0;
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
 
 .container1 .contactInfo1 .box1 .icon1 {
@@ -86,9 +86,9 @@
 }
 
 .contactForm1 {
-  width: 100%; 
-  max-width: 600px; 
-  padding: 20px; 
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
   background: #fff;
 }
 
@@ -129,7 +129,7 @@
 .contactForm1 .inputBox1 input:focus ~ span,
 .contactForm1 .inputBox1 input:valid ~ span,
 .contactForm1 .inputBox1 textarea:focus ~ span,
-.contactForm1 .inputBox1 input:valid ~ span {
+.contactForm1 .inputBox1 textarea:valid ~ span {
   color: #e91e63;
   font-size: 12px;
   transform: translateY(-20px);
@@ -168,5 +168,54 @@
 @media (min-width: 992px) {
   .contact1 {
     padding: 50px 100px;
+  }
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 767px) {
+  .contact1 .content1 h2 {
+    font-size: 28px;
+  }
+
+  .contact1 .content1 p {
+    font-size: 14px;
+  }
+
+  .container1 {
+    padding: 20px;
+  }
+
+  .container1 .contactInfo1 .box1 {
+    padding: 10px 0;
+  }
+
+  .container1 .contactInfo1 .box1 .icon1 {
+    font-size: 18px;
+  }
+
+  .container1 .contactInfo1 .box1 .text1 {
+    font-size: 14px;
+    margin-left: 10px;
+  }
+
+  .contactForm1 {
+    padding: 10px;
+  }
+
+  .contactForm1 h2 {
+    font-size: 24px;
+  }
+
+  .contactForm1 .inputBox1 input,
+  .contactForm1 .inputBox1 textarea {
+    font-size: 14px;
+  }
+
+  .contactForm1 .inputBox1 span {
+    font-size: 14px;
+  }
+
+  .contactForm1 .inputBox1 input[type="submit"] {
+    font-size: 16px;
   }
 }

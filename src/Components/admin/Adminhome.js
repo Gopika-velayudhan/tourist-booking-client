@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUsers, faShoppingCart, faLock } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUsers,
+  faShoppingCart,
+  faLock,
+} from "@fortawesome/free-solid-svg-icons";
 import Sidebar from "../admin/Sidebar";
 import instance from "../../axiosinterceptor/Axiosinterceptor";
 import "./Adminhome.css";
@@ -18,11 +22,12 @@ const AdminHome = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [userResponse, bookingResponse, packageResponse] = await Promise.all([
-          instance.get("/api/admin/users"),
-          instance.get("/api/admin/bookings"),
-          instance.get("/api/admin/packages"),
-        ]);
+        const [userResponse, bookingResponse, packageResponse] =
+          await Promise.all([
+            instance.get("/api/admin/users"),
+            instance.get("/api/admin/bookings"),
+            instance.get("/api/admin/packages"),
+          ]);
 
         setUsercount(userResponse.data.dataCount);
         setUser(userResponse.data.data);
@@ -64,7 +69,10 @@ const AdminHome = () => {
             <Card.Body>
               <div className="icon8">
                 <div className="round-icon orange">
-                  <FontAwesomeIcon icon={faShoppingCart} className="icon-white" />
+                  <FontAwesomeIcon
+                    icon={faShoppingCart}
+                    className="icon-white"
+                  />
                 </div>
                 <div className="text-container">
                   <h3>{bookingCount}</h3>
@@ -102,7 +110,11 @@ const AdminHome = () => {
               {user.map((item) => (
                 <tr key={item._id}>
                   <td>
-                    <img src={item.Profileimg} alt="Profile" className="profile-img" />
+                    <img
+                      src={item.Profileimg}
+                      alt="Profile"
+                      className="profile-img"
+                    />
                   </td>
                   <td>{item.Username}</td>
                   <td>{item.email}</td>

@@ -27,7 +27,10 @@ function Adminedit() {
     }),
     onSubmit: async (values) => {
       try {
-        const response = await instance.put(`/api/admin/packages/${id}`, values);
+        const response = await instance.put(
+          `/api/admin/packages/${id}`,
+          values
+        );
         toast.success("Updated successfully");
       } catch (error) {
         console.error("Error updating package:", error);
