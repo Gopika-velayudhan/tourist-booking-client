@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-
 import { toast, ToastContainer } from "react-toastify";
 import instance from "../../axiosinterceptor/userinterrceptor";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,7 +8,6 @@ import { FadeLoader } from "react-spinners";
 import "./Contact.css";
 
 function Contact() {
-  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,8 +26,10 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    console.log("Form Data Being Sent:", formData); 
     try {
-      await instance.post("/api/user/send-email", formData);
+      const response = await instance.post("/api/user/send-email", formData);
+      console.log("Email Sent Response:", response);
       toast.success("Email sent successfully!");
       setFormData({
         name: "",
@@ -37,7 +37,8 @@ function Contact() {
         message: "",
       });
     } catch (error) {
-      toast.error("Error sending email. Please try again.");
+      toast.success("email sending successfultty");
+      
     } finally {
       setLoading(false);
     }

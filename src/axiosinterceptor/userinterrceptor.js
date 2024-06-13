@@ -9,24 +9,27 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    console.log(config);
+    console.log("Request Config:", config);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
   (error) => {
+    console.error("Request Error:", error);
     return Promise.reject(error);
   }
 );
 
 instance.interceptors.response.use(
   (response) => {
+    console.log("Response:", response);
     return response;
   },
   (error) => {
     if (error.response) {
-      console.error("Error Response:", error.response.data);
+      console.error("Response Error Data:", error.response.data);
+      console.error("Response Error Status:", error.response.status);
       if (error.response.status === 401) {
         toast.error("Unauthorized. Check your authentication credentials.");
       }
@@ -34,7 +37,7 @@ instance.interceptors.response.use(
       console.error("Request Error:", error.request);
       toast.error("No response received from the server.");
     } else {
-      console.error("Error:", error.message);
+      console.error("General Error:", error.message);
       toast.error("An error occurred.");
     }
     return Promise.reject(error);
