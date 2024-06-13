@@ -45,7 +45,7 @@ const OtpVerification = () => {
       <div className="shadow p-3 bg-white rounded" style={{ width: "100%", maxWidth: "25rem" }}>
         <form className="mt-4" onSubmit={handleSubmit}>
           <label htmlFor="otp" className="mb-2">
-            Enter OTP sent to your phone:
+            Enter OTP sent to your email:
           </label>
           <input
             type="text"
