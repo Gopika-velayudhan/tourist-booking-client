@@ -1,4 +1,3 @@
-// src/components/Home.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Homepage.css";
@@ -38,29 +37,6 @@ function Home() {
 
   return (
     <div className="landing-page">
-      <header className="landing-header">
-        <Container>
-          <Row className="align-items-center">
-            <Col>
-              <h1
-                className="header-title"
-                data-aos="fade-down"
-                data-aos-delay="350"
-              >
-                LET'S TRAVEL BEAUTIFUL KERALA WITH US
-              </h1>
-              <h2
-                className="header-subtitle"
-                data-aos="fade-down"
-                data-aos-delay="700"
-              >
-                UNCOVER THE MAGIC OF <span className="highlight">INDIA</span>{" "}
-                WITH Explore_EPIC
-              </h2>
-            </Col>
-          </Row>
-        </Container>
-      </header>
       <div className="quote-form">
         <Container>
           <Row className="justify-content-center">
@@ -106,6 +82,29 @@ function Home() {
           </Row>
         </Container>
       </div>
+      <header className="landing-header">
+        <Container>
+          <Row className="align-items-center">
+            <Col>
+              <h1
+                className="header-title"
+                data-aos="fade-down"
+                data-aos-delay="350"
+              >
+                LET'S TRAVEL BEAUTIFUL KERALA WITH US
+              </h1>
+              <h2
+                className="header-subtitle"
+                data-aos="fade-down"
+                data-aos-delay="700"
+              >
+                UNCOVER THE MAGIC OF <span className="highlight">INDIA</span>{" "}
+                WITH Explore_EPIC
+              </h2>
+            </Col>
+          </Row>
+        </Container>
+      </header>
     </div>
   );
 }

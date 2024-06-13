@@ -67,7 +67,6 @@ function Singlepackage() {
       console.log("Error fetching reviews:", error);
     }
   };
-  
 
   useEffect(() => {
     if (id) {
@@ -218,10 +217,10 @@ function Singlepackage() {
               </div>
             </div>
           ))}
-          <Button onClick={() => navigate("/review")} className="review-button">
-            Rate the Package
-          </Button>
         </div>
+        <Button onClick={() => navigate("/review")} className="review-button">
+          Rate the Package
+        </Button>
       </div>
     </Container>
   );
