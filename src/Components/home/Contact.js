@@ -29,7 +29,7 @@ function Contact() {
     e.preventDefault();
     setLoading(true);
     try {
-      await instance.post("api/user/send-email", formData);
+      await instance.post("/api/user/send-email", formData);
       toast.success("Email sent successfully!");
       setFormData({
         name: "",
