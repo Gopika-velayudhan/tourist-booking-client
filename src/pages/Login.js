@@ -4,15 +4,14 @@ import { useNavigate } from "react-router-dom";
 import instance from "../axiosinterceptor/userinterrceptor";
 import { toast } from "react-toastify";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import axios from "axios";
+
 import * as Yup from "yup";
 
 const Login = () => {
-  
   const navigate = useNavigate();
 
   const handleLoginSuccess = (token, userDetails) => {
-    const { _id, Username, } = userDetails;
+    const { _id, Username } = userDetails;
     localStorage.setItem("token", token);
     localStorage.setItem("_id", _id);
     localStorage.setItem("Username", Username);
@@ -30,15 +29,11 @@ const Login = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const response = await instance.post(
-        "/api/user/login",
-        values,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await instance.post("/api/user/login", values, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       console.log(response);
       const { token, user } = response.data;
       handleLoginSuccess(token, user);
@@ -130,8 +125,7 @@ const Login = () => {
               <Row>
                 <Col>
                   <h6 className="mt-3 text-center">
-                    Don't have an account?{" "}
-                    <Link to="/register">Register</Link>
+                    Don't have an account? <Link to="/register">Register</Link>
                   </h6>
                 </Col>
               </Row>

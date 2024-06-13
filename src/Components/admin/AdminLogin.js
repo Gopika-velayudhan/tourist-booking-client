@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Col, Row, Button, Container } from "react-bootstrap";
-import axios from "axios";
-import { toast } from "react-toastify";
+import instance from "../../axiosinterceptor/Axiosinterceptor";
+import { toast } from "react-toastify"
 
 function AdminLogin() {
   const [login, setLogin] = useState({ email: "", password: "" });
@@ -13,11 +13,12 @@ function AdminLogin() {
     setLogin({ ...login, [name]: value });
   };
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:3005/api/admin/admin_login",
+      const response = await instance.post(
+        "/api/admin/admin_login",
         login
       );
       const { data } = response.data;
