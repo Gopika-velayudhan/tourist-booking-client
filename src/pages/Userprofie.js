@@ -5,8 +5,10 @@ import { FadeLoader } from "react-spinners";
 import instance from "../axiosinterceptor/userinterrceptor";
 import { toast } from "react-toastify";
 import { UserContext } from "../pages/Usecontext";
+import  {useNavigate} from 'react-router-dom'
 
 function UserProfile() {
+  const navigate = useNavigate()
   const [user, setUser] = useState({
     Profileimg: "",
     Username: "",
@@ -61,6 +63,7 @@ function UserProfile() {
       }));
       setProfileImg(updatedUserData.Profileimg || "");
       toast.success("Profile updated successfully");
+      navigate("/")
     } catch (err) {
       console.error("Error updating profile", err);
     } finally {
