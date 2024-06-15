@@ -6,6 +6,7 @@ import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 import instance from "../../axiosinterceptor/Axiosinterceptor";
 import { FadeLoader } from 'react-spinners';
 import SideBar from "./Sidebar";
+import { useNavigate } from "react-router-dom";
 
 const AdminProduct = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ const AdminProduct = () => {
   });
   const [loading, setLoading] = useState(false);
   const [Category, setCategory] = useState([]);
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -65,7 +67,9 @@ const AdminProduct = () => {
 
       if (response.status === 201) {
         toast.success(response.data.message);
-        console.log("Package ID:", response.data.packageId); 
+        navigate("/adminview")
+      
+
         
         
         localStorage.setItem('packageId', response.data.packageId);
