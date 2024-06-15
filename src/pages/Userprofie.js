@@ -1,14 +1,13 @@
-// UserProfile.js
 import React, { useState, useEffect, useRef, useContext } from "react";
 import styles from "./Userprofile.module.css";
 import { FadeLoader } from "react-spinners";
 import instance from "../axiosinterceptor/userinterrceptor";
 import { toast } from "react-toastify";
 import { UserContext } from "../pages/Usecontext";
-import  {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 function UserProfile() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     Profileimg: "",
     Username: "",
@@ -63,7 +62,7 @@ function UserProfile() {
       }));
       setProfileImg(updatedUserData.Profileimg || "");
       toast.success("Profile updated successfully");
-      navigate("/")
+      navigate("/");
     } catch (err) {
       console.error("Error updating profile", err);
     } finally {
@@ -99,54 +98,62 @@ function UserProfile() {
   };
 
   return (
-    <div className={styles["form-container"]}>
-      <h2>Profile</h2>
-      <div className={styles["photo-container"]} onClick={handleImageClick}>
-        <img
-          src={user.Profileimg || "default-profile-img.png"}
-          alt="Profile"
-          className={styles["profile-photo"]}
-        />
-      </div>
-      <form className={styles["form1"]} onSubmit={handleUpdate}>
-        <input
-          type="text"
-          name="Username"
-          placeholder="Username"
-          value={user.Username}
-          onChange={handleChange}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={user.email}
-          onChange={handleChange}
-        />
-        <input
-          type="tel"
-          name="Phonenumber"
-          placeholder="Phone number"
-          value={user.Phonenumber}
-          onChange={handleChange}
-        />
-        <input
-          type="file"
-          name="Profileimg"
-          ref={fileInputRef}
-          style={{ display: "none" }}
-          onChange={handleImageChange}
-        />
-        {loading ? (
-          <div className="d-flex justify-content-center">
-            <FadeLoader color="#007bff" loading={loading} size={15} />
+    <div className={styles.modal}>
+      <div className={styles.overlay}></div>
+      <div className={styles.modalContent}>
+        <span className={styles.closeButton} onClick={() => navigate("/")}>
+          &times;
+        </span>
+        <div className={styles.formContainer}>
+          <h2>Profile</h2>
+          <div className={styles.photoContainer} onClick={handleImageClick}>
+            <img
+              src={user.Profileimg || "default-profile-img.png"}
+              alt="Profile"
+              className={styles.profilePhoto}
+            />
           </div>
-        ) : (
-          <button type="submit" className={styles["submit-button"]}>
-            Update
-          </button>
-        )}
-      </form>
+          <form className={styles.form1} onSubmit={handleUpdate}>
+            <input
+              type="text"
+              name="Username"
+              placeholder="Username"
+              value={user.Username}
+              onChange={handleChange}
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={user.email}
+              onChange={handleChange}
+            />
+            <input
+              type="tel"
+              name="Phonenumber"
+              placeholder="Phone number"
+              value={user.Phonenumber}
+              onChange={handleChange}
+            />
+            <input
+              type="file"
+              name="Profileimg"
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              onChange={handleImageChange}
+            />
+            {loading ? (
+              <div className="d-flex justify-content-center">
+                <FadeLoader color="#007bff" loading={loading} size={15} />
+              </div>
+            ) : (
+              <button type="submit" className={styles.submitButton}>
+                Update
+              </button>
+            )}
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
