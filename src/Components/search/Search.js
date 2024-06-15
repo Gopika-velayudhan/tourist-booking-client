@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Card, Button } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import instance from '../../axiosinterceptor/userinterrceptor';
 
 function Search() {
   const [search, setSearch] = useState({ location: '', duration: '', price: '' });
@@ -24,7 +24,7 @@ function Search() {
 
         setSearch({ location: locationQuery, duration: durationQuery, price: priceQuery });
 
-        const response = await axios.get(`http://localhost:3005/api/user/searches?location=${locationQuery}&duration=${durationQuery}&price=${priceQuery}`, { headers });
+        const response = await instance.get(`/api/user/searches?location=${locationQuery}&duration=${durationQuery}&price=${priceQuery}`, { headers });
         const data = response.data.data;
         
         const foundPackage = data.find((pack) => 
