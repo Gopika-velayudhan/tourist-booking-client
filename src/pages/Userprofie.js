@@ -62,7 +62,7 @@ function UserProfile() {
       }));
       setProfileImg(updatedUserData.Profileimg || "");
       toast.success("Profile updated successfully");
-      navigate("/");
+     
     } catch (err) {
       console.error("Error updating profile", err);
     } finally {
@@ -147,7 +147,7 @@ function UserProfile() {
                 <FadeLoader color="#007bff" loading={loading} size={15} />
               </div>
             ) : (
-              <button type="submit" className={styles.submitButton}>
+              <button type="submit"  className={styles.submitButton}>
                 Update
               </button>
             )}

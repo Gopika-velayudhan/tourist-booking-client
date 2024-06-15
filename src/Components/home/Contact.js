@@ -37,7 +37,7 @@ function Contact() {
         message: "",
       });
     } catch (error) {
-      toast.success("email sending successfultty");
+      toast.error("error fetched successfully",error);
       
     } finally {
       setLoading(false);
