@@ -34,7 +34,7 @@ const Registration = () => {
       );
 
       if (response && response.status === 200) {
-        toast.success("Registration Success. OTP sent to your email.");
+        toast.success(" OTP sent to your email.");
         navigate("/verifyotp", { state: { email: values.email } });
       }
     } catch (error) {

@@ -45,22 +45,7 @@ const Reviewpackage = () => {
     }
   };
 
-  const checkIfUserBookedPackage = async (userid, packageid) => {
-    try {
-      const response = await instance.get(`/api/user/bookings/${userid}`);
-      if (response.status === 200) {
-        const bookings = response.data;
-        const hasBooked = bookings.some(
-          (booking) => booking.package === packageid
-        );
-        return hasBooked;
-      }
-      return false;
-    } catch (err) {
-      console.error("Error checking booking status:", err);
-      return false;
-    }
-  };
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -30,7 +30,7 @@ const OtpVerification = () => {
       });
 
       if (response.status === 200) {
-        toast.success("OTP verified successfully.");
+        toast.success("registrationn successfully.");
         navigate("/login");
       }
     } catch (error) {
