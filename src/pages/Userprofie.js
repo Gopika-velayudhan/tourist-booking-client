@@ -1,18 +1,19 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
-import styles from "./Userprofile.module.css";
-import { FadeLoader } from "react-spinners";
-import instance from "../axiosinterceptor/userinterrceptor";
-import { toast } from "react-toastify";
-import { UserContext } from "../pages/Usecontext";
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import styles from './Userprofile.module.css';
+import { FadeLoader } from 'react-spinners';
+import instance from '../../src/axiosinterceptor/userinterrceptor';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { UserContext } from '../pages/Usecontext';
 import { useNavigate } from 'react-router-dom';
 
 function UserProfile() {
   const navigate = useNavigate();
   const [user, setUser] = useState({
-    Profileimg: "",
-    Username: "",
-    email: "",
-    Phonenumber: "",
+    Profileimg: '',
+    Username: '',
+    email: '',
+    Phonenumber: '',
   });
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -22,18 +23,18 @@ function UserProfile() {
   useEffect(() => {
     const handleGet = async () => {
       try {
-        const userId = localStorage.getItem("_id");
+        const userId = localStorage.getItem('_id');
         const response = await instance.get(`/api/user/users/${userId}`);
         const userData = response.data?.data || {};
         setUser({
-          Profileimg: userData.Profileimg || "",
-          Username: userData.Username || "",
-          email: userData.email || "",
-          Phonenumber: userData.Phonenumber || "",
+          Profileimg: userData.Profileimg || '',
+          Username: userData.Username || '',
+          email: userData.email || '',
+          Phonenumber: userData.Phonenumber || '',
         });
-        setProfileImg(userData.Profileimg || "");
+        setProfileImg(userData.Profileimg || '');
       } catch (err) {
-        console.error("Error fetching data", err);
+        console.error('Error fetching data', err);
       }
     };
     handleGet();
@@ -43,28 +44,28 @@ function UserProfile() {
     e.preventDefault();
     setLoading(true);
     try {
-      const userId = localStorage.getItem("_id");
+      const userId = localStorage.getItem('_id');
       const formData = new FormData();
-      formData.append("Username", user.Username);
-      formData.append("email", user.email);
-      formData.append("Phonenumber", user.Phonenumber);
+      formData.append('Username', user.Username);
+      formData.append('email', user.email);
+      formData.append('Phonenumber', user.Phonenumber);
       if (image) {
-        formData.append("Profileimg", image);
+        formData.append('Profileimg', image);
       }
       const response = await instance.put(`/api/user/users/${userId}`, formData);
       const updatedUserData = response.data?.data || {};
       setUser((prevUser) => ({
         ...prevUser,
-        Profileimg: updatedUserData.Profileimg || "",
-        Username: updatedUserData.Username || "",
-        email: updatedUserData.email || "",
-        Phonenumber: updatedUserData.Phonenumber || "",
+        Profileimg: updatedUserData.Profileimg || '',
+        Username: updatedUserData.Username || '',
+        email: updatedUserData.email || '',
+        Phonenumber: updatedUserData.Phonenumber || '',
       }));
-      setProfileImg(updatedUserData.Profileimg || "");
-      toast.success("Profile updated successfully");
-     
+      setProfileImg(updatedUserData.Profileimg || '');
+      toast.success('Profile updated successfully');
     } catch (err) {
-      console.error("Error updating profile", err);
+      console.error('Error updating profile', err);
+      toast.error(err.response?.data?.error || 'Error updating profile');
     } finally {
       setLoading(false);
     }
@@ -101,14 +102,15 @@ function UserProfile() {
     <div className={styles.modal}>
       <div className={styles.overlay}></div>
       <div className={styles.modalContent}>
-        <span className={styles.closeButton} onClick={() => navigate("/")}>
+        <span className={styles.closeButton} onClick={() => navigate('/')}>
           &times;
         </span>
+        <ToastContainer />
         <div className={styles.formContainer}>
           <h2>Profile</h2>
           <div className={styles.photoContainer} onClick={handleImageClick}>
             <img
-              src={user.Profileimg || "default-profile-img.png"}
+              src={user.Profileimg || 'default-profile-img.png'}
               alt="Profile"
               className={styles.profilePhoto}
             />
@@ -139,7 +141,7 @@ function UserProfile() {
               type="file"
               name="Profileimg"
               ref={fileInputRef}
-              style={{ display: "none" }}
+              style={{ display: 'none' }}
               onChange={handleImageChange}
             />
             {loading ? (
@@ -147,7 +149,7 @@ function UserProfile() {
                 <FadeLoader color="#007bff" loading={loading} size={15} />
               </div>
             ) : (
-              <button type="submit"  className={styles.submitButton}>
+              <button type="submit" className={styles.submitButton}>
                 Update
               </button>
             )}

@@ -31,9 +31,14 @@ function Booking() {
   const downloadPageAsImage = () => {
     const bookingElement = document.getElementById('booking-details');
     const downloadContainer = document.querySelector('.download-container');
+    const homeButton = document.querySelector('.home-button');
 
     if (downloadContainer) {
       downloadContainer.style.display = 'none';
+    }
+
+    if (homeButton) {
+      homeButton.classList.add('hide');
     }
 
     html2canvas(bookingElement).then(canvas => {
@@ -44,6 +49,10 @@ function Booking() {
 
       if (downloadContainer) {
         downloadContainer.style.display = 'flex';
+      }
+
+      if (homeButton) {
+        homeButton.classList.remove('hide');
       }
     });
   };

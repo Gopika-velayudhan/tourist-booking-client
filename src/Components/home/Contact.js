@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { toast, ToastContainer } from "react-toastify";
-import instance from "../../axiosinterceptor/userinterrceptor";
-import "react-toastify/dist/ReactToastify.css";
-import { FadeLoader } from "react-spinners";
-import "./Contact.css";
+import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { FadeLoader } from 'react-spinners';
+import './Contact.css';
+import instance from '../../axiosinterceptor/userinterrceptor';
 
 function Contact() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
+    name: '',
+    email: '',
+    message: '',
   });
   const [loading, setLoading] = useState(false);
 
@@ -26,19 +26,19 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log("Form Data Being Sent:", formData); 
+    console.log('Form Data Being Sent:', formData);
     try {
-      const response = await instance.post("/api/user/send-email", formData);
-      console.log("Email Sent Response:", response);
-      toast.success("Email sent successfully!");
+      const response = await instance.post('/api/user/send-email', formData);
+      console.log('Email Sent Response:', response);
+      toast.success('Email sent successfully!');
       setFormData({
-        name: "",
-        email: "",
-        message: "",
+        name: '',
+        email: '',
+        message: '',
       });
     } catch (error) {
-      toast.error("error fetched successfully",error);
-      
+      console.error('Error sending email:', error.response?.data || error.message);
+      toast.error('Error sending email. Please try again.');
     } finally {
       setLoading(false);
     }
