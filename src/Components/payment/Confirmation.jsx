@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import instance from "../../axiosinterceptor/userinterrceptor";
-import { FadeLoader } from "react-spinners";
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBTable,
+  MDBTableBody,
+  MDBTableHead,
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+  MDBSpinner,
+} from "mdb-react-ui-kit";
 import "./Confirmation.css";
 
 const Confirmation = () => {
@@ -14,7 +26,7 @@ const Confirmation = () => {
   const destination = searchParams.get("destination");
   const duration = searchParams.get("duration");
   const availableDate = searchParams.get("available_date");
-  const totalPrice = searchParams.get("total_price");
+  const totalPrice = parseFloat(searchParams.get("total_price"));
   const packageId = searchParams.get("package_id");
   const image = searchParams.get("image");
 
@@ -98,70 +110,103 @@ const Confirmation = () => {
     }
   };
 
+  const handleCancel = () => {
+    navigate(`/singlepackage`);
+  };
+
+  const gstAmount = totalPrice * 0.18;
+  const netFare = totalPrice + gstAmount;
+
   return (
-    <div className="container4">
-      <div className="header4" style={{ backgroundImage: `url(${image})` }}>
-        <h2>{destination}</h2>
-      </div>
-      <div className="content4">
-        <table className="confirmation-table4">
-          <thead>
-            <tr>
-              <th>Location</th>
-              <th>Available Date & Time</th>
-              <th>Duration</th>
-              <th>Departure Date & Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{destination}</td>
-              <td>{availableDate} 12:00 PM</td>
-              <td>{duration}</td>
-              <td>{availableDate} 11:00 AM</td>
-            </tr>
-          </tbody>
-        </table>
-        <div className="guest-details4">
-          <h3>Guest Details</h3>
-          {user && (
-            <table className="confirmation-table4">
-              <thead>
-                <tr>
-                  <th>Name of Guest</th>
-                  <th>Mobile Number</th>
-                  <th>Email Address</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{user.Username}</td>
-                  <td>{user.Phonenumber}</td>
-                  <td>{user.email}</td>
-                </tr>
-              </tbody>
-            </table>
-          )}
-        </div>
-        <div className="total-price4">
-          <h3>Total Price</h3>
-          <p>Total fare: <span className="highlight">₹{totalPrice}</span></p>
-          <p>GST 18%: <span className="highlight">₹{(totalPrice * 0.18).toFixed(2)}</span></p>
-          <p>
-            Net fare: <span className="highlight">₹{(parseFloat(totalPrice) + totalPrice * 0.18).toFixed(2)}</span>
-          </p>
-          {loading ? (
-            <div className="d-flex justify-content-center">
-              <FadeLoader color="blue" loading={loading} size={15} />
+    <MDBContainer fluid className="my-5">
+      <MDBRow className="justify-content-center">
+        <MDBCol md="8" lg="6" xl="6">
+          <MDBCard>
+            <div
+              className="bg-image hover-overlay ripple"
+              style={{ backgroundImage: `url(${image})`, height: "300px", backgroundSize: "cover" }}
+            >
+              <a href="#!">
+                <div className="mask"></div>
+              </a>
             </div>
-          ) : (
-            <Button onClick={handlePayment} style={{ backgroundColor: "blue" }}>
-              Pay to Proceed
-            </Button>
-          )}
-        </div>
-      </div>
-    </div>
+            <MDBCardBody>
+              <MDBCardTitle>{destination}</MDBCardTitle>
+              <MDBCardText>
+                <MDBTable>
+                  <MDBTableHead>
+                    <tr>
+                      <th>Location</th>
+                      <th>Available Date & Time</th>
+                      <th>Duration</th>
+                      <th>Departure Date & Time</th>
+                    </tr>
+                  </MDBTableHead>
+                  <MDBTableBody>
+                    <tr>
+                      <td>{destination}</td>
+                      <td>{availableDate} 12:00 PM</td>
+                      <td>{duration}</td>
+                      <td>{availableDate} 11:00 AM</td>
+                    </tr>
+                  </MDBTableBody>
+                </MDBTable>
+                <h3>Guest Details</h3>
+                {user && (
+                  <MDBTable>
+                    <MDBTableHead>
+                      <tr>
+                        <th>Name of Guest</th>
+                        <th>Mobile Number</th>
+                        <th>Email Address</th>
+                      </tr>
+                    </MDBTableHead>
+                    <MDBTableBody>
+                      <tr>
+                        <td>{user.Username}</td>
+                        <td>{user.Phonenumber}</td>
+                        <td>{user.email}</td>
+                      </tr>
+                    </MDBTableBody>
+                  </MDBTable>
+                )}
+                <h3>Total Price</h3>
+                <MDBTable>
+                  <MDBTableHead>
+                    <tr>
+                      <th>Total fare</th>
+                      <th>Gst 18%</th>
+                      <th>Net fare</th>
+                    </tr>
+                  </MDBTableHead>
+                  <MDBTableBody>
+                    <tr>
+                      <td>₹{totalPrice}</td>
+                      <td>₹{gstAmount.toFixed(2)}</td>
+                      <td>₹{netFare.toFixed(2)}</td>
+                    </tr>
+                  </MDBTableBody>
+                </MDBTable>
+                {loading ? (
+                  <div className="d-flex justify-content-center">
+                    <MDBSpinner color="primary" />
+                  </div>
+                ) : (
+                  <div className="button-group">
+                    <MDBBtn color="danger" onClick={handleCancel} className="button-left">
+                      Cancel
+                    </MDBBtn>
+                    <MDBBtn color="primary" onClick={handlePayment} className="button-right">
+                      Pay to Proceed
+                    </MDBBtn>
+                  </div>
+                )}
+              </MDBCardText>
+            </MDBCardBody>
+          </MDBCard>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
   );
 };
 

@@ -25,6 +25,7 @@
     "html2canvas": "^1.4.1",
     "js-cookie": "^3.0.5",
     "mdb-react-ui-kit": "^7.2.0",
+    "mdbreact": "^5.2.0",
     "nodemailer": "^6.9.13",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
