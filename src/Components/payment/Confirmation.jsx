@@ -111,7 +111,7 @@ const Confirmation = () => {
   };
 
   const handleCancel = () => {
-    navigate(`/singlepackage`);
+    navigate('/');
   };
 
   const gstAmount = totalPrice * 0.18;
