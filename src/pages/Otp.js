@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 
 const OtpVerification = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate();                                                                                                                                                   
   const location = useLocation();
   const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
