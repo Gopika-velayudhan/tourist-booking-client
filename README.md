@@ -1,5 +1,5 @@
 ExploreEpic-Touriest Booking Website
-![ExploreEpic Banner]("C:\Users\gopik\OneDrive\Pictures\Screenshots\Screenshot (40).png")
+
 
 - [Introduction](#introduction)
 - [Demo](#demo)
