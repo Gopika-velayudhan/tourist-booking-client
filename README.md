@@ -22,7 +22,7 @@ The application is deployed and can be accessed through the following link:Explo
 The website allows users to search for travel experiences, view details, and make bookings. For testing the checkout process, use the provided dummy card numbers or payment methods. Please DO NOT use real card numbers or data.
 
 
-### `Run`
+### Run
 
 To install and run this project locally, follow these steps:
 1. **Clone the repository**:
