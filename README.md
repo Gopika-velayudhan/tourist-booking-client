@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+ExploreEpic-Touriest Booking Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- [Introduction](#introduction)
+- [Demo](#demo)
+- [Run](#run)
+- [Technology](#technology)
+- [Features](#features)
+- [License](#license)
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+## **Introduction**
+---
+ExploreEpic is a tourist booking website where users can search for and book travel experiences. This MERN stack project includes a frontend deployed on Vercel and a backend deployed on AWS.  
+NOTE: Please read the RUN section before opening an issue.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Demo
+---
+The application is deployed and can be accessed through the following link:Exploreepic[http://tourist-booking-client-v3jf.vercel.app]
+The website allows users to search for travel experiences, view details, and make bookings. For testing the checkout process, use the provided dummy card numbers or payment methods. Please DO NOT use real card numbers or data.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `Run`
 
-### `npm run build`
+To install and run this project locally, follow these steps:
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/your-username/exploreepic.git
+    ```
+2. **Navigate to the project directory**:
+    ```bash
+    cd exploreepic
+    ```
+3. **Install dependencies for both frontend and backend**:
+    ```bash
+    cd backend
+    npm install
+    cd ../frontend
+    npm install
+    ```
+4. **Set up environment variables**:
+   - Create a `.env` file in the `backend` directory with the necessary environment variables (e.g., MongoDB URI, JWT secret, API keys for Razorpay, Cloudinary, Nodemailer, and Twilio).
+5. **Start the development server**:
+    ```bash
+    cd backend
+    npm start
+    cd ../frontend
+    npm start
+    ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Technology
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The application is built with:
+- **Frontend**: React.js, Material-UI
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Payment Processing**: Razorpay
+- **Media Management**: Cloudinary
+- **Email/SMS Notifications**: Nodemailer, Twilio
+- **Authentication**: JWT
+The backend is deployed on AWS and the frontend is deployed on Vercel.
+## Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The application allows users to:
+- Create an account, log in, or log out.
+- Search for travel experiences.
+- View travel experience details.
+- Book travel experiences.
+- View booking history.
+- Update profile information.
 
-### `npm run eject`
+Admins can:
+- Log in to the admin panel.
+- Manage users and travel experiences.
+- View all bookings.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## License
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Gopika kv
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
