@@ -1,4 +1,4 @@
-ExploreEpic-Touriest Booking Website
+## **ExploreEpic-Touriest Booking Website**
 
 
 - [Introduction](#introduction)
