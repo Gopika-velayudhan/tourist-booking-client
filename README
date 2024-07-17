@@ -1,0 +1,75 @@
+# ExploreEpic
+
+ExploreEpic is a comprehensive tourist booking website that helps users discover and book travel experiences seamlessly.
+
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Installation
+
+To install and run this project locally, follow these steps:
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/your-username/exploreepic.git
+    ```
+2. Navigate to the project directory:
+    ```bash
+    cd exploreepic
+    ```
+3. Install dependencies for both frontend and backend:
+    ```bash
+    cd backend
+    npm install
+    cd ../frontend
+    npm install
+    ```
+4. Set up environment variables:
+   - Create a `.env` file in the `backend` directory with the necessary environment variables (e.g., MongoDB URI, JWT secret, API keys for Razorpay, Cloudinary, Nodemailer, and Twilio).
+5. Start the development server:
+    ```bash
+    cd backend
+    npm start
+    cd ../frontend
+    npm start
+    ```
+
+## Usage
+
+Once the servers are running, you can access the application at `http://localhost:3000`. ExploreEpic allows users to browse and book various travel experiences, manage bookings, and more.
+
+## Features
+
+- **User Authentication**: Secure login and registration using JWT.
+- **Real-Time Notifications**: Get instant updates on booking status via email and SMS.
+- **Payment Integration**: Seamless payment processing with Razorpay.
+- **Media Management**: Efficient media handling with Cloudinary.
+- **Admin Dashboard**: Comprehensive admin interface for managing bookings and users.
+
+## Contributing
+
+We welcome contributions from the community! To contribute:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix:
+    ```bash
+    git checkout -b feature-name
+    ```
+3. Make your changes and commit them:
+    ```bash
+    git commit -m "Description of the feature or fix"
+    ```
+4. Push to your branch:
+    ```bash
+    git push origin feature-name
+    ```
+5. Create a pull request on GitHub.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+aa
